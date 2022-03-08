@@ -6,6 +6,6 @@ class Pages {
   static final Routes _routes = Get.find();
 
   static final pages = <GetPage>[
-    GetPage(name: _routes.initialRoute, page: () => const SplashPage()),
+    GetPage(name: _routes.initialRoute, page: () => SplashPage()),
   ];
 }

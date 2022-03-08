@@ -6,8 +6,8 @@ import '../core/values/colors.dart';
 import '../data/enums/text_color_option.dart';
 import '../data/enums/text_size_option.dart';
 
-class CustomText extends GetResponsiveView {
-  CustomText(
+class OptimizedText extends StatelessWidget {
+  OptimizedText(
     this.txt, {
     Key? key,
     this.maxLine = 1,
@@ -16,7 +16,9 @@ class CustomText extends GetResponsiveView {
     this.colorOption = TextColorOptions.dark,
     this.fontWeight = FontWeight.normal,
     this.customColor,
-  }) : super(key: key, alwaysUseBuilder: true);
+  }) : super(
+          key: key,
+        );
   final String txt;
   final int maxLine;
   final TextAlign textAlign;
@@ -47,7 +49,7 @@ class CustomText extends GetResponsiveView {
   }
 
   @override
-  Widget? builder() {
+  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,

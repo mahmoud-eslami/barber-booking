@@ -3,6 +3,7 @@ import 'package:barber_booking/app/routes/pages.dart';
 import 'package:barber_booking/app/routes/routes.dart';
 import 'package:barber_booking/dependency_injection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'app/core/utils/size_config.dart';
@@ -10,6 +11,7 @@ import 'app/core/utils/size_config.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DependencyInjection.injector();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
   runApp(const MyApp());
 }
 
@@ -29,7 +31,8 @@ class MyApp extends StatelessWidget {
           title: strings.title,
           theme: ThemeData(
             primarySwatch: Colors.blue,
-            brightness: Brightness.light,
+            brightness: Brightness.dark,
+            fontFamily: "bitter",
           ),
           initialRoute: routes.initialRoute,
           getPages: Pages.pages,

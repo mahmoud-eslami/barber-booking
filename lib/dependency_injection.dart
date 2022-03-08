@@ -1,4 +1,5 @@
 import 'package:barber_booking/app/core/values/colors.dart';
+import 'package:barber_booking/app/modules/splash/controller.dart';
 import 'package:barber_booking/app/routes/routes.dart';
 import 'package:get/get.dart';
 
@@ -9,5 +10,7 @@ class DependencyInjection {
     Get.put(Strings());
     Get.put(AppColors());
     Get.put(Routes());
+
+    Get.lazyPut(() => SplashController(), fenix: true);
   }
 }
