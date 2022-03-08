@@ -1,3 +1,4 @@
+import 'package:barber_booking/app/core/theme/app_theme.dart';
 import 'package:barber_booking/app/core/values/strings.dart';
 import 'package:barber_booking/app/routes/pages.dart';
 import 'package:barber_booking/app/routes/routes.dart';
@@ -12,6 +13,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DependencyInjection.injector();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const MyApp());
 }
 
@@ -22,6 +27,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Strings strings = Get.find();
     Routes routes = Get.find();
+    Theming theming = Get.find();
 
     return LayoutBuilder(builder: (context, constraints) {
       return OrientationBuilder(builder: (context, orientation) {
@@ -29,11 +35,7 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: strings.title,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            brightness: Brightness.dark,
-            fontFamily: "bitter",
-          ),
+          theme: theming.appTheme,
           initialRoute: routes.initialRoute,
           getPages: Pages.pages,
         );

@@ -10,6 +10,8 @@ class GlobalButton extends StatelessWidget {
     this.height,
     this.width,
     required this.radius,
+    this.borderColor,
+    this.borderedButton = false,
   }) : super(key: key);
 
   final Widget child;
@@ -17,6 +19,8 @@ class GlobalButton extends StatelessWidget {
   final VoidCallback onPressed;
   final double? elevation, height, width;
   final double radius;
+  final bool borderedButton;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +31,18 @@ class GlobalButton extends StatelessWidget {
         onPressed: onPressed,
         child: child,
         style: ElevatedButton.styleFrom(
-          primary: color,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radius),
-          ),
+          primary: borderedButton ? Colors.transparent : color,
+          shape: borderedButton
+              ? RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(radius),
+                  side: BorderSide(
+                    color: borderColor ?? color,
+                    width: 2,
+                  ),
+                )
+              : RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(radius),
+                ),
           elevation: elevation,
         ),
       ),

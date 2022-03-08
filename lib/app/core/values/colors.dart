@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 class AppColors {
   // main colors
   Color springGreen = const Color(0xff74c69d);
@@ -8,4 +10,5 @@ class AppColors {
   Color hintTextColor = const Color(0xff252525);
   Color lightTxtColor = const Color(0xffffffff);
   Color darkTxtColor = const Color(0xff252525);
+  Color greenTxtColor = const Color(0xff74c69d);
 }

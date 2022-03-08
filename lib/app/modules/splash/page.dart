@@ -7,12 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../global_widgets/global_button.dart';
+import '../../routes/routes.dart';
 
 class SplashPage extends StatelessWidget {
   SplashPage({Key? key}) : super(key: key);
 
   final AppColors _colors = Get.find();
   final Strings _strings = Get.find();
+  final Routes _routes = Get.find();
   final SplashController _splashController = Get.find();
 
   @override
@@ -36,7 +38,9 @@ class SplashPage extends StatelessWidget {
                 child: GlobalButton(
                   child: OptimizedText(_strings.startButton),
                   color: _colors.springGreen,
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(_routes.authRoute);
+                  },
                   radius: 50,
                   height: 60,
                   width: SizeConfig.widthMultiplier * 70,
