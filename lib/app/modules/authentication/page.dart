@@ -7,6 +7,7 @@ import 'package:barber_booking/app/modules/authentication/controller.dart';
 import 'package:barber_booking/app/modules/authentication/local_widget/barber_title.dart';
 import 'package:barber_booking/app/modules/authentication/local_widget/login_bottom_sheet.dart';
 import 'package:barber_booking/app/modules/authentication/local_widget/register_bottom_sheet.dart';
+import 'package:barber_booking/app/modules/authentication/local_widget/terms_conditions_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/values/colors.dart';
@@ -104,42 +105,8 @@ class AuthenticationPage extends StatelessWidget {
                   ],
                 ),
                 FadeTransition(
-                  opacity: _authenticationController.termsAnimation,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "By signing up you accept the ",
-                            style: TextStyle(
-                                color: _colors.lightTxtColor,
-                                fontFamily: "bitter"),
-                          ),
-                          TextSpan(
-                            text: "Term of service",
-                            style: TextStyle(
-                                color: _colors.greenTxtColor,
-                                fontFamily: "bitter"),
-                          ),
-                          TextSpan(
-                            text: " and ",
-                            style: TextStyle(
-                                color: _colors.lightTxtColor,
-                                fontFamily: "bitter"),
-                          ),
-                          TextSpan(
-                            text: "Privacy policy",
-                            style: TextStyle(
-                                color: _colors.greenTxtColor,
-                                fontFamily: "bitter"),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                    opacity: _authenticationController.termsAnimation,
+                    child: TermsConditionsSection()),
               ],
             ),
           ),
