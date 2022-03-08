@@ -11,8 +11,14 @@ class AuthenticationController extends GetxController
   late Animation<double> termsAnimation;
   late AnimationController fadeAnimationController;
 
+  late TextEditingController emailController;
+  late TextEditingController passwordController;
+
   @override
   void onInit() {
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+
     const duration = Duration(seconds: 1);
     fadeAnimationController =
         AnimationController(vsync: this, duration: duration)..forward();
@@ -49,6 +55,8 @@ class AuthenticationController extends GetxController
   @override
   void onClose() {
     fadeAnimationController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     super.onClose();
   }
 }

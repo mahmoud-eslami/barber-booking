@@ -5,6 +5,8 @@ import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:barber_booking/app/global_widgets/parent_widget.dart';
 import 'package:barber_booking/app/modules/authentication/controller.dart';
 import 'package:barber_booking/app/modules/authentication/local_widget/barber_title.dart';
+import 'package:barber_booking/app/modules/authentication/local_widget/login_bottom_sheet.dart';
+import 'package:barber_booking/app/modules/authentication/local_widget/register_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/values/colors.dart';
@@ -18,6 +20,17 @@ class AuthenticationPage extends StatelessWidget {
   final Strings _strings = Get.find();
   final Routes _routes = Get.find();
   final AuthenticationController _authenticationController = Get.find();
+
+  showBottomSheet(child, context) {
+    showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(30),
+          ),
+        ),
+        context: context,
+        builder: (context) => child);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +71,9 @@ class AuthenticationPage extends StatelessWidget {
                       child: GlobalButton(
                         child: OptimizedText(_strings.registerTitle),
                         color: _colors.springGreen,
-                        onPressed: () {},
+                        onPressed: () {
+                          showBottomSheet(const RegisterBottomSheet(), context);
+                        },
                         radius: 50,
                         height: 60,
                         width: SizeConfig.widthMultiplier * 70,
@@ -76,7 +91,9 @@ class AuthenticationPage extends StatelessWidget {
                         ),
                         color: _colors.springGreen,
                         elevation: 0,
-                        onPressed: () {},
+                        onPressed: () {
+                          showBottomSheet(LoginBottomSheet(), context);
+                        },
                         borderedButton: true,
                         borderColor: _colors.lightTxtColor,
                         radius: 50,
@@ -91,8 +108,9 @@ class AuthenticationPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(children: [
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        children: [
                           TextSpan(
                             text: "By signing up you accept the ",
                             style: TextStyle(
@@ -117,7 +135,9 @@ class AuthenticationPage extends StatelessWidget {
                                 color: _colors.greenTxtColor,
                                 fontFamily: "bitter"),
                           ),
-                        ])),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ],
