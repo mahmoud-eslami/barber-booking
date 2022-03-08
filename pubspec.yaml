@@ -17,6 +17,7 @@ dependencies:
   get: ^4.6.1
   supabase: ^0.2.15
   ionicons: ^0.1.2
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
