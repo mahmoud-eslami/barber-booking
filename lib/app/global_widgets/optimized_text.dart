@@ -40,7 +40,7 @@ class OptimizedText extends StatelessWidget {
       fontSize = 14.0;
     } else if (sizeOption == TextSizeOptions.title) {
       fontSize = 30.0;
-    } else if (sizeOption == TextSizeOptions.appBar) {
+    } else if (sizeOption == TextSizeOptions.bigBody) {
       fontSize = 25;
     } else if (sizeOption == TextSizeOptions.small) {
       fontSize = 12.0;

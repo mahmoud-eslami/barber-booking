@@ -4,6 +4,6 @@ enum TextSizeOptions {
   caption,
   underline,
   body,
-  appBar,
+  bigBody,
   small,
 }

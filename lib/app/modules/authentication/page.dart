@@ -6,8 +6,7 @@ import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:barber_booking/app/global_widgets/parent_widget.dart';
 import 'package:barber_booking/app/modules/authentication/controller.dart';
 import 'package:barber_booking/app/modules/authentication/local_widget/barber_title.dart';
-import 'package:barber_booking/app/modules/authentication/local_widget/login_bottom_sheet.dart';
-import 'package:barber_booking/app/modules/authentication/local_widget/register_bottom_sheet.dart';
+import 'package:barber_booking/app/modules/authentication/local_widget/auth_bottom_sheet.dart';
 import 'package:barber_booking/app/modules/authentication/local_widget/terms_conditions_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -75,7 +74,8 @@ class AuthenticationPage extends StatelessWidget {
                         child: OptimizedText(_strings.registerTitle),
                         color: _colors.springGreen,
                         onPressed: () {
-                          showBottomSheet(RegisterBottomSheet(), context);
+                          showBottomSheet(
+                              AuthBottomSheet(isRegister: true), context);
                         },
                         radius: _dimens.defaultRadius,
                         height: _dimens.defaultButtonHeight,
@@ -95,7 +95,8 @@ class AuthenticationPage extends StatelessWidget {
                         color: _colors.springGreen,
                         elevation: 0,
                         onPressed: () {
-                          showBottomSheet(LoginBottomSheet(), context);
+                          showBottomSheet(
+                              AuthBottomSheet(isRegister: false), context);
                         },
                         borderedButton: true,
                         borderColor: _colors.lightTxtColor,

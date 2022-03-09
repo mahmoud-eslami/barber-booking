@@ -40,7 +40,10 @@ class SplashPage extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: GlobalButton(
-                    child: OptimizedText(_strings.startButton),
+                    child: OptimizedText(
+                      _strings.startButton,
+                      fontWeight: FontWeight.bold,
+                    ),
                     color: _colors.springGreen,
                     onPressed: () {
                       Get.toNamed(_routes.authRoute);
