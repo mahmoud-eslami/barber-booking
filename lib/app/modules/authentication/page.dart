@@ -1,4 +1,5 @@
 import 'package:barber_booking/app/core/utils/size_config.dart';
+import 'package:barber_booking/app/core/values/dimes.dart';
 import 'package:barber_booking/app/data/enums/text_size_option.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
@@ -20,13 +21,14 @@ class AuthenticationPage extends StatelessWidget {
   final AppColors _colors = Get.find();
   final Strings _strings = Get.find();
   final Routes _routes = Get.find();
+  final Dimens _dimens = Get.find();
   final AuthenticationController _authenticationController = Get.find();
 
   showBottomSheet(child, context) {
     showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
-            top: Radius.circular(30),
+            top: Radius.circular(_dimens.defaultRadius),
           ),
         ),
         context: context,
@@ -39,7 +41,7 @@ class AuthenticationPage extends StatelessWidget {
       body: SafeArea(
         child: ParentWidget(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(_dimens.defaultPadding),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,10 +75,10 @@ class AuthenticationPage extends StatelessWidget {
                         child: OptimizedText(_strings.registerTitle),
                         color: _colors.springGreen,
                         onPressed: () {
-                          showBottomSheet(const RegisterBottomSheet(), context);
+                          showBottomSheet(RegisterBottomSheet(), context);
                         },
-                        radius: 50,
-                        height: 60,
+                        radius: _dimens.defaultRadius,
+                        height: _dimens.defaultButtonHeight,
                         width: SizeConfig.widthMultiplier * 70,
                       ),
                     ),
@@ -97,16 +99,17 @@ class AuthenticationPage extends StatelessWidget {
                         },
                         borderedButton: true,
                         borderColor: _colors.lightTxtColor,
-                        radius: 50,
-                        height: 60,
+                        radius: _dimens.defaultRadius,
+                        height: _dimens.defaultButtonHeight,
                         width: SizeConfig.widthMultiplier * 70,
                       ),
                     ),
                   ],
                 ),
                 FadeTransition(
-                    opacity: _authenticationController.termsAnimation,
-                    child: TermsConditionsSection()),
+                  opacity: _authenticationController.termsAnimation,
+                  child: TermsConditionsSection(),
+                ),
               ],
             ),
           ),

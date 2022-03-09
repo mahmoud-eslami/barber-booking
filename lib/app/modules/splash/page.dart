@@ -1,5 +1,6 @@
 import 'package:barber_booking/app/core/utils/size_config.dart';
 import 'package:barber_booking/app/core/values/colors.dart';
+import 'package:barber_booking/app/core/values/dimes.dart';
 import 'package:barber_booking/app/core/values/strings.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:barber_booking/app/modules/splash/controller.dart';
@@ -15,6 +16,7 @@ class SplashPage extends StatelessWidget {
   final AppColors _colors = Get.find();
   final Strings _strings = Get.find();
   final Routes _routes = Get.find();
+  final Dimens _dimens = Get.find();
   final SplashController _splashController = Get.find();
 
   @override
@@ -33,7 +35,7 @@ class SplashPage extends StatelessWidget {
           FadeTransition(
             opacity: _splashController.fadeAnimation,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(_dimens.defaultPadding),
               child: SafeArea(
                 child: Align(
                   alignment: Alignment.bottomCenter,
@@ -43,8 +45,8 @@ class SplashPage extends StatelessWidget {
                     onPressed: () {
                       Get.toNamed(_routes.authRoute);
                     },
-                    radius: 50,
-                    height: 60,
+                    radius: _dimens.defaultButtonHeight,
+                    height: _dimens.defaultButtonHeight,
                     width: SizeConfig.widthMultiplier * 70,
                   ),
                 ),

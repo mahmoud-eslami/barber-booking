@@ -9,6 +9,8 @@ import 'package:barber_booking/app/modules/authentication/local_widget/terms_con
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/values/dimes.dart';
+
 class LoginBottomSheet extends StatelessWidget {
   LoginBottomSheet({
     Key? key,
@@ -16,6 +18,7 @@ class LoginBottomSheet extends StatelessWidget {
 
   final Strings _strings = Get.find();
   final AppColors _colors = Get.find();
+  final Dimens _dimens = Get.find();
   final AuthenticationController _authenticationController = Get.find();
 
   @override
@@ -35,7 +38,7 @@ class LoginBottomSheet extends StatelessWidget {
           child: OptimizedText(_strings.loginTitle),
           color: _colors.springGreen,
           onPressed: () {},
-          radius: 50,
+          radius: _dimens.defaultRadius,
         ),
         TermsConditionsSection(),
       ],
