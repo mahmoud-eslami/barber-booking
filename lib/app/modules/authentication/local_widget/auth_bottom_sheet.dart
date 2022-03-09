@@ -8,6 +8,7 @@ import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:barber_booking/app/modules/authentication/controller.dart';
 import 'package:barber_booking/app/modules/authentication/local_widget/bottom_sheet_line.dart';
 import 'package:barber_booking/app/modules/authentication/local_widget/terms_conditions_section.dart';
+import 'package:barber_booking/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +25,7 @@ class AuthBottomSheet extends StatelessWidget {
   final Strings _strings = Get.find();
   final AppColors _colors = Get.find();
   final Dimens _dimens = Get.find();
+  final Routes _routes = Get.find();
   final AuthenticationController _authenticationController = Get.find();
 
   @override
@@ -66,7 +68,10 @@ class AuthBottomSheet extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
                 color: _colors.springGreen,
-                onPressed: () {},
+                onPressed: () {
+                  // todo : use different function based on input
+                  Get.toNamed(_routes.homeRoute);
+                },
                 radius: _dimens.defaultRadius,
                 height: _dimens.defaultButtonHeight,
               ),
