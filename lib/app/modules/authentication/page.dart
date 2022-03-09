@@ -1,6 +1,5 @@
 import 'package:barber_booking/app/core/utils/size_config.dart';
 import 'package:barber_booking/app/core/values/dimes.dart';
-import 'package:barber_booking/app/data/enums/text_size_option.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:barber_booking/app/global_widgets/parent_widget.dart';
@@ -25,6 +24,7 @@ class AuthenticationPage extends StatelessWidget {
 
   showBottomSheet(child, context) {
     showModalBottomSheet(
+        isScrollControlled: false,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(_dimens.defaultRadius),
@@ -71,7 +71,10 @@ class AuthenticationPage extends StatelessWidget {
                     FadeTransition(
                       opacity: _authenticationController.registerBtnAnimation,
                       child: GlobalButton(
-                        child: OptimizedText(_strings.registerTitle),
+                        child: OptimizedText(
+                          _strings.registerTitle,
+                          fontWeight: FontWeight.bold,
+                        ),
                         color: _colors.springGreen,
                         onPressed: () {
                           showBottomSheet(
@@ -91,6 +94,7 @@ class AuthenticationPage extends StatelessWidget {
                         child: OptimizedText(
                           _strings.loginTitle,
                           customColor: _colors.lightTxtColor,
+                          fontWeight: FontWeight.bold,
                         ),
                         color: _colors.springGreen,
                         elevation: 0,

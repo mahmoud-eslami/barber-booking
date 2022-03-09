@@ -1,5 +1,6 @@
 import 'package:barber_booking/app/modules/home/page.dart';
 import 'package:barber_booking/app/modules/splash/page.dart';
+import 'package:barber_booking/app/modules/terms_conditions/page.dart';
 import 'package:barber_booking/app/routes/routes.dart';
 import 'package:get/get.dart';
 
@@ -12,5 +13,6 @@ class Pages {
     GetPage(name: _routes.initialRoute, page: () => SplashPage()),
     GetPage(name: _routes.homeRoute, page: () => HomePage()),
     GetPage(name: _routes.authRoute, page: () => AuthenticationPage()),
+    GetPage(name: _routes.termsConditionsRoute, page: () => TermsConditions()),
   ];
 }
