@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:barber_booking/app/core/values/dimes.dart';
 import 'package:barber_booking/app/modules/home/controller.dart';
+import 'package:barber_booking/app/modules/home/local_widget/bottom_nav_item.dart';
 import 'package:barber_booking/app/modules/home/local_widget/profile_nav_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,38 +26,47 @@ class CustomBottomNav extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: _dimens.defaultPadding * 3),
-        child: Container(
-          margin: EdgeInsets.all(_dimens.defaultMargin * 2),
-          height: _dimens.defaultButtonHeight,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(_dimens.defaultRadius),
-            // color: _colors.ericBlack,
-            color: Colors.white.withOpacity(.08),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(_dimens.defaultRadius),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 7,
-                sigmaY: 7,
+        child: Obx(
+          () => AnimatedScale(
+            scale: _homeController.navItemPressed.value ? .90 : 1,
+            duration: const Duration(seconds: 1),
+            child: Container(
+              margin: EdgeInsets.all(_dimens.defaultMargin * 2),
+              height: _dimens.defaultButtonHeight,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(_dimens.defaultRadius),
+                // color: _colors.ericBlack,
+                color: Colors.white.withOpacity(.08),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Icon(
-                    Ionicons.location_outline,
-                    size: _dimens.defaultIconSize,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(_dimens.defaultRadius),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 2,
+                    sigmaY: 2,
                   ),
-                  Icon(
-                    Ionicons.newspaper,
-                    size: _dimens.defaultIconSize,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      BottomNavItem(
+                        onTap: () {},
+                        iconData: Ionicons.location_outline,
+                      ),
+                      BottomNavItem(
+                        onTap: () {},
+                        iconData: Ionicons.newspaper,
+                      ),
+                      BottomNavItem(
+                        onTap: () {},
+                        iconData: Ionicons.navigate,
+                      ),
+                      BottomNavItem(
+                        onTap: () {},
+                        customWidget: ProfileNavItem(),
+                      ),
+                    ],
                   ),
-                  Icon(
-                    Ionicons.navigate,
-                    size: _dimens.defaultIconSize,
-                  ),
-                  ProfileNavItem(),
-                ],
+                ),
               ),
             ),
           ),
