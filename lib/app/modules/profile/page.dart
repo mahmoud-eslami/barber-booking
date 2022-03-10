@@ -49,38 +49,50 @@ class ProfilePage extends StatelessWidget {
             ),
             Center(
               child: FadeTransition(
-                opacity: _profileController.avatarAnimation,
-                child: ProfileAvatar(),
+                opacity: _profileController.avatarFadeAnimation,
+                child: SlideTransition(
+                  position: _profileController.avatarAnimation,
+                  child: ProfileAvatar(),
+                ),
               ),
             ),
             SizedBox(
               height: SizeConfig.heightMultiplier * 4,
             ),
             FadeTransition(
-              opacity: _profileController.fieldAnimation1,
-              child: GlobalTextFormField(
-                controller: TextEditingController(),
-                label: "Your name",
+              opacity: _profileController.fieldFadeAnimation1,
+              child: SlideTransition(
+                position: _profileController.fieldAnimation1,
+                child: GlobalTextFormField(
+                  controller: TextEditingController(),
+                  label: "Your name",
+                ),
               ),
             ),
             SizedBox(
               height: SizeConfig.heightMultiplier * 1,
             ),
             FadeTransition(
-              opacity: _profileController.fieldAnimation2,
-              child: GlobalTextFormField(
-                controller: TextEditingController(),
-                label: "Email",
+              opacity: _profileController.fieldFadeAnimation2,
+              child: SlideTransition(
+                position: _profileController.fieldAnimation2,
+                child: GlobalTextFormField(
+                  controller: TextEditingController(),
+                  label: "Email",
+                ),
               ),
             ),
             SizedBox(
               height: SizeConfig.heightMultiplier * 1,
             ),
             FadeTransition(
-              opacity: _profileController.fieldAnimation3,
-              child: GlobalTextFormField(
-                controller: TextEditingController(),
-                label: "Date of birth",
+              opacity: _profileController.fieldFadeAnimation3,
+              child: SlideTransition(
+                position: _profileController.fieldAnimation3,
+                child: GlobalTextFormField(
+                  controller: TextEditingController(),
+                  label: "Date of birth",
+                ),
               ),
             ),
             const Expanded(
@@ -89,18 +101,21 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             FadeTransition(
-              opacity: _profileController.buttonAnimation,
-              child: GlobalButton(
-                child: OptimizedText(
-                  "Submit",
-                  fontWeight: FontWeight.bold,
+              opacity: _profileController.buttonFadeAnimation,
+              child: SlideTransition(
+                position: _profileController.buttonAnimation,
+                child: GlobalButton(
+                  child: OptimizedText(
+                    "Submit",
+                    fontWeight: FontWeight.bold,
+                  ),
+                  color: _colors.pastelCyan,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  height: _dimens.defaultButtonHeight,
+                  radius: _dimens.defaultRadius,
                 ),
-                color: _colors.pastelCyan,
-                onPressed: () {
-                  Get.back();
-                },
-                height: _dimens.defaultButtonHeight,
-                radius: _dimens.defaultRadius,
               ),
             ),
             SizedBox(
