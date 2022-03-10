@@ -44,7 +44,7 @@ class SplashPage extends StatelessWidget {
                       _strings.startButton,
                       fontWeight: FontWeight.bold,
                     ),
-                    color: _colors.springGreen,
+                    color: _colors.pastelCyan,
                     onPressed: () {
                       Get.toNamed(_routes.authRoute);
                     },

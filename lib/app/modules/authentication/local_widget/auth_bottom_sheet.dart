@@ -67,7 +67,7 @@ class AuthBottomSheet extends StatelessWidget {
                   isRegister ? _strings.registerTitle : _strings.loginTitle,
                   fontWeight: FontWeight.bold,
                 ),
-                color: _colors.springGreen,
+                color: _colors.pastelCyan,
                 onPressed: () {
                   // todo : use different function based on input
                   Get.toNamed(_routes.homeRoute);

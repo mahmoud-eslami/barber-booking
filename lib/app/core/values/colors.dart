@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   // main colors
-  Color springGreen = const Color(0xff74c69d);
-  Color ericBlack = const Color(0xff252525);
+  Color pastelCyan = const Color(0xff13DAE9);
+  Color frostedBlack = const Color(0xff10171D);
 
   Color hintTextColor = const Color(0xffffffff);
   Color lightTxtColor = const Color(0xffffffff);
-  Color darkTxtColor = const Color(0xff252525);
-  Color greenTxtColor = const Color(0xff74c69d);
+  Color darkTxtColor = const Color(0xff10171D);
+  Color greenTxtColor = const Color(0xff13DAE9);
 
   Color enableBorderFormFieldColor = const Color(0xffffffff);
-  Color focusBorderFormFieldColor = const Color(0xff74c69d);
+  Color focusBorderFormFieldColor = const Color(0xff13DAE9);
   Color errorBorderFormFieldColor = const Color(0xffFF0000);
 }

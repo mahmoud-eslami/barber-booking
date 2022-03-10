@@ -3,4 +3,5 @@ class Dimens {
   double defaultPadding = 8.0;
   double defaultMargin = 10.0;
   double defaultButtonHeight = 60.0;
+  double defaultIconSize = 25;
 }

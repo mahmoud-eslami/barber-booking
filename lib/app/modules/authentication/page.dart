@@ -75,7 +75,7 @@ class AuthenticationPage extends StatelessWidget {
                           _strings.registerTitle,
                           fontWeight: FontWeight.bold,
                         ),
-                        color: _colors.springGreen,
+                        color: _colors.pastelCyan,
                         onPressed: () {
                           showBottomSheet(
                               AuthBottomSheet(isRegister: true), context);
@@ -96,7 +96,7 @@ class AuthenticationPage extends StatelessWidget {
                           customColor: _colors.lightTxtColor,
                           fontWeight: FontWeight.bold,
                         ),
-                        color: _colors.springGreen,
+                        color: _colors.pastelCyan,
                         elevation: 0,
                         onPressed: () {
                           showBottomSheet(

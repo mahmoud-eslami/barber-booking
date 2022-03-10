@@ -25,9 +25,9 @@ class TermsConditions extends StatelessWidget {
           maintainAnimation: true,
           maintainState: true,
           child: FloatingActionButton(
-            backgroundColor: _colors.springGreen,
-            hoverColor: _colors.ericBlack,
-            splashColor: _colors.ericBlack.withOpacity(.3),
+            backgroundColor: _colors.pastelCyan,
+            hoverColor: _colors.frostedBlack,
+            splashColor: _colors.frostedBlack.withOpacity(.3),
             onPressed: () {
               _termsConditionsController.scrollToTop();
             },

@@ -8,10 +8,10 @@ class Theming {
   static final AppColors _colors = Get.find();
 
   ThemeData appTheme = ThemeData(
-    primarySwatch: materialColorCreator(_colors.springGreen),
-    primaryColor: _colors.springGreen,
+    primarySwatch: materialColorCreator(_colors.pastelCyan),
+    primaryColor: _colors.pastelCyan,
     brightness: Brightness.dark,
     fontFamily: "bitter",
-    scaffoldBackgroundColor: _colors.ericBlack,
+    scaffoldBackgroundColor: _colors.frostedBlack,
   );
 }

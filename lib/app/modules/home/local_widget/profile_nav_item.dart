@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 
 import '../../../core/values/colors.dart';
 import '../../../core/values/dimes.dart';
@@ -16,6 +17,16 @@ class ProfileNavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      decoration: BoxDecoration(
+        color: _colors.pastelCyan,
+        shape: BoxShape.circle,
+      ),
+      child: Icon(
+        Ionicons.person_circle,
+        color: _colors.frostedBlack.withOpacity(.7),
+        size: _dimens.defaultIconSize * 1.3,
+      ),
+    );
   }
 }

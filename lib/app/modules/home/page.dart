@@ -1,5 +1,6 @@
 import 'package:barber_booking/app/core/utils/size_config.dart';
 import 'package:barber_booking/app/core/values/secret.dart';
+import 'package:barber_booking/app/modules/home/controller.dart';
 import 'package:barber_booking/app/modules/home/local_widget/custom_bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -16,6 +17,7 @@ class HomePage extends StatelessWidget {
   final AppColors _colors = Get.find();
   final Strings _strings = Get.find();
   final Routes _routes = Get.find();
+  final HomeController _homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class HomePage extends StatelessWidget {
             ),
             layers: [
               TileLayerOptions(
-                urlTemplate: mapBoxUrl,
+                urlTemplate: darkMapUrl,
                 subdomains: ['a', 'b', 'c'],
                 attributionBuilder: (_) {
                   return Container();
@@ -41,12 +43,10 @@ class HomePage extends StatelessWidget {
                     width: 80.0,
                     height: 80.0,
                     point: LatLng(51.5, -0.09),
-                    builder: (ctx) => Container(
-                      child: Icon(
-                        Ionicons.accessibility,
-                        color: _colors.springGreen,
-                        size: SizeConfig.widthMultiplier * 10,
-                      ),
+                    builder: (ctx) => Icon(
+                      Ionicons.accessibility,
+                      color: _colors.pastelCyan,
+                      size: SizeConfig.widthMultiplier * 10,
                     ),
                   ),
                 ],
