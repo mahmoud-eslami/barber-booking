@@ -1,4 +1,3 @@
-import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -26,52 +25,52 @@ class ProfileController extends GetxController
         Tween<Offset>(begin: beginOffset, end: Offset.zero).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: const Interval(.0, .20, curve: Curves.ease),
+        curve: const Interval(.0, 1, curve: Curves.ease),
       ),
     );
     avatarFadeAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: const Interval(.0, .15, curve: Curves.ease),
+        curve: const Interval(.0, 1, curve: Curves.ease),
       ),
     );
     fieldAnimation1 =
         Tween<Offset>(begin: beginOffset, end: Offset.zero).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: const Interval(.20, .40, curve: Curves.ease),
+        curve: const Interval(.20, 1, curve: Curves.ease),
       ),
     );
     fieldFadeAnimation1 = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: const Interval(.20, .35, curve: Curves.ease),
+        curve: const Interval(.20, 1, curve: Curves.ease),
       ),
     );
     fieldAnimation2 =
         Tween<Offset>(begin: beginOffset, end: Offset.zero).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: const Interval(.40, .60, curve: Curves.ease),
+        curve: const Interval(.40, 1, curve: Curves.ease),
       ),
     );
     fieldFadeAnimation2 = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: const Interval(.40, .55, curve: Curves.ease),
+        curve: const Interval(.40, 1, curve: Curves.ease),
       ),
     );
     fieldAnimation3 =
         Tween<Offset>(begin: beginOffset, end: Offset.zero).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: const Interval(.60, .80, curve: Curves.ease),
+        curve: const Interval(.60, 1, curve: Curves.ease),
       ),
     );
     fieldFadeAnimation3 = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: const Interval(.60, .75, curve: Curves.ease),
+        curve: const Interval(.60, 1, curve: Curves.ease),
       ),
     );
     buttonAnimation =
@@ -84,7 +83,7 @@ class ProfileController extends GetxController
     buttonFadeAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: animationController,
-        curve: const Interval(.80, 95, curve: Curves.ease),
+        curve: const Interval(.80, 1, curve: Curves.ease),
       ),
     );
     super.onInit();
