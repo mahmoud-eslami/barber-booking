@@ -3,4 +3,5 @@ class Routes {
   String homeRoute = "/home";
   String authRoute = "/auth";
   String termsConditionsRoute = "/terms";
+  String profileRoute = "/profile";
 }

@@ -4,6 +4,7 @@ import 'package:barber_booking/app/core/values/dimes.dart';
 import 'package:barber_booking/app/modules/authentication/controller.dart';
 import 'package:barber_booking/app/modules/authentication/page.dart';
 import 'package:barber_booking/app/modules/home/controller.dart';
+import 'package:barber_booking/app/modules/profile/controller.dart';
 import 'package:barber_booking/app/modules/splash/controller.dart';
 import 'package:barber_booking/app/modules/terms_conditions/controller.dart';
 import 'package:barber_booking/app/routes/routes.dart';
@@ -23,5 +24,6 @@ class DependencyInjection {
     Get.lazyPut(() => AuthenticationController(), fenix: true);
     Get.lazyPut(() => TermsConditionsController(), fenix: true);
     Get.lazyPut(() => HomeController(), fenix: true);
+    Get.lazyPut(() => ProfileController(), fenix: true);
   }
 }

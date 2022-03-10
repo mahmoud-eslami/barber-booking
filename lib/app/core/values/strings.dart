@@ -1,11 +1,20 @@
 class Strings {
+  // hero tags
+  String profileImageTag = "profile_image";
+
+  // app strings
   String title = "Barber Booking";
-  String startButton = "Start Hair Cut!";
+  String startDescription =
+      "Find the perfect Barberman at your door step\n and nearest Barbershop";
+  String startButton = "Get Started";
   String barberBookingTitle = "Barber Booking";
   String findBarberDescription = "Let's find Best and Nearest \nbarber Shop";
   String registerTitle = "Sign up";
   String loginTitle = "Sign in";
   String termsAndConditionsTitle = "Terms and Conditions";
+  String profileTitle = "Personal Data";
+
+  // term and conditions
   String termAndConditions = '''Terms and Conditions
 Welcome to Website Name!
 

@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                     height: 80.0,
                     point: LatLng(51.5, -0.09),
                     builder: (ctx) => Icon(
-                      Ionicons.accessibility,
+                      Ionicons.walk_outline,
                       color: _colors.pastelCyan,
                       size: SizeConfig.widthMultiplier * 10,
                     ),

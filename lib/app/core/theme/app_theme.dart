@@ -13,5 +13,15 @@ class Theming {
     brightness: Brightness.dark,
     fontFamily: "bitter",
     scaffoldBackgroundColor: _colors.frostedBlack,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      centerTitle: true,
+      titleTextStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 25,
+        fontFamily: "bitter",
+      ),
+    ),
   );
 }

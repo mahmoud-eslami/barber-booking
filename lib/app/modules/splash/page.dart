@@ -34,6 +34,22 @@ class SplashPage extends StatelessWidget {
           ),
           FadeTransition(
             opacity: _splashController.fadeAnimation,
+            child: SafeArea(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  margin: EdgeInsets.only(bottom: _dimens.defaultMargin * 15),
+                  child: OptimizedText(
+                    _strings.startDescription,
+                    customColor: _colors.lightTxtColor,
+                    maxLine: 3,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          FadeTransition(
+            opacity: _splashController.fadeAnimation,
             child: Padding(
               padding: EdgeInsets.all(_dimens.defaultPadding),
               child: SafeArea(
@@ -48,7 +64,7 @@ class SplashPage extends StatelessWidget {
                     onPressed: () {
                       Get.toNamed(_routes.authRoute);
                     },
-                    radius: _dimens.defaultButtonHeight,
+                    radius: _dimens.defaultRadius,
                     height: _dimens.defaultButtonHeight,
                     width: SizeConfig.widthMultiplier * 70,
                   ),

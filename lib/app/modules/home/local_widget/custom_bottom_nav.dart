@@ -61,7 +61,9 @@ class CustomBottomNav extends StatelessWidget {
                         iconData: Ionicons.navigate,
                       ),
                       BottomNavItem(
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed(_routes.profileRoute);
+                        },
                         customWidget: ProfileNavItem(),
                       ),
                     ],

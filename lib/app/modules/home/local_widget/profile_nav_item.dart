@@ -1,3 +1,4 @@
+import 'package:barber_booking/app/core/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -17,15 +18,11 @@ class ProfileNavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: _colors.pastelCyan,
-        shape: BoxShape.circle,
-      ),
-      child: Icon(
-        Ionicons.person_circle,
-        color: _colors.frostedBlack.withOpacity(.7),
-        size: _dimens.defaultIconSize * 1.3,
+    return Hero(
+      tag: _strings.profileImageTag,
+      child: Image.asset(
+        "assets/images/user.png",
+        width: SizeConfig.widthMultiplier * 8,
       ),
     );
   }

@@ -1,0 +1,114 @@
+import 'package:barber_booking/app/core/utils/size_config.dart';
+import 'package:barber_booking/app/core/values/dimes.dart';
+import 'package:barber_booking/app/global_widgets/global_button.dart';
+import 'package:barber_booking/app/global_widgets/global_form_field.dart';
+import 'package:barber_booking/app/global_widgets/optimized_text.dart';
+import 'package:barber_booking/app/modules/profile/local_widget/profile_avatar.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
+import '../../core/values/colors.dart';
+import '../../core/values/strings.dart';
+import '../../routes/routes.dart';
+import 'controller.dart';
+
+class ProfilePage extends StatelessWidget {
+  ProfilePage({Key? key}) : super(key: key);
+
+  final AppColors _colors = Get.find();
+  final Strings _strings = Get.find();
+  final Routes _routes = Get.find();
+  final Dimens _dimens = Get.find();
+  final ProfileController _profileController = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          _strings.profileTitle,
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Ionicons.log_out_outline,
+              size: _dimens.defaultIconSize * 1.2,
+            ),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: _dimens.defaultPadding * 4,
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: SizeConfig.heightMultiplier * 5,
+            ),
+            Center(
+              child: FadeTransition(
+                opacity: _profileController.avatarAnimation,
+                child: ProfileAvatar(),
+              ),
+            ),
+            SizedBox(
+              height: SizeConfig.heightMultiplier * 4,
+            ),
+            FadeTransition(
+              opacity: _profileController.fieldAnimation1,
+              child: GlobalTextFormField(
+                controller: TextEditingController(),
+                label: "Your name",
+              ),
+            ),
+            SizedBox(
+              height: SizeConfig.heightMultiplier * 1,
+            ),
+            FadeTransition(
+              opacity: _profileController.fieldAnimation2,
+              child: GlobalTextFormField(
+                controller: TextEditingController(),
+                label: "Email",
+              ),
+            ),
+            SizedBox(
+              height: SizeConfig.heightMultiplier * 1,
+            ),
+            FadeTransition(
+              opacity: _profileController.fieldAnimation3,
+              child: GlobalTextFormField(
+                controller: TextEditingController(),
+                label: "Date of birth",
+              ),
+            ),
+            const Expanded(
+              child: SizedBox(
+                height: 1,
+              ),
+            ),
+            FadeTransition(
+              opacity: _profileController.buttonAnimation,
+              child: GlobalButton(
+                child: OptimizedText(
+                  "Submit",
+                  fontWeight: FontWeight.bold,
+                ),
+                color: _colors.pastelCyan,
+                onPressed: () {
+                  Get.back();
+                },
+                height: _dimens.defaultButtonHeight,
+                radius: _dimens.defaultRadius,
+              ),
+            ),
+            SizedBox(
+              height: SizeConfig.heightMultiplier * 4,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
-class TermsConditions extends StatelessWidget {
-  TermsConditions({Key? key}) : super(key: key);
+class TermsConditionsPage extends StatelessWidget {
+  TermsConditionsPage({Key? key}) : super(key: key);
 
   final AppColors _colors = Get.find();
   final Strings _strings = Get.find();
@@ -36,13 +36,8 @@ class TermsConditions extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: OptimizedText(
+        title: Text(
           _strings.termsAndConditionsTitle,
-          customColor: _colors.lightTxtColor,
-          textAlign: TextAlign.start,
-          fontWeight: FontWeight.bold,
         ),
       ),
       body: SingleChildScrollView(
