@@ -53,7 +53,9 @@ class CustomBottomNav extends StatelessWidget {
                         iconData: Ionicons.location_outline,
                       ),
                       BottomNavItem(
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed(_routes.newsRoute);
+                        },
                         iconData: Ionicons.newspaper,
                       ),
                       BottomNavItem(

@@ -2,6 +2,7 @@ import 'package:barber_booking/app/core/utils/size_config.dart';
 import 'package:barber_booking/app/core/values/dimes.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/global_form_field.dart';
+import 'package:barber_booking/app/global_widgets/global_indicator.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:barber_booking/app/modules/profile/local_widget/profile_avatar.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class ProfilePage extends StatelessWidget {
                 position: _profileController.fieldAnimation1,
                 child: GlobalTextFormField(
                   controller: TextEditingController(),
-                  label: "Your name",
+                  label: _strings.nameHint,
                 ),
               ),
             ),
@@ -78,7 +79,7 @@ class ProfilePage extends StatelessWidget {
                 position: _profileController.fieldAnimation2,
                 child: GlobalTextFormField(
                   controller: TextEditingController(),
-                  label: "Email",
+                  label: _strings.emailHint,
                 ),
               ),
             ),
@@ -91,7 +92,7 @@ class ProfilePage extends StatelessWidget {
                 position: _profileController.fieldAnimation3,
                 child: GlobalTextFormField(
                   controller: TextEditingController(),
-                  label: "Date of birth",
+                  label: _strings.birthHint,
                 ),
               ),
             ),
@@ -106,7 +107,7 @@ class ProfilePage extends StatelessWidget {
                 position: _profileController.buttonAnimation,
                 child: GlobalButton(
                   child: OptimizedText(
-                    "Submit",
+                    _strings.profileSubmitBtn,
                     fontWeight: FontWeight.bold,
                   ),
                   color: _colors.pastelCyan,

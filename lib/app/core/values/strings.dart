@@ -13,6 +13,10 @@ class Strings {
   String loginTitle = "Sign in";
   String termsAndConditionsTitle = "Terms and Conditions";
   String profileTitle = "Personal Data";
+  String profileSubmitBtn = "Submit";
+  String nameHint = "Your name";
+  String emailHint = "Email";
+  String birthHint = "Date of birth";
 
   // term and conditions
   String termAndConditions = '''Terms and Conditions

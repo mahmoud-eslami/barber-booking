@@ -19,6 +19,7 @@ dependencies:
   ionicons: ^0.1.2
   auto_size_text: ^3.0.0
   flutter_map: ^0.14.0
+  geolocator: ^8.2.0
 
 dev_dependencies:
   flutter_test:
