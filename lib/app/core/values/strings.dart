@@ -1,6 +1,7 @@
 class Strings {
   // hero tags
   String profileImageTag = "profile_image";
+  String storyTag = "story_image";
 
   // app strings
   String title = "Barber Booking";

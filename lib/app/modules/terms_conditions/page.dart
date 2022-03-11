@@ -25,6 +25,7 @@ class TermsConditionsPage extends StatelessWidget {
           maintainAnimation: true,
           maintainState: true,
           child: FloatingActionButton(
+            heroTag: null,
             backgroundColor: _colors.pastelCyan,
             hoverColor: _colors.frostedBlack,
             splashColor: _colors.frostedBlack.withOpacity(.3),

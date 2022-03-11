@@ -5,4 +5,5 @@ class Routes {
   String termsConditionsRoute = "/terms";
   String profileRoute = "/profile";
   String newsRoute = "/news";
+  String storyRoute = "/story";
 }
