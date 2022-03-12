@@ -55,7 +55,7 @@ class OptimizedText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
-          child: AutoSizeText(
+          child: Text(
             txt,
             style: TextStyle(
               fontSize: setTextSize(),
@@ -70,7 +70,6 @@ class OptimizedText extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             textAlign: textAlign,
             maxLines: maxLine,
-            minFontSize: 5,
           ),
         ),
       ],

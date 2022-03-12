@@ -19,6 +19,10 @@ class Strings {
   String emailHint = "Email";
   String birthHint = "Date of birth";
 
+  // lorem
+  String lorem =
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+
   // term and conditions
   String termAndConditions = '''Terms and Conditions
 Welcome to Website Name!

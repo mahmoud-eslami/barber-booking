@@ -1,4 +1,7 @@
+import 'package:barber_booking/app/data/enums/text_size_option.dart';
+import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:barber_booking/app/modules/news/local_widget/add_story.dart';
+import 'package:barber_booking/app/modules/news/local_widget/news_line.dart';
 import 'package:barber_booking/app/modules/news/local_widget/stories_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,6 +28,20 @@ class NewsPage extends StatelessWidget {
       body: Column(
         children: [
           StoriesLine(),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: _dimens.defaultPadding * 2,
+              vertical: _dimens.defaultPadding,
+            ),
+            child: OptimizedText(
+              "Barber Shops news",
+              customColor: _colors.lightTxtColor,
+              textAlign: TextAlign.left,
+              fontWeight: FontWeight.bold,
+              sizeOption: TextSizeOptions.bigBody,
+            ),
+          ),
+          NewsLine(),
         ],
       ),
     );
