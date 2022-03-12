@@ -32,41 +32,47 @@ class SplashPage extends StatelessWidget {
               height: SizeConfig.heightMultiplier * 100,
             ),
           ),
-          FadeTransition(
-            opacity: _splashController.fadeAnimation,
-            child: SafeArea(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  margin: EdgeInsets.only(bottom: _dimens.defaultMargin * 15),
-                  child: OptimizedText(
-                    _strings.startDescription,
-                    customColor: _colors.lightTxtColor,
-                    maxLine: 3,
+          SlideTransition(
+            position: _splashController.alignAnimationText,
+            child: FadeTransition(
+              opacity: _splashController.fadeAnimationText,
+              child: SafeArea(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: _dimens.defaultMargin * 15),
+                    child: OptimizedText(
+                      _strings.startDescription,
+                      customColor: _colors.lightTxtColor,
+                      maxLine: 3,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-          FadeTransition(
-            opacity: _splashController.fadeAnimation,
-            child: Padding(
-              padding: EdgeInsets.all(_dimens.defaultPadding),
-              child: SafeArea(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: GlobalButton(
-                    child: OptimizedText(
-                      _strings.startButton,
-                      fontWeight: FontWeight.bold,
+          SlideTransition(
+            position: _splashController.alignAnimationButton,
+            child: FadeTransition(
+              opacity: _splashController.fadeAnimationButton,
+              child: Padding(
+                padding: EdgeInsets.all(_dimens.defaultPadding),
+                child: SafeArea(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: GlobalButton(
+                      child: OptimizedText(
+                        _strings.startButton,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      color: _colors.pastelCyan,
+                      onPressed: () {
+                        Get.toNamed(_routes.authRoute);
+                      },
+                      radius: _dimens.defaultRadius,
+                      height: _dimens.defaultButtonHeight,
+                      width: SizeConfig.widthMultiplier * 70,
                     ),
-                    color: _colors.pastelCyan,
-                    onPressed: () {
-                      Get.toNamed(_routes.authRoute);
-                    },
-                    radius: _dimens.defaultRadius,
-                    height: _dimens.defaultButtonHeight,
-                    width: SizeConfig.widthMultiplier * 70,
                   ),
                 ),
               ),

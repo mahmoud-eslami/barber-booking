@@ -30,7 +30,7 @@ class ProfileController extends GetxController
         updateSelectedAgeDependOnScroll();
       });
     const duration = Duration(milliseconds: 800);
-    const beginOffset = Offset(0, 2);
+    const beginOffset = Offset(0, .6);
     animationController = AnimationController(vsync: this, duration: duration)
       ..forward();
     avatarAnimation =
