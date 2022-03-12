@@ -1,9 +1,12 @@
 import 'package:barber_booking/app/core/utils/size_config.dart';
 import 'package:barber_booking/app/core/values/dimes.dart';
+import 'package:barber_booking/app/data/enums/text_color_option.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/global_form_field.dart';
 import 'package:barber_booking/app/global_widgets/global_indicator.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
+import 'package:barber_booking/app/modules/profile/local_widget/age_selector.dart';
+import 'package:barber_booking/app/modules/profile/local_widget/gender_selector.dart';
 import 'package:barber_booking/app/modules/profile/local_widget/profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -87,14 +90,24 @@ class ProfilePage extends StatelessWidget {
               height: SizeConfig.heightMultiplier * 1,
             ),
             FadeTransition(
-              opacity: _profileController.fieldFadeAnimation3,
+              opacity: _profileController.genderSelectorFadeAnimation,
               child: SlideTransition(
-                position: _profileController.fieldAnimation3,
-                child: GlobalTextFormField(
-                  controller: TextEditingController(),
-                  label: _strings.birthHint,
-                ),
+                position: _profileController.genderSelectorAnimation,
+                child: GenderSelector(),
               ),
+            ),
+            SizedBox(
+              height: SizeConfig.heightMultiplier * 1,
+            ),
+            FadeTransition(
+              opacity: _profileController.ageSelectorFadeAnimation,
+              child: SlideTransition(
+                position: _profileController.ageSelectorAnimation,
+                child: AgeSelector(),
+              ),
+            ),
+            SizedBox(
+              height: SizeConfig.heightMultiplier * 1,
             ),
             const Expanded(
               child: SizedBox(

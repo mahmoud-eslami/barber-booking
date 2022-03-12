@@ -1,5 +1,6 @@
 import 'package:barber_booking/app/data/enums/text_size_option.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
+import 'package:barber_booking/app/global_widgets/parent_widget.dart';
 import 'package:barber_booking/app/modules/news/local_widget/add_story.dart';
 import 'package:barber_booking/app/modules/news/local_widget/news_line.dart';
 import 'package:barber_booking/app/modules/news/local_widget/stories_line.dart';
@@ -25,24 +26,36 @@ class NewsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("News"),
       ),
-      body: Column(
-        children: [
-          StoriesLine(),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: _dimens.defaultPadding * 2,
-              vertical: _dimens.defaultPadding,
+      body: ParentWidget(
+        child: Column(
+          children: [
+            StoriesLine(),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: _dimens.defaultPadding * 2,
+                vertical: _dimens.defaultPadding,
+              ),
+              child: OptimizedText(
+                "Barber Shops news",
+                customColor: _colors.lightTxtColor,
+                textAlign: TextAlign.left,
+                fontWeight: FontWeight.bold,
+                sizeOption: TextSizeOptions.bigBody,
+              ),
             ),
-            child: OptimizedText(
-              "Barber Shops news",
-              customColor: _colors.lightTxtColor,
-              textAlign: TextAlign.left,
-              fontWeight: FontWeight.bold,
-              sizeOption: TextSizeOptions.bigBody,
+            NewsLine(),
+            Padding(
+              padding: EdgeInsets.all(_dimens.defaultPadding * 2),
+              child: OptimizedText(
+                "Trending Barber Shops",
+                customColor: _colors.lightTxtColor,
+                textAlign: TextAlign.left,
+                fontWeight: FontWeight.bold,
+                sizeOption: TextSizeOptions.bigBody,
+              ),
             ),
-          ),
-          NewsLine(),
-        ],
+          ],
+        ),
       ),
     );
   }
