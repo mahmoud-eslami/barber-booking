@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 class ProfileController extends GetxController
     with GetTickerProviderStateMixin {
   late ScrollController ageSelectorScrollController;
+  double pixelHolder = 0.0;
 
   RxBool genderIsWoman = false.obs;
   RxInt selectedAgeIndex = 0.obs;
@@ -24,7 +25,10 @@ class ProfileController extends GetxController
 
   @override
   void onInit() {
-    ageSelectorScrollController = ScrollController()..addListener(() {});
+    ageSelectorScrollController = ScrollController()
+      ..addListener(() {
+        updateSelectedAgeDependOnScroll();
+      });
     const duration = Duration(milliseconds: 800);
     const beginOffset = Offset(0, 2);
     animationController = AnimationController(vsync: this, duration: duration)
@@ -116,6 +120,24 @@ class ProfileController extends GetxController
     animationController.dispose();
     super.onClose();
   }
+
+  updateSelectedAgeDependOnScroll() {
+    if (ageSelectorScrollController.position.pixels > pixelHolder + 50) {
+      pixelHolder = ageSelectorScrollController.position.pixels;
+      if (selectedAgeIndex.value < 80) {
+        increaseSelectedAgeIndex();
+      }
+    } else if (ageSelectorScrollController.position.pixels < pixelHolder - 50) {
+      pixelHolder = ageSelectorScrollController.position.pixels;
+      if (selectedAgeIndex.value > 0) {
+        decreaseSelectedAgeIndex();
+      }
+    }
+  }
+
+  increaseSelectedAgeIndex() => selectedAgeIndex(selectedAgeIndex.value + 1);
+
+  decreaseSelectedAgeIndex() => selectedAgeIndex(selectedAgeIndex.value - 1);
 
   setManAsGender() => genderIsWoman(false);
 

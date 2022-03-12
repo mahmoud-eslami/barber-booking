@@ -52,6 +52,9 @@ class AgeSelector extends StatelessWidget {
               left: ((SizeConfig.widthMultiplier * 100) -
                       (_dimens.defaultPadding * 9)) *
                   .5,
+              right: ((SizeConfig.widthMultiplier * 100) -
+                      (_dimens.defaultPadding * 9)) *
+                  .4,
             ),
             controller: _profileController.ageSelectorScrollController,
             scrollDirection: Axis.horizontal,
