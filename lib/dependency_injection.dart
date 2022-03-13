@@ -1,6 +1,8 @@
 import 'package:barber_booking/app/core/theme/app_theme.dart';
 import 'package:barber_booking/app/core/values/colors.dart';
 import 'package:barber_booking/app/core/values/dimes.dart';
+import 'package:barber_booking/app/data/services/camera_service.dart';
+import 'package:barber_booking/app/modules/add_story/controller.dart';
 import 'package:barber_booking/app/modules/authentication/controller.dart';
 import 'package:barber_booking/app/modules/authentication/page.dart';
 import 'package:barber_booking/app/modules/home/controller.dart';
@@ -15,6 +17,8 @@ import 'app/core/values/strings.dart';
 
 class DependencyInjection {
   static void injector() {
+    CustomCameraService.initializeCamera();
+
     Get.put(Strings());
     Get.put(AppColors());
     Get.put(Routes());
@@ -27,5 +31,6 @@ class DependencyInjection {
     Get.lazyPut(() => HomeController(), fenix: true);
     Get.lazyPut(() => ProfileController(), fenix: true);
     Get.lazyPut(() => NewsController(), fenix: true);
+    Get.lazyPut(() => AddStoryController(), fenix: true);
   }
 }

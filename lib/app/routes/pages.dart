@@ -9,6 +9,7 @@ import 'package:barber_booking/app/modules/terms_conditions/page.dart';
 import 'package:barber_booking/app/routes/routes.dart';
 import 'package:get/get.dart';
 
+import '../modules/add_story/page.dart';
 import '../modules/authentication/page.dart';
 
 class Pages {
@@ -25,5 +26,6 @@ class Pages {
     GetPage(name: _routes.storyRoute, page: () => StoryPage()),
     GetPage(name: _routes.barberProfile, page: () => BarberProfile()),
     GetPage(name: _routes.barberShopProfile, page: () => BarberShopProfile()),
+    GetPage(name: _routes.addStory, page: () => AddStory()),
   ];
 }

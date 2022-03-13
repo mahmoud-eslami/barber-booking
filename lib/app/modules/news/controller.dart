@@ -39,12 +39,12 @@ class NewsController extends GetxController with GetTickerProviderStateMixin {
     newsTitleFadeAnimation =
         Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
       parent: animationController,
-      curve: const Interval(0.4, 1, curve: Curves.ease),
+      curve: const Interval(0.6, 1, curve: Curves.ease),
     ));
     newsTitleSlideAnimation = Tween<Offset>(begin: startOffset, end: endOffset)
         .animate(CurvedAnimation(
       parent: animationController,
-      curve: const Interval(0.4, 1, curve: Curves.ease),
+      curve: const Interval(0.6, 1, curve: Curves.ease),
     ));
     newsLineFadeAnimation =
         Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(

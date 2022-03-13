@@ -8,4 +8,5 @@ class Routes {
   String storyRoute = "/story";
   String barberProfile = "/barberProfile";
   String barberShopProfile = "/barberShopProfile";
+  String addStory = "/addStory";
 }

@@ -21,6 +21,7 @@ class Strings {
   String newsPageTitle = "News";
   String barberShopNewsTitle = "Barber Shops news";
   String trendingBarberTitle = "Trending Barber Shops";
+  String addStoryAppBarTitle = "Add Story";
 
   // lorem
   String lorem =
