@@ -45,75 +45,95 @@ class AuthenticationPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                FadeTransition(
-                  opacity: _authenticationController.titleAnimation,
-                  child: Center(
-                    child: BarberTitle(),
+                SlideTransition(
+                  position: _authenticationController.titleSlideAnimation,
+                  child: FadeTransition(
+                    opacity: _authenticationController.titleAnimation,
+                    child: Center(
+                      child: BarberTitle(),
+                    ),
                   ),
                 ),
-                FadeTransition(
-                  opacity: _authenticationController.imageAnimation,
-                  child: Image.asset(
-                    "assets/images/hairstyle.png",
-                    height: SizeConfig.heightMultiplier * 30,
+                SlideTransition(
+                  position: _authenticationController.imageSlideAnimation,
+                  child: FadeTransition(
+                    opacity: _authenticationController.imageAnimation,
+                    child: Image.asset(
+                      "assets/images/hairstyle.png",
+                      height: SizeConfig.heightMultiplier * 30,
+                    ),
                   ),
                 ),
-                FadeTransition(
-                  opacity: _authenticationController.descriptionAnimation,
-                  child: OptimizedText(
-                    _strings.findBarberDescription,
-                    customColor: _colors.lightTxtColor,
-                    maxLine: 2,
+                SlideTransition(
+                  position: _authenticationController.descriptionSlideAnimation,
+                  child: FadeTransition(
+                    opacity: _authenticationController.descriptionAnimation,
+                    child: OptimizedText(
+                      _strings.findBarberDescription,
+                      customColor: _colors.lightTxtColor,
+                      maxLine: 2,
+                    ),
                   ),
                 ),
                 Column(
                   children: [
-                    FadeTransition(
-                      opacity: _authenticationController.registerBtnAnimation,
-                      child: GlobalButton(
-                        child: OptimizedText(
-                          _strings.registerTitle,
-                          fontWeight: FontWeight.bold,
+                    SlideTransition(
+                      position:
+                          _authenticationController.registerBtnSlideAnimation,
+                      child: FadeTransition(
+                        opacity: _authenticationController.registerBtnAnimation,
+                        child: GlobalButton(
+                          child: OptimizedText(
+                            _strings.registerTitle,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          color: _colors.pastelCyan,
+                          onPressed: () {
+                            showBottomSheet(
+                                AuthBottomSheet(isRegister: true), context);
+                          },
+                          radius: _dimens.defaultRadius,
+                          height: _dimens.defaultButtonHeight,
+                          width: SizeConfig.widthMultiplier * 70,
                         ),
-                        color: _colors.pastelCyan,
-                        onPressed: () {
-                          showBottomSheet(
-                              AuthBottomSheet(isRegister: true), context);
-                        },
-                        radius: _dimens.defaultRadius,
-                        height: _dimens.defaultButtonHeight,
-                        width: SizeConfig.widthMultiplier * 70,
                       ),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    FadeTransition(
-                      opacity: _authenticationController.loginBtnAnimation,
-                      child: GlobalButton(
-                        child: OptimizedText(
-                          _strings.loginTitle,
-                          customColor: _colors.lightTxtColor,
-                          fontWeight: FontWeight.bold,
+                    SlideTransition(
+                      position:
+                          _authenticationController.loginBtnSlideAnimation,
+                      child: FadeTransition(
+                        opacity: _authenticationController.loginBtnAnimation,
+                        child: GlobalButton(
+                          child: OptimizedText(
+                            _strings.loginTitle,
+                            customColor: _colors.lightTxtColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          color: _colors.pastelCyan,
+                          elevation: 0,
+                          onPressed: () {
+                            showBottomSheet(
+                                AuthBottomSheet(isRegister: false), context);
+                          },
+                          borderedButton: true,
+                          borderColor: _colors.lightTxtColor,
+                          radius: _dimens.defaultRadius,
+                          height: _dimens.defaultButtonHeight,
+                          width: SizeConfig.widthMultiplier * 70,
                         ),
-                        color: _colors.pastelCyan,
-                        elevation: 0,
-                        onPressed: () {
-                          showBottomSheet(
-                              AuthBottomSheet(isRegister: false), context);
-                        },
-                        borderedButton: true,
-                        borderColor: _colors.lightTxtColor,
-                        radius: _dimens.defaultRadius,
-                        height: _dimens.defaultButtonHeight,
-                        width: SizeConfig.widthMultiplier * 70,
                       ),
                     ),
                   ],
                 ),
-                FadeTransition(
-                  opacity: _authenticationController.termsAnimation,
-                  child: TermsConditionsSection(),
+                SlideTransition(
+                  position: _authenticationController.termsSlideAnimation,
+                  child: FadeTransition(
+                    opacity: _authenticationController.termsAnimation,
+                    child: TermsConditionsSection(),
+                  ),
                 ),
               ],
             ),
