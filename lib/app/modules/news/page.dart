@@ -4,6 +4,7 @@ import 'package:barber_booking/app/global_widgets/parent_widget.dart';
 import 'package:barber_booking/app/modules/news/local_widget/add_story.dart';
 import 'package:barber_booking/app/modules/news/local_widget/news_line.dart';
 import 'package:barber_booking/app/modules/news/local_widget/stories_line.dart';
+import 'package:barber_booking/app/modules/news/local_widget/trends_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -54,6 +55,7 @@ class NewsPage extends StatelessWidget {
                 sizeOption: TextSizeOptions.bigBody,
               ),
             ),
+            TrendsLine(),
           ],
         ),
       ),
