@@ -18,6 +18,9 @@ class Strings {
   String nameHint = "Your name";
   String emailHint = "Email";
   String birthHint = "Date of birth";
+  String newsPageTitle = "News";
+  String barberShopNewsTitle = "Barber Shops news";
+  String trendingBarberTitle = "Trending Barber Shops";
 
   // lorem
   String lorem =
