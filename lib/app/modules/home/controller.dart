@@ -1,15 +1,17 @@
 import 'dart:async';
 
+import 'package:barber_booking/app/data/services/location_service.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   RxBool navItemPressed = false.obs;
+  late RxObjectMixin<Position> userPosition;
   StreamSubscription<Position>? positionStream;
 
   @override
   void onInit() {
-    liveLocationStream();
+    checkLocationStatus();
     super.onInit();
   }
 
@@ -17,6 +19,16 @@ class HomeController extends GetxController {
   void onClose() {
     positionStream?.cancel();
     super.onClose();
+  }
+
+  checkLocationStatus() async {
+    try {
+      await CustomLocationService.determinePosition();
+      liveLocationStream();
+    } catch (e, s) {
+      print(e);
+      print(s);
+    }
   }
 
   liveLocationStream() {
@@ -28,9 +40,9 @@ class HomeController extends GetxController {
       positionStream =
           Geolocator.getPositionStream(locationSettings: locationSettings)
               .listen((Position? position) {
-        print(position == null
-            ? 'Unknown'
-            : '${position.latitude.toString()}, ${position.longitude.toString()}');
+        if (position != null) {
+          userPosition(position);
+        }
       });
     } catch (e) {
       print(e);
