@@ -6,4 +6,6 @@ class Routes {
   String profileRoute = "/profile";
   String newsRoute = "/news";
   String storyRoute = "/story";
+  String barberProfile = "/barberProfile";
+  String barberShopProfile = "/barberShopProfile";
 }
