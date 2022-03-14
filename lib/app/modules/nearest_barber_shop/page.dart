@@ -121,7 +121,7 @@ class BarberShopItem extends StatelessWidget {
             painter: BarberShopItemPainter(isUpperWidget: isUpperWidget),
           ),
         ),
-        if (!isUpperWidget) const SizedBox(height: 30),
+        if (!isUpperWidget) const SizedBox(height: 20),
       ],
     );
   }
@@ -131,6 +131,7 @@ class BarberShopItemPainter extends CustomPainter {
   final bool isUpperWidget;
 
   final AppColors _colors = Get.find();
+  final Dimens _dimens = Get.find();
 
   BarberShopItemPainter({required this.isUpperWidget});
 
@@ -139,22 +140,49 @@ class BarberShopItemPainter extends CustomPainter {
     var paint = Paint();
     var path = Path();
     paint
-      ..color = _colors.coloredBorder
+      ..color = _colors.lightBorder.withOpacity(.1)
       ..style = PaintingStyle.fill;
 
+    const radiusStop = 30.0;
+
     if (isUpperWidget) {
-      path.moveTo(0, 0);
-      path.lineTo(size.width, 0);
-      path.lineTo(size.width, size.height);
-      path.lineTo(size.width, size.height * .85);
-      path.lineTo(0, size.height);
+      path.moveTo(0, radiusStop);
+      path.quadraticBezierTo(0, 0, size.width * .1, 0);
+      path.lineTo(size.width * .9, 0);
+      path.quadraticBezierTo(size.width, 0, size.width * 1, radiusStop);
+      path.lineTo(size.width, size.height * .75);
+      path.quadraticBezierTo(size.width, size.height * .90,
+          size.width - radiusStop, size.height * .90);
+      path.lineTo(radiusStop, size.height);
+      path.quadraticBezierTo(0, size.height, 0, size.height - radiusStop);
     } else {
-      path.moveTo(0, size.height);
-      path.lineTo(size.width, size.height);
-      path.lineTo(size.width, 0);
-      path.lineTo(0, size.height * .15);
+      path.moveTo(size.width, size.height - radiusStop);
+      path.quadraticBezierTo(
+          size.width, size.height, size.width - radiusStop, size.height);
+      path.lineTo(radiusStop, size.height);
+      path.quadraticBezierTo(0, size.height, 0, size.height - radiusStop);
+      path.lineTo(0, size.height * .25);
+      path.quadraticBezierTo(0, size.height * .1, radiusStop, size.height * .1);
+      path.lineTo(size.width - radiusStop, 0);
+      path.quadraticBezierTo(size.width, 0, size.width, radiusStop);
     }
     path.close();
+
+    // path.lineTo(0, size.height);
+    // path.quadraticBezierTo(0, size.height - 30, 0, size.height - 20);
+    // path.quadraticBezierTo(0, size.height, 20, size.height);
+    // path.lineTo(size.width, size.height);
+    // path.quadraticBezierTo(
+    //     size.width - 20, size.height, size.width - 20, size.height);
+    // path.quadraticBezierTo(
+    //     size.width, size.height, size.width, size.height - 20);
+    // path.lineTo(size.width, 0);
+    // path.quadraticBezierTo(size.width, 20, size.width, 40);
+    // path.quadraticBezierTo(size.width, 0, size.width - 40, 10);
+    // path.lineTo(40, size.height / 2 - 60);
+    // path.quadraticBezierTo(20, size.height / 2 - 60, 40, size.height / 2 - 60);
+    // path.quadraticBezierTo(0, size.height / 2 - 40, 0, size.height / 2);
+    // path.close();
 
     canvas.drawPath(path, paint);
   }
