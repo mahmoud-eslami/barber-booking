@@ -50,7 +50,7 @@ class NewsItem extends StatelessWidget {
                 sigmaY: 10,
               ),
               child: Container(
-                height: SizeConfig.heightMultiplier * 22,
+                height: SizeConfig.heightMultiplier * 25,
                 width: SizeConfig.widthMultiplier * 90,
                 decoration: BoxDecoration(
                   color: _colors.frostedBlack.withOpacity(.4),

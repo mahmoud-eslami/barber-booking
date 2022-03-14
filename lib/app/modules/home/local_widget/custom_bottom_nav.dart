@@ -59,7 +59,9 @@ class CustomBottomNav extends StatelessWidget {
                         iconData: Ionicons.newspaper,
                       ),
                       BottomNavItem(
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed(_routes.nearestBarberShop);
+                        },
                         iconData: Ionicons.navigate,
                       ),
                       BottomNavItem(

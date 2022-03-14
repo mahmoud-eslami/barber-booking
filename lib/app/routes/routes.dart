@@ -9,4 +9,5 @@ class Routes {
   String barberProfile = "/barberProfile";
   String barberShopProfile = "/barberShopProfile";
   String addStory = "/addStory";
+  String nearestBarberShop = "/nearestBarberShop";
 }

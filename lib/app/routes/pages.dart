@@ -1,6 +1,7 @@
 import 'package:barber_booking/app/modules/barber_profile/page.dart';
 import 'package:barber_booking/app/modules/barber_shop_profile/page.dart';
 import 'package:barber_booking/app/modules/home/page.dart';
+import 'package:barber_booking/app/modules/nearest_barber_shop/page.dart';
 import 'package:barber_booking/app/modules/news/page.dart';
 import 'package:barber_booking/app/modules/profile/page.dart';
 import 'package:barber_booking/app/modules/splash/page.dart';
@@ -27,5 +28,6 @@ class Pages {
     GetPage(name: _routes.barberProfile, page: () => BarberProfile()),
     GetPage(name: _routes.barberShopProfile, page: () => BarberShopProfile()),
     GetPage(name: _routes.addStory, page: () => AddStory()),
+    GetPage(name: _routes.nearestBarberShop, page: () => NearestBarberShop()),
   ];
 }
