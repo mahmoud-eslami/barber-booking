@@ -5,6 +5,8 @@ import 'package:barber_booking/app/data/services/camera_service.dart';
 import 'package:barber_booking/app/modules/add_story/controller.dart';
 import 'package:barber_booking/app/modules/authentication/controller.dart';
 import 'package:barber_booking/app/modules/authentication/page.dart';
+import 'package:barber_booking/app/modules/barber_shop_profile/controller.dart';
+import 'package:barber_booking/app/modules/barber_shop_profile/page.dart';
 import 'package:barber_booking/app/modules/home/controller.dart';
 import 'package:barber_booking/app/modules/nearest_barber_shop/controller.dart';
 import 'package:barber_booking/app/modules/news/controller.dart';
@@ -34,5 +36,6 @@ class DependencyInjection {
     Get.lazyPut(() => NewsController(), fenix: true);
     Get.lazyPut(() => AddStoryController(), fenix: true);
     Get.lazyPut(() => NearestBarberShopController(), fenix: true);
+    Get.lazyPut(() => BarberShopProfileController(), fenix: true);
   }
 }

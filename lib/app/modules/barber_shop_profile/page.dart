@@ -11,6 +11,7 @@ import 'package:ionicons/ionicons.dart';
 import '../../core/values/colors.dart';
 import '../../core/values/strings.dart';
 import '../../routes/routes.dart';
+import 'controller.dart';
 
 class BarberShopProfile extends StatelessWidget {
   BarberShopProfile({Key? key}) : super(key: key);
@@ -19,6 +20,7 @@ class BarberShopProfile extends StatelessWidget {
   final Strings _strings = Get.find();
   final Routes _routes = Get.find();
   final Dimens _dimens = Get.find();
+  final BarberShopProfileController _profileController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -67,15 +69,21 @@ class BarberShopProfile extends StatelessWidget {
               ),
             ],
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: GlobalButton(
-              width: SizeConfig.widthMultiplier * 80,
-              height: _dimens.defaultButtonHeight,
-              child: OptimizedText("Booking"),
-              color: _colors.pastelCyan,
-              onPressed: () {},
-              radius: _dimens.defaultRadius,
+          SlideTransition(
+            position: _profileController.slideBookButtonAnimation,
+            child: FadeTransition(
+              opacity: _profileController.fadeBookButtonAnimation,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: GlobalButton(
+                  width: SizeConfig.widthMultiplier * 80,
+                  height: _dimens.defaultButtonHeight,
+                  child: OptimizedText("Booking"),
+                  color: _colors.pastelCyan,
+                  onPressed: () {},
+                  radius: _dimens.defaultRadius,
+                ),
+              ),
             ),
           ),
         ],
@@ -91,6 +99,7 @@ class BarberShopDescriptionWidget extends StatelessWidget {
   final Strings _strings = Get.find();
   final Routes _routes = Get.find();
   final Dimens _dimens = Get.find();
+  final BarberShopProfileController _profileController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -98,36 +107,48 @@ class BarberShopDescriptionWidget extends StatelessWidget {
       padding: EdgeInsets.all(_dimens.defaultPadding * 3),
       child: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    OptimizedText(
-                      "USA - new street in somewhere that is exist !",
-                      colorOption: TextColorOptions.light,
-                      textAlign: TextAlign.start,
-                      sizeOption: TextSizeOptions.caption,
-                      maxLine: 2,
+          SlideTransition(
+            position: _profileController.slideLikeButtonAnimation,
+            child: FadeTransition(
+              opacity: _profileController.fadeLikeButtonAnimation,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        OptimizedText(
+                          "USA - new street in somewhere that is exist !",
+                          colorOption: TextColorOptions.light,
+                          textAlign: TextAlign.start,
+                          sizeOption: TextSizeOptions.caption,
+                          maxLine: 2,
+                        ),
+                        ratingWidget(),
+                      ],
                     ),
-                    ratingWidget(),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    width: SizeConfig.widthMultiplier * 2,
+                  ),
+                  likeButton(),
+                ],
               ),
-              SizedBox(
-                width: SizeConfig.widthMultiplier * 2,
-              ),
-              likeButton(),
-            ],
+            ),
           ),
           SizedBox(height: SizeConfig.heightMultiplier * 2),
           tagsWidget(),
           SizedBox(height: SizeConfig.heightMultiplier * 2),
-          OptimizedText(
-            _strings.lorem + _strings.lorem + _strings.lorem,
-            colorOption: TextColorOptions.light,
-            maxLine: 100,
-            textAlign: TextAlign.justify,
+          SlideTransition(
+            position: _profileController.slideDescriptionAnimation,
+            child: FadeTransition(
+              opacity: _profileController.fadeDescriptionAnimation,
+              child: OptimizedText(
+                _strings.lorem + _strings.lorem + _strings.lorem,
+                colorOption: TextColorOptions.light,
+                maxLine: 100,
+                textAlign: TextAlign.justify,
+              ),
+            ),
           ),
           SizedBox(
             height: SizeConfig.heightMultiplier * 8,
@@ -137,30 +158,36 @@ class BarberShopDescriptionWidget extends StatelessWidget {
     );
   }
 
-  tagsWidget() => Wrap(
-        alignment: WrapAlignment.start,
-        crossAxisAlignment: WrapCrossAlignment.start,
-        runAlignment: WrapAlignment.start,
-        children: [
-          for (int i = 0; i < 4; i++)
-            Container(
-              margin: EdgeInsets.all(_dimens.defaultMargin * .3),
-              padding: EdgeInsets.all(_dimens.defaultPadding),
-              decoration: BoxDecoration(
-                color: _colors.pastelCyan.withOpacity(.2),
-                borderRadius: BorderRadius.circular(
-                  _dimens.defaultRadius,
+  tagsWidget() => SlideTransition(
+        position: _profileController.slideTagsAnimation,
+        child: FadeTransition(
+          opacity: _profileController.fadeTagsAnimation,
+          child: Wrap(
+            alignment: WrapAlignment.start,
+            crossAxisAlignment: WrapCrossAlignment.start,
+            runAlignment: WrapAlignment.start,
+            children: [
+              for (int i = 0; i < 4; i++)
+                Container(
+                  margin: EdgeInsets.all(_dimens.defaultMargin * .3),
+                  padding: EdgeInsets.all(_dimens.defaultPadding),
+                  decoration: BoxDecoration(
+                    color: _colors.pastelCyan.withOpacity(.2),
+                    borderRadius: BorderRadius.circular(
+                      _dimens.defaultRadius,
+                    ),
+                  ),
+                  child: Text(
+                    "Tags num $i",
+                    style: TextStyle(
+                      color: _colors.pastelCyan,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
-              child: Text(
-                "Tags num $i",
-                style: TextStyle(
-                  color: _colors.pastelCyan,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-        ],
+            ],
+          ),
+        ),
       );
 
   ratingWidget() => Row(
