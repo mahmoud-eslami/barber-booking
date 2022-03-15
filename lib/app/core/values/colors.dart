@@ -13,6 +13,7 @@ class AppColors {
   Color greenTxtColor = const Color(0xff13DAE9);
   Color lightBorder = Colors.white24;
   Color coloredBorder = const Color(0xff13DAE9);
+  Color starColor = Colors.amber;
 
   Color enableBorderFormFieldColor = const Color(0xffffffff);
   Color focusBorderFormFieldColor = const Color(0xff13DAE9);
