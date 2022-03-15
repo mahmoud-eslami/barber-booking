@@ -9,6 +9,7 @@ import '../../../core/utils/size_config.dart';
 import '../../../core/values/colors.dart';
 import '../../../core/values/dimes.dart';
 import '../../../core/values/strings.dart';
+import '../../../routes/routes.dart';
 import 'barber_shop_item_painter.dart';
 
 class BarberShopItem extends StatelessWidget {
@@ -18,79 +19,84 @@ class BarberShopItem extends StatelessWidget {
 
   final Dimens _dimens = Get.find();
   final AppColors _colors = Get.find();
+  final Routes _routes = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          width: SizeConfig.widthMultiplier * 100,
-          height: 190,
-          color: Colors.transparent,
-          child: CustomPaint(
-            painter: BarberShopItemPainter(isUpperWidget: isUpperWidget),
-            child: Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: _dimens.defaultPadding * 3),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Material(
-                    borderRadius:
-                        BorderRadius.circular(_dimens.defaultRadius * .4),
-                    clipBehavior: Clip.hardEdge,
-                    child: Image.asset(
-                      "assets/images/design.png",
-                      height: 130,
-                      width: 90,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(left: _dimens.defaultMargin * 2),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          titleWidget(),
-                          SizedBox(
-                            height: SizeConfig.heightMultiplier * 2,
-                          ),
-                          Row(
-                            children: [
-                              openStatusWidget(),
-                              SizedBox(
-                                width: SizeConfig.widthMultiplier * 4,
-                              ),
-                              workTimeWidget(),
-                            ],
-                          ),
-                          SizedBox(
-                            height: SizeConfig.heightMultiplier,
-                          ),
-                          ratingWidget(),
-                          SizedBox(
-                            height: SizeConfig.heightMultiplier,
-                          ),
-                          separatorWidget(),
-                          SizedBox(
-                            height: SizeConfig.heightMultiplier,
-                          ),
-                          locationWidget(),
-                        ],
+    return GestureDetector(
+      onTap: () => Get.toNamed(_routes.barberShopProfile),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            width: SizeConfig.widthMultiplier * 100,
+            height: 190,
+            color: Colors.transparent,
+            child: CustomPaint(
+              painter: BarberShopItemPainter(isUpperWidget: isUpperWidget),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: _dimens.defaultPadding * 3),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Material(
+                      borderRadius:
+                          BorderRadius.circular(_dimens.defaultRadius * .4),
+                      clipBehavior: Clip.hardEdge,
+                      child: Image.asset(
+                        "assets/images/design.png",
+                        height: 130,
+                        width: 90,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: Container(
+                        margin:
+                            EdgeInsets.only(left: _dimens.defaultMargin * 2),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            titleWidget(),
+                            SizedBox(
+                              height: SizeConfig.heightMultiplier * 2,
+                            ),
+                            Row(
+                              children: [
+                                openStatusWidget(),
+                                SizedBox(
+                                  width: SizeConfig.widthMultiplier * 4,
+                                ),
+                                workTimeWidget(),
+                              ],
+                            ),
+                            SizedBox(
+                              height: SizeConfig.heightMultiplier,
+                            ),
+                            ratingWidget(),
+                            SizedBox(
+                              height: SizeConfig.heightMultiplier,
+                            ),
+                            separatorWidget(),
+                            SizedBox(
+                              height: SizeConfig.heightMultiplier,
+                            ),
+                            locationWidget(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        if (!isUpperWidget) const SizedBox(height: 20),
-      ],
+          if (!isUpperWidget) const SizedBox(height: 20),
+        ],
+      ),
     );
   }
 
