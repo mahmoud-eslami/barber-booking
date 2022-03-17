@@ -17,6 +17,7 @@ import 'package:barber_booking/app/routes/routes.dart';
 import 'package:get/get.dart';
 
 import 'app/core/values/strings.dart';
+import 'app/modules/barber_profile/controller.dart';
 
 class DependencyInjection {
   static void injector() {
@@ -37,5 +38,6 @@ class DependencyInjection {
     Get.lazyPut(() => AddStoryController(), fenix: true);
     Get.lazyPut(() => NearestBarberShopController(), fenix: true);
     Get.lazyPut(() => BarberShopProfileController(), fenix: true);
+    Get.lazyPut(() => BarberProfileController(), fenix: true);
   }
 }

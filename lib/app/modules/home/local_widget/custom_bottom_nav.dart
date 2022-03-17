@@ -50,7 +50,7 @@ class CustomBottomNav extends StatelessWidget {
                     children: [
                       BottomNavItem(
                         onTap: () {},
-                        iconData: Ionicons.location_outline,
+                        iconData: Ionicons.time_sharp,
                       ),
                       BottomNavItem(
                         onTap: () {

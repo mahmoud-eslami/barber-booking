@@ -123,14 +123,17 @@ class NewsItem extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Material(
-                            borderRadius: BorderRadius.circular(
-                                _dimens.defaultRadius * .5),
-                            clipBehavior: Clip.hardEdge,
-                            child: Image.asset(
-                              "assets/images/avatar.jpeg",
-                              width: 59,
-                              height: 59,
+                          GestureDetector(
+                            onTap: () => Get.toNamed(_routes.barberProfile),
+                            child: Material(
+                              borderRadius: BorderRadius.circular(
+                                  _dimens.defaultRadius * .5),
+                              clipBehavior: Clip.hardEdge,
+                              child: Image.asset(
+                                "assets/images/avatar.jpeg",
+                                width: 59,
+                                height: 59,
+                              ),
                             ),
                           )
                         ],
