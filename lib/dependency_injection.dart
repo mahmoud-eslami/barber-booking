@@ -10,6 +10,7 @@ import 'package:barber_booking/app/modules/barber_shop_profile/page.dart';
 import 'package:barber_booking/app/modules/home/controller.dart';
 import 'package:barber_booking/app/modules/nearest_barber_shop/controller.dart';
 import 'package:barber_booking/app/modules/news/controller.dart';
+import 'package:barber_booking/app/modules/news_details/controller.dart';
 import 'package:barber_booking/app/modules/profile/controller.dart';
 import 'package:barber_booking/app/modules/splash/controller.dart';
 import 'package:barber_booking/app/modules/terms_conditions/controller.dart';
@@ -39,5 +40,6 @@ class DependencyInjection {
     Get.lazyPut(() => NearestBarberShopController(), fenix: true);
     Get.lazyPut(() => BarberShopProfileController(), fenix: true);
     Get.lazyPut(() => BarberProfileController(), fenix: true);
+    Get.lazyPut(() => NewsDetailsController(), fenix: true);
   }
 }
