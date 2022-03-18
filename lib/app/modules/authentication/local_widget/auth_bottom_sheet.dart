@@ -30,58 +30,67 @@ class AuthBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(_dimens.defaultPadding),
-      child: Stack(
-        children: [
-          Align(alignment: Alignment.topCenter, child: BottomSheetLine()),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+    return SingleChildScrollView(
+      child: AnimatedPadding(
+        padding: MediaQuery.of(context).viewInsets,
+        duration: const Duration(milliseconds: 100),
+        child: Padding(
+          padding: EdgeInsets.all(_dimens.defaultPadding),
+          child: Stack(
             children: [
-              OptimizedText(
-                isRegister
-                    ? "Enter your email and set a password"
-                    : "Enter your email and password",
-                customColor: _colors.lightTxtColor,
-                sizeOption: TextSizeOptions.bigBody,
+              Align(alignment: Alignment.topCenter, child: BottomSheetLine()),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: SizeConfig.heightMultiplier * 4),
+                  OptimizedText(
+                    isRegister
+                        ? "Enter your email and set a password"
+                        : "Enter your email and password",
+                    customColor: _colors.lightTxtColor,
+                    sizeOption: TextSizeOptions.bigBody,
+                    maxLine: 2,
+                  ),
+                  SizedBox(
+                    height: SizeConfig.heightMultiplier * 4,
+                  ),
+                  GlobalTextFormField(
+                    controller: _authenticationController.emailController,
+                    label: "Email",
+                  ),
+                  SizedBox(
+                    height: SizeConfig.heightMultiplier * 1,
+                  ),
+                  GlobalTextFormField(
+                    controller: _authenticationController.passwordController,
+                    label: "password",
+                  ),
+                  SizedBox(
+                    height: SizeConfig.heightMultiplier * 1,
+                  ),
+                  GlobalButton(
+                    child: OptimizedText(
+                      isRegister ? _strings.registerTitle : _strings.loginTitle,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    color: _colors.pastelCyan,
+                    onPressed: () {
+                      // todo : use different function based on input
+                      Get.toNamed(_routes.homeRoute);
+                    },
+                    radius: _dimens.defaultRadius,
+                    height: _dimens.defaultButtonHeight,
+                  ),
+                  SizedBox(
+                    height: SizeConfig.heightMultiplier * 7,
+                  ),
+                  TermsConditionsSection(),
+                ],
               ),
-              SizedBox(
-                height: SizeConfig.heightMultiplier * 4,
-              ),
-              GlobalTextFormField(
-                controller: _authenticationController.emailController,
-                label: "Email",
-              ),
-              SizedBox(
-                height: SizeConfig.heightMultiplier * 1,
-              ),
-              GlobalTextFormField(
-                controller: _authenticationController.passwordController,
-                label: "password",
-              ),
-              SizedBox(
-                height: SizeConfig.heightMultiplier * 1,
-              ),
-              GlobalButton(
-                child: OptimizedText(
-                  isRegister ? _strings.registerTitle : _strings.loginTitle,
-                  fontWeight: FontWeight.bold,
-                ),
-                color: _colors.pastelCyan,
-                onPressed: () {
-                  // todo : use different function based on input
-                  Get.toNamed(_routes.homeRoute);
-                },
-                radius: _dimens.defaultRadius,
-                height: _dimens.defaultButtonHeight,
-              ),
-              SizedBox(
-                height: SizeConfig.heightMultiplier * 7,
-              ),
-              TermsConditionsSection(),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

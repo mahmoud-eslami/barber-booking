@@ -24,7 +24,7 @@ class AuthenticationPage extends StatelessWidget {
 
   showBottomSheet(child, context) {
     showModalBottomSheet(
-        isScrollControlled: false,
+        isScrollControlled: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(_dimens.defaultRadius),
