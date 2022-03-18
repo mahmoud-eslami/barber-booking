@@ -1,3 +1,4 @@
+import 'package:barber_booking/app/modules/appointments/page.dart';
 import 'package:barber_booking/app/modules/barber_profile/page.dart';
 import 'package:barber_booking/app/modules/barber_shop_profile/page.dart';
 import 'package:barber_booking/app/modules/home/page.dart';
@@ -31,5 +32,6 @@ class Pages {
     GetPage(name: _routes.addStory, page: () => AddStory()),
     GetPage(name: _routes.nearestBarberShop, page: () => NearestBarberShop()),
     GetPage(name: _routes.newsDetails, page: () => NewsDetailsPage()),
+    GetPage(name: _routes.appointments, page: () => AppointmentsPage()),
   ];
 }

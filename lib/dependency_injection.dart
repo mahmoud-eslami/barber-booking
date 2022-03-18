@@ -3,6 +3,7 @@ import 'package:barber_booking/app/core/values/colors.dart';
 import 'package:barber_booking/app/core/values/dimes.dart';
 import 'package:barber_booking/app/data/services/camera_service.dart';
 import 'package:barber_booking/app/modules/add_story/controller.dart';
+import 'package:barber_booking/app/modules/appointments/controller.dart';
 import 'package:barber_booking/app/modules/authentication/controller.dart';
 import 'package:barber_booking/app/modules/authentication/page.dart';
 import 'package:barber_booking/app/modules/barber_shop_profile/controller.dart';
@@ -41,5 +42,6 @@ class DependencyInjection {
     Get.lazyPut(() => BarberShopProfileController(), fenix: true);
     Get.lazyPut(() => BarberProfileController(), fenix: true);
     Get.lazyPut(() => NewsDetailsController(), fenix: true);
+    Get.lazyPut(() => AppointmentsController(), fenix: true);
   }
 }

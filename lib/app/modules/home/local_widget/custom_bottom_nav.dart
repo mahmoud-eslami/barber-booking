@@ -49,7 +49,9 @@ class CustomBottomNav extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       BottomNavItem(
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed(_routes.appointments);
+                        },
                         iconData: Ionicons.time_sharp,
                       ),
                       BottomNavItem(
