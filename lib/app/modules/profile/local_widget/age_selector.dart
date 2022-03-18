@@ -4,12 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../core/values/colors.dart';
-import '../../../core/values/dimes.dart';
-import '../../../core/values/strings.dart';
 import '../../../data/enums/text_color_option.dart';
+import '../../../exports.dart';
 import '../../../global_widgets/optimized_text.dart';
-import '../../../routes/routes.dart';
 import '../controller.dart';
 
 class AgeSelector extends StatelessWidget {
