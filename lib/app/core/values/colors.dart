@@ -14,6 +14,7 @@ class AppColors {
   Color lightBorder = Colors.white24;
   Color coloredBorder = const Color(0xff13DAE9);
   Color starColor = Colors.amber;
+  Color barberShopsLocationColors = Colors.amber;
 
   Color enableBorderFormFieldColor = const Color(0xffffffff);
   Color focusBorderFormFieldColor = const Color(0xff13DAE9);

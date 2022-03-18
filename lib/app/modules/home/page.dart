@@ -47,21 +47,7 @@ class HomePage extends StatelessWidget {
                     },
                   ),
                   MarkerLayerOptions(
-                    markers: [
-                      Marker(
-                        width: 80.0,
-                        height: 80.0,
-                        point: LatLng(
-                          _homeController.userPosition.latitude,
-                          _homeController.userPosition.longitude,
-                        ),
-                        builder: (ctx) => Icon(
-                          Ionicons.location,
-                          color: _colors.pastelCyan,
-                          size: SizeConfig.widthMultiplier * 10,
-                        ),
-                      ),
-                    ],
+                    markers: _homeController.markers.toList(),
                   ),
                 ],
               );
