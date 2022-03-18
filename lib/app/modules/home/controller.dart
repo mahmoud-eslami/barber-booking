@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   RxBool navItemPressed = false.obs;
-  late RxObjectMixin<Position> userPosition;
-  StreamSubscription<Position>? positionStream;
+  late Position userPosition;
+  RxBool getLocationLoading = true.obs;
 
   @override
   void onInit() {
@@ -17,35 +17,16 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
-    positionStream?.cancel();
     super.onClose();
   }
 
   checkLocationStatus() async {
     try {
-      await CustomLocationService.determinePosition();
-      liveLocationStream();
+      userPosition = await CustomLocationService.determinePosition();
+      getLocationLoading(false);
     } catch (e, s) {
       print(e);
       print(s);
-    }
-  }
-
-  liveLocationStream() {
-    try {
-      const LocationSettings locationSettings = LocationSettings(
-        accuracy: LocationAccuracy.high,
-        distanceFilter: 100,
-      );
-      positionStream =
-          Geolocator.getPositionStream(locationSettings: locationSettings)
-              .listen((Position? position) {
-        if (position != null) {
-          userPosition(position);
-        }
-      });
-    } catch (e) {
-      print(e);
     }
   }
 
