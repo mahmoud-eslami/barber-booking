@@ -1,6 +1,7 @@
 import 'package:barber_booking/app/core/utils/size_config.dart';
 import 'package:barber_booking/app/core/values/colors.dart';
 import 'package:barber_booking/app/core/values/strings.dart';
+import 'package:barber_booking/app/data/enums/text_color_option.dart';
 import 'package:barber_booking/app/data/enums/text_size_option.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/global_form_field.dart';
@@ -11,6 +12,7 @@ import 'package:barber_booking/app/modules/authentication/local_widget/terms_con
 import 'package:barber_booking/app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ionicons/ionicons.dart';
 
 import '../../../core/values/dimes.dart';
 
@@ -78,6 +80,39 @@ class AuthBottomSheet extends StatelessWidget {
                     onPressed: () {
                       // todo : use different function based on input
                       Get.toNamed(_routes.homeRoute);
+                    },
+                    radius: _dimens.defaultRadius,
+                    height: _dimens.defaultButtonHeight,
+                  ),
+                  SizedBox(
+                    height: SizeConfig.heightMultiplier * 1,
+                  ),
+                  GlobalButton(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Ionicons.logo_google,
+                          color: _colors.lightTxtColor,
+                        ),
+                        SizedBox(
+                          width: SizeConfig.widthMultiplier * 35,
+                          child: OptimizedText(
+                            isRegister
+                                ? _strings.googleSignupTitle
+                                : _strings.googleSigninTitle,
+                            fontWeight: FontWeight.bold,
+                            colorOption: TextColorOptions.light,
+                            maxLine: 2,
+                          ),
+                        ),
+                      ],
+                    ),
+                    color: _colors.lightTxtColor,
+                    borderedButton: true,
+                    elevation: 0,
+                    onPressed: () {
+                      // todo : use different function based on input google
                     },
                     radius: _dimens.defaultRadius,
                     height: _dimens.defaultButtonHeight,

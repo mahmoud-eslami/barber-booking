@@ -21,6 +21,7 @@ dependencies:
   flutter_map: ^0.14.0
   geolocator: ^8.2.0
   camera: ^0.9.4+16
+  firebase_auth: ^3.3.11
 
 dev_dependencies:
   flutter_test:

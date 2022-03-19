@@ -12,6 +12,8 @@ class Strings {
   String findBarberDescription = "Let's find Best and Nearest \nbarber Shop";
   String registerTitle = "Sign up";
   String loginTitle = "Sign in";
+  String googleSigninTitle = "Google sign in";
+  String googleSignupTitle = "Google sign up";
   String termsAndConditionsTitle = "Terms and Conditions";
   String profileTitle = "Personal Data";
   String profileSubmitBtn = "Submit";
