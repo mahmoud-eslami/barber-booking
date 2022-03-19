@@ -19,13 +19,15 @@ class Strings {
   String profileSubmitBtn = "Submit";
   String nameHint = "Your name";
   String emailHint = "Email";
+  String passwordHint = "Password";
   String birthHint = "Date of birth";
   String newsPageTitle = "News";
   String barberShopNewsTitle = "Barber Shops news";
   String trendingBarberTitle = "Trending Barber Shops";
   String addStoryAppBarTitle = "Add Story";
   String noticeTitle = "Notice!";
-
+  String loginDescription = "Enter your email and password";
+  String registerDescription = "Enter your email and set a password";
   // lorem
   String lorem =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";

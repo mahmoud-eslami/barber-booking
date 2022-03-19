@@ -83,9 +83,20 @@ class AuthenticationController extends GetxController
     }
   }
 
-  void register() {
-    try {} catch (e) {
+  void register(String email, String password) async {
+    try {
+      pageState(AuthenticationState.registerLoading);
+      UserCredential? userCredential =
+          await _firebaseService.registerUser(email: email, password: password);
+
+      if (userCredential != null) {
+        Get.offAndToNamed(_routes.homeRoute);
+      } else {
+        pageState(AuthenticationState.registerError);
+      }
+    } catch (e) {
       globalSnackbar(content: e.toString());
+      pageState(AuthenticationState.registerError);
     }
   }
 

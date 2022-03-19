@@ -10,17 +10,35 @@ class GlobalTextFormField extends StatelessWidget {
     Key? key,
     required this.controller,
     required this.label,
+    this.isEmailField = false,
+    this.isPasswordField = false,
   }) : super(key: key);
 
   final AppColors _colors = Get.find();
   final Dimens _dimens = Get.find();
   final TextEditingController controller;
   final String label;
+  final bool isEmailField;
+  final bool isPasswordField;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (val) {
+        if (val != null) {
+          if (val.isEmpty) {
+            return "Field Cannot be empty";
+          } else if (!GetUtils.isEmail(val) && isEmailField) {
+            return "Email is not valid";
+          } else if (isPasswordField && val.length < 6) {
+            return "Enter 6 character or more as password";
+          }
+        } else {
+          return "Field Cannot be empty";
+        }
+      },
       decoration: InputDecoration(
         label: OptimizedText(
           label,

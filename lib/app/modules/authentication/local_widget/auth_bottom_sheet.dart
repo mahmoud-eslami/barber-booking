@@ -50,8 +50,8 @@ class AuthBottomSheet extends StatelessWidget {
                   SizedBox(height: SizeConfig.heightMultiplier * 4),
                   OptimizedText(
                     isRegister
-                        ? "Enter your email and set a password"
-                        : "Enter your email and password",
+                        ? _strings.registerDescription
+                        : _strings.loginDescription,
                     customColor: _colors.lightTxtColor,
                     sizeOption: TextSizeOptions.bigBody,
                     maxLine: 2,
@@ -61,14 +61,16 @@ class AuthBottomSheet extends StatelessWidget {
                   ),
                   GlobalTextFormField(
                     controller: _authenticationController.emailController,
-                    label: "Email",
+                    isEmailField: true,
+                    label: _strings.emailHint,
                   ),
                   SizedBox(
                     height: SizeConfig.heightMultiplier * 1,
                   ),
                   GlobalTextFormField(
                     controller: _authenticationController.passwordController,
-                    label: "password",
+                    label: _strings.passwordHint,
+                    isPasswordField: true,
                   ),
                   SizedBox(
                     height: SizeConfig.heightMultiplier * 1,
@@ -90,6 +92,9 @@ class AuthBottomSheet extends StatelessWidget {
                     color: _colors.pastelCyan,
                     onPressed: () {
                       if (isRegister) {
+                        _authenticationController.register(
+                            _authenticationController.emailController.text,
+                            _authenticationController.passwordController.text);
                       } else {
                         _authenticationController.login(
                             _authenticationController.emailController.text,
