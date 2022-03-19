@@ -19,18 +19,18 @@ import 'package:ionicons/ionicons.dart';
 import '../../../core/values/dimes.dart';
 
 class AuthBottomSheet extends StatelessWidget {
-  AuthBottomSheet({
-    Key? key,
-    required this.isRegister,
-  }) : super(key: key);
-
   final bool isRegister;
 
   final Strings _strings = Get.find();
+
   final AppColors _colors = Get.find();
   final Dimens _dimens = Get.find();
   final Routes _routes = Get.find();
   final AuthenticationController _authenticationController = Get.find();
+  AuthBottomSheet({
+    Key? key,
+    required this.isRegister,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

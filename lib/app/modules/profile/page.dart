@@ -1,9 +1,7 @@
 import 'package:barber_booking/app/core/utils/size_config.dart';
 import 'package:barber_booking/app/core/values/dimes.dart';
-import 'package:barber_booking/app/data/enums/text_color_option.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/global_form_field.dart';
-import 'package:barber_booking/app/global_widgets/global_indicator.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:barber_booking/app/modules/profile/local_widget/age_selector.dart';
 import 'package:barber_booking/app/modules/profile/local_widget/gender_selector.dart';
@@ -11,6 +9,7 @@ import 'package:barber_booking/app/modules/profile/local_widget/profile_avatar.d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+
 import '../../core/values/colors.dart';
 import '../../core/values/strings.dart';
 import '../../routes/routes.dart';
@@ -34,7 +33,9 @@ class ProfilePage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              _profileController.logout();
+            },
             icon: Icon(
               Ionicons.log_out_outline,
               size: _dimens.defaultIconSize * 1.2,

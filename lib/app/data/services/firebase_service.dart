@@ -11,35 +11,42 @@ class FirebaseService {
   String weakPwdError = 'The password provided is too weak.';
   String emailUseError = 'The account already exists for that email.';
   String internetConnectionError = 'Please check your internet connection';
-  String unknownError = 'Something went wrong , please try again.';
+  String unknownError = "Operation failed. Please try again.";
   String userNotFoundError = 'No user found for that email.';
   String wrongPwdError = 'Wrong password provided for that user.';
+  String userNotExistError = "No user found with this email.";
 
-  firebaseErrorHandler(FirebaseAuthException error) {
-    switch (error.code) {
-      case "ERROR_EMAIL_ALREADY_IN_USE":
-      case "account-exists-with-different-credential":
-      case "email-already-in-use":
-        throw "Email already used. Go to login page.";
-      case "ERROR_WRONG_PASSWORD":
-      case "wrong-password":
-        throw "Wrong email/password combination.";
-      case "ERROR_USER_NOT_FOUND":
-      case "user-not-found":
-        throw "No user found with this email.";
-      case "ERROR_USER_DISABLED":
-      case "user-disabled":
-        throw "User disabled.";
-      case "ERROR_TOO_MANY_REQUESTS":
-      case "operation-not-allowed":
-        throw "Too many requests to log into this account.";
-      case "ERROR_OPERATION_NOT_ALLOWED":
-        throw "Server error, please try again later.";
-      case "ERROR_INVALID_EMAIL":
-      case "invalid-email":
-        throw "Email address is invalid.";
-      default:
-        throw "Operation failed. Please try again.";
+  firebaseErrorHandler(error) {
+    if (error is FirebaseAuthException) {
+      switch (error.code) {
+        case "ERROR_EMAIL_ALREADY_IN_USE":
+        case "account-exists-with-different-credential":
+        case "email-already-in-use":
+          throw emailUseError;
+        case "ERROR_WRONG_PASSWORD":
+        case "wrong-password":
+          throw wrongPwdError;
+        case "ERROR_USER_NOT_FOUND":
+        case "user-not-found":
+          throw userNotExistError;
+        case "ERROR_USER_DISABLED":
+        case "user-disabled":
+          throw "User disabled.";
+        case "ERROR_TOO_MANY_REQUESTS":
+        case "operation-not-allowed":
+          throw "Too many requests to log into this account.";
+        case "ERROR_OPERATION_NOT_ALLOWED":
+          throw "Server error, please try again later.";
+        case "ERROR_INVALID_EMAIL":
+        case "invalid-email":
+          throw "Email address is invalid.";
+        default:
+          throw unknownError;
+      }
+    } else if (error is SocketException) {
+      throw internetConnectionError;
+    } else {
+      throw unknownError;
     }
   }
 
@@ -56,12 +63,10 @@ class FirebaseService {
       );
 
       return await _auth.signInWithCredential(credential);
-    } on FirebaseAuthException catch (e) {
-      firebaseErrorHandler(e);
-    } on SocketException catch (e) {
+    } on SocketException {
       throw internetConnectionError;
     } catch (e) {
-      throw unknownError;
+      firebaseErrorHandler(e);
     }
   }
 
@@ -71,12 +76,10 @@ class FirebaseService {
           .createUserWithEmailAndPassword(email: email, password: password);
 
       return userCredential;
-    } on FirebaseAuthException catch (e) {
-      firebaseErrorHandler(e);
-    } on SocketException catch (e) {
+    } on SocketException {
       throw internetConnectionError;
     } catch (e) {
-      throw unknownError;
+      firebaseErrorHandler(e);
     }
   }
 
@@ -86,12 +89,43 @@ class FirebaseService {
           .signInWithEmailAndPassword(email: email, password: password);
 
       return userCredential;
-    } on FirebaseAuthException catch (e) {
-      firebaseErrorHandler(e);
-    } on SocketException catch (e) {
+    } on SocketException {
       throw internetConnectionError;
     } catch (e) {
-      throw unknownError;
+      firebaseErrorHandler(e);
     }
+  }
+
+  Future checkUserState() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      firebaseErrorHandler(e);
+    }
+  }
+
+  Future sendVerificationEmail() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        await user.sendEmailVerification();
+      } else {
+        throw userNotExistError;
+      }
+    } catch (e) {
+      firebaseErrorHandler(e);
+    }
+  }
+
+  Future logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {}
   }
 }

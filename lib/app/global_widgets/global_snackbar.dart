@@ -6,6 +6,8 @@ import '../exports.dart';
 
 void globalSnackbar({
   required String content,
+  DismissDirection dismissDirection = DismissDirection.down,
+  bool isPermanet = false,
 }) {
   final AppColors _colors = Get.find();
   final Dimens _dimens = Get.find();
@@ -20,9 +22,9 @@ void globalSnackbar({
     borderRadius: _dimens.defaultRadius * .5,
     margin: EdgeInsets.all(_dimens.defaultMargin),
     colorText: _colors.frostedBlack,
-    duration: const Duration(seconds: 4),
+    duration: isPermanet ? null : const Duration(seconds: 4),
     isDismissible: true,
-    dismissDirection: DismissDirection.down,
+    dismissDirection: dismissDirection,
     forwardAnimationCurve: Curves.easeOutBack,
   );
 }

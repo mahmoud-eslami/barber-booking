@@ -11,13 +11,13 @@ import '../../global_widgets/global_button.dart';
 import '../../routes/routes.dart';
 
 class SplashPage extends StatelessWidget {
-  SplashPage({Key? key}) : super(key: key);
-
   final AppColors _colors = Get.find();
+
   final Strings _strings = Get.find();
   final Routes _routes = Get.find();
   final Dimens _dimens = Get.find();
   final SplashController _splashController = Get.find();
+  SplashPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class SplashPage extends StatelessWidget {
                       ),
                       color: _colors.pastelCyan,
                       onPressed: () {
-                        Get.toNamed(_routes.authRoute);
+                        _splashController.checkUserAuthentication();
                       },
                       radius: _dimens.defaultRadius,
                       height: _dimens.defaultButtonHeight,

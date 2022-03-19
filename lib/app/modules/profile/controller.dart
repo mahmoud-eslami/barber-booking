@@ -1,8 +1,13 @@
+import 'package:barber_booking/app/data/services/firebase_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../../exports.dart';
+
 class ProfileController extends GetxController
     with GetTickerProviderStateMixin {
+  final Routes _routes = Get.find();
+
   late ScrollController ageSelectorScrollController;
   double pixelHolder = 0.0;
 
@@ -23,8 +28,51 @@ class ProfileController extends GetxController
   late Animation<Offset> buttonAnimation;
   late Animation<double> buttonFadeAnimation;
 
+  final FirebaseService _firebaseService = Get.find();
+
   @override
   void onInit() {
+    initializeAnimations();
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    ageSelectorScrollController.dispose();
+    animationController.dispose();
+    super.onClose();
+  }
+
+  logout() async {
+    await _firebaseService.logout();
+    Get.offAllNamed(_routes.authRoute);
+  }
+
+  updateSelectedAgeDependOnScroll() {
+    if (ageSelectorScrollController.position.pixels > pixelHolder + 50) {
+      pixelHolder = ageSelectorScrollController.position.pixels;
+      if (selectedAgeIndex.value < 80) {
+        increaseSelectedAgeIndex();
+      }
+    } else if (ageSelectorScrollController.position.pixels < pixelHolder - 50) {
+      pixelHolder = ageSelectorScrollController.position.pixels;
+      if (selectedAgeIndex.value > 0) {
+        decreaseSelectedAgeIndex();
+      }
+    }
+  }
+
+  increaseSelectedAgeIndex() => selectedAgeIndex(selectedAgeIndex.value + 1);
+
+  decreaseSelectedAgeIndex() => selectedAgeIndex(selectedAgeIndex.value - 1);
+
+  setManAsGender() => genderIsWoman(false);
+
+  setWomanAsGender() => genderIsWoman(true);
+
+  setSelectedAgeIndex(int index) => selectedAgeIndex(index);
+
+  initializeAnimations() {
     ageSelectorScrollController = ScrollController()
       ..addListener(() {
         updateSelectedAgeDependOnScroll();
@@ -111,37 +159,5 @@ class ProfileController extends GetxController
         curve: const Interval(.85, 1, curve: Curves.ease),
       ),
     );
-    super.onInit();
   }
-
-  @override
-  void onClose() {
-    ageSelectorScrollController.dispose();
-    animationController.dispose();
-    super.onClose();
-  }
-
-  updateSelectedAgeDependOnScroll() {
-    if (ageSelectorScrollController.position.pixels > pixelHolder + 50) {
-      pixelHolder = ageSelectorScrollController.position.pixels;
-      if (selectedAgeIndex.value < 80) {
-        increaseSelectedAgeIndex();
-      }
-    } else if (ageSelectorScrollController.position.pixels < pixelHolder - 50) {
-      pixelHolder = ageSelectorScrollController.position.pixels;
-      if (selectedAgeIndex.value > 0) {
-        decreaseSelectedAgeIndex();
-      }
-    }
-  }
-
-  increaseSelectedAgeIndex() => selectedAgeIndex(selectedAgeIndex.value + 1);
-
-  decreaseSelectedAgeIndex() => selectedAgeIndex(selectedAgeIndex.value - 1);
-
-  setManAsGender() => genderIsWoman(false);
-
-  setWomanAsGender() => genderIsWoman(true);
-
-  setSelectedAgeIndex(int index) => selectedAgeIndex(index);
 }
