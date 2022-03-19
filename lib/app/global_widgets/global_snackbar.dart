@@ -7,7 +7,9 @@ import '../exports.dart';
 void globalSnackbar({
   required String content,
   DismissDirection dismissDirection = DismissDirection.down,
+  SnackPosition snackPosition = SnackPosition.BOTTOM,
   bool isPermanet = false,
+  VoidCallback? onTap,
 }) {
   final AppColors _colors = Get.find();
   final Dimens _dimens = Get.find();
@@ -17,7 +19,15 @@ void globalSnackbar({
     _strings.noticeTitle,
     content,
     icon: Icon(Ionicons.notifications, color: _colors.frostedBlack),
-    snackPosition: SnackPosition.BOTTOM,
+    mainButton: (onTap != null)
+        ? TextButton(
+            onPressed: onTap,
+            child: Icon(
+              Ionicons.refresh_outline,
+              color: _colors.darkTxtColor,
+            ))
+        : null,
+    snackPosition: snackPosition,
     backgroundColor: _colors.pastelCyan,
     borderRadius: _dimens.defaultRadius * .5,
     margin: EdgeInsets.all(_dimens.defaultMargin),

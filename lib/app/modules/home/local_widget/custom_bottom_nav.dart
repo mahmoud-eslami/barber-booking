@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:barber_booking/app/core/values/dimes.dart';
+import 'package:barber_booking/app/data/enums/home_state.dart';
 import 'package:barber_booking/app/modules/home/controller.dart';
 import 'package:barber_booking/app/modules/home/local_widget/bottom_nav_item.dart';
 import 'package:barber_booking/app/modules/home/local_widget/profile_nav_item.dart';
@@ -50,19 +51,34 @@ class CustomBottomNav extends StatelessWidget {
                     children: [
                       BottomNavItem(
                         onTap: () {
-                          Get.toNamed(_routes.appointments);
+                          if (_homeController.pageState.value ==
+                              HomeState.userVerified) {
+                            Get.toNamed(_routes.appointments);
+                          } else {
+                            _homeController.showVerificationSnackbar();
+                          }
                         },
                         iconData: Ionicons.time_sharp,
                       ),
                       BottomNavItem(
                         onTap: () {
-                          Get.toNamed(_routes.newsRoute);
+                          if (_homeController.pageState.value ==
+                              HomeState.userVerified) {
+                            Get.toNamed(_routes.newsRoute);
+                          } else {
+                            _homeController.showVerificationSnackbar();
+                          }
                         },
                         iconData: Ionicons.newspaper,
                       ),
                       BottomNavItem(
                         onTap: () {
-                          Get.toNamed(_routes.nearestBarberShop);
+                          if (_homeController.pageState.value ==
+                              HomeState.userVerified) {
+                            Get.toNamed(_routes.nearestBarberShop);
+                          } else {
+                            _homeController.showVerificationSnackbar();
+                          }
                         },
                         iconData: Ionicons.navigate,
                       ),

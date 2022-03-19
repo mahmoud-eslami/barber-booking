@@ -110,6 +110,24 @@ class FirebaseService {
     }
   }
 
+  Future checkUserVerificationState() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        if (user.emailVerified) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        throw userNotExistError;
+      }
+    } catch (e) {
+      firebaseErrorHandler(e);
+    }
+  }
+
   Future sendVerificationEmail() async {
     try {
       User? user = FirebaseAuth.instance.currentUser;

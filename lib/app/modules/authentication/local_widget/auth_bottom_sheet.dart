@@ -78,7 +78,9 @@ class AuthBottomSheet extends StatelessWidget {
                   GlobalButton(
                     child: Obx(
                       () => (_authenticationController.pageState.value ==
-                              AuthenticationState.loginLoading)
+                                  AuthenticationState.loginLoading ||
+                              _authenticationController.pageState.value ==
+                                  AuthenticationState.registerError)
                           ? GlobalIndicator(
                               color: _colors.darkTxtColor,
                             )
