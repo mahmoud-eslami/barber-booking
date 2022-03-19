@@ -79,44 +79,52 @@ class AuthBottomSheet extends StatelessWidget {
                     color: _colors.pastelCyan,
                     onPressed: () {
                       // todo : use different function based on input
-                      Get.toNamed(_routes.homeRoute);
                     },
                     radius: _dimens.defaultRadius,
                     height: _dimens.defaultButtonHeight,
                   ),
-                  SizedBox(
-                    height: SizeConfig.heightMultiplier * 1,
-                  ),
-                  GlobalButton(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  if (!isRegister)
+                    Wrap(
+                      direction: Axis.vertical,
                       children: [
-                        Icon(
-                          Ionicons.logo_google,
-                          color: _colors.lightTxtColor,
-                        ),
                         SizedBox(
-                          width: SizeConfig.widthMultiplier * 35,
-                          child: OptimizedText(
-                            isRegister
-                                ? _strings.googleSignupTitle
-                                : _strings.googleSigninTitle,
-                            fontWeight: FontWeight.bold,
-                            colorOption: TextColorOptions.light,
-                            maxLine: 2,
+                          height: SizeConfig.heightMultiplier * 1,
+                        ),
+                        GlobalButton(
+                          width: SizeConfig.widthMultiplier * 95,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Ionicons.logo_google,
+                                color: _colors.lightTxtColor,
+                              ),
+                              SizedBox(
+                                width: SizeConfig.widthMultiplier * 35,
+                                child: OptimizedText(
+                                  _strings.googleSigninTitle,
+                                  fontWeight: FontWeight.bold,
+                                  colorOption: TextColorOptions.light,
+                                  maxLine: 2,
+                                ),
+                              ),
+                            ],
                           ),
+                          color: _colors.lightTxtColor,
+                          borderedButton: true,
+                          elevation: 0,
+                          onPressed: () {
+                            // todo : use different function based on input google
+                            _authenticationController.login(
+                                _authenticationController.emailController.text,
+                                _authenticationController
+                                    .passwordController.text);
+                          },
+                          radius: _dimens.defaultRadius,
+                          height: _dimens.defaultButtonHeight,
                         ),
                       ],
                     ),
-                    color: _colors.lightTxtColor,
-                    borderedButton: true,
-                    elevation: 0,
-                    onPressed: () {
-                      // todo : use different function based on input google
-                    },
-                    radius: _dimens.defaultRadius,
-                    height: _dimens.defaultButtonHeight,
-                  ),
                   SizedBox(
                     height: SizeConfig.heightMultiplier * 7,
                   ),

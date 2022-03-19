@@ -11,6 +11,7 @@ import 'app/core/utils/size_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await DependencyInjection.injectFirebase();
   DependencyInjection.injector();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
   SystemChrome.setPreferredOrientations([
