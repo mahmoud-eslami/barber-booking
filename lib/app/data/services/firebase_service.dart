@@ -15,6 +15,34 @@ class FirebaseService {
   String userNotFoundError = 'No user found for that email.';
   String wrongPwdError = 'Wrong password provided for that user.';
 
+  firebaseErrorHandler(FirebaseAuthException error) {
+    switch (error.code) {
+      case "ERROR_EMAIL_ALREADY_IN_USE":
+      case "account-exists-with-different-credential":
+      case "email-already-in-use":
+        throw "Email already used. Go to login page.";
+      case "ERROR_WRONG_PASSWORD":
+      case "wrong-password":
+        throw "Wrong email/password combination.";
+      case "ERROR_USER_NOT_FOUND":
+      case "user-not-found":
+        throw "No user found with this email.";
+      case "ERROR_USER_DISABLED":
+      case "user-disabled":
+        throw "User disabled.";
+      case "ERROR_TOO_MANY_REQUESTS":
+      case "operation-not-allowed":
+        throw "Too many requests to log into this account.";
+      case "ERROR_OPERATION_NOT_ALLOWED":
+        throw "Server error, please try again later.";
+      case "ERROR_INVALID_EMAIL":
+      case "invalid-email":
+        throw "Email address is invalid.";
+      default:
+        throw "Operation failed. Please try again.";
+    }
+  }
+
   Future signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -28,10 +56,12 @@ class FirebaseService {
       );
 
       return await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      firebaseErrorHandler(e);
     } on SocketException catch (e) {
-      return Future.error(internetConnectionError);
+      throw internetConnectionError;
     } catch (e) {
-      return Future.error(unknownError);
+      throw unknownError;
     }
   }
 
@@ -42,15 +72,11 @@ class FirebaseService {
 
       return userCredential;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        return Future.error(weakPwdError);
-      } else if (e.code == 'email-already-in-use') {
-        return Future.error(emailUseError);
-      }
+      firebaseErrorHandler(e);
     } on SocketException catch (e) {
-      return Future.error(internetConnectionError);
+      throw internetConnectionError;
     } catch (e) {
-      return Future.error(unknownError);
+      throw unknownError;
     }
   }
 
@@ -61,15 +87,11 @@ class FirebaseService {
 
       return userCredential;
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        Future.error(userNotFoundError);
-      } else if (e.code == 'wrong-password') {
-        Future.error(wrongPwdError);
-      }
+      firebaseErrorHandler(e);
     } on SocketException catch (e) {
-      Future.error(internetConnectionError);
+      throw internetConnectionError;
     } catch (e) {
-      Future.error(unknownError);
+      throw unknownError;
     }
   }
 }

@@ -1,10 +1,12 @@
 import 'package:barber_booking/app/core/utils/size_config.dart';
 import 'package:barber_booking/app/core/values/colors.dart';
 import 'package:barber_booking/app/core/values/strings.dart';
+import 'package:barber_booking/app/data/enums/authentication_state.dart';
 import 'package:barber_booking/app/data/enums/text_color_option.dart';
 import 'package:barber_booking/app/data/enums/text_size_option.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/global_form_field.dart';
+import 'package:barber_booking/app/global_widgets/global_indicator.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:barber_booking/app/modules/authentication/controller.dart';
 import 'package:barber_booking/app/modules/authentication/local_widget/bottom_sheet_line.dart';
@@ -72,59 +74,74 @@ class AuthBottomSheet extends StatelessWidget {
                     height: SizeConfig.heightMultiplier * 1,
                   ),
                   GlobalButton(
-                    child: OptimizedText(
-                      isRegister ? _strings.registerTitle : _strings.loginTitle,
-                      fontWeight: FontWeight.bold,
+                    child: Obx(
+                      () => (_authenticationController.pageState.value ==
+                              AuthenticationState.loginLoading)
+                          ? GlobalIndicator(
+                              color: _colors.darkTxtColor,
+                            )
+                          : OptimizedText(
+                              isRegister
+                                  ? _strings.registerTitle
+                                  : _strings.loginTitle,
+                              fontWeight: FontWeight.bold,
+                            ),
                     ),
                     color: _colors.pastelCyan,
                     onPressed: () {
-                      // todo : use different function based on input
+                      if (isRegister) {
+                      } else {
+                        _authenticationController.login(
+                            _authenticationController.emailController.text,
+                            _authenticationController.passwordController.text);
+                      }
                     },
                     radius: _dimens.defaultRadius,
                     height: _dimens.defaultButtonHeight,
                   ),
-                  if (!isRegister)
-                    Wrap(
-                      direction: Axis.vertical,
-                      children: [
-                        SizedBox(
-                          height: SizeConfig.heightMultiplier * 1,
-                        ),
-                        GlobalButton(
-                          width: SizeConfig.widthMultiplier * 95,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Ionicons.logo_google,
-                                color: _colors.lightTxtColor,
-                              ),
-                              SizedBox(
-                                width: SizeConfig.widthMultiplier * 35,
-                                child: OptimizedText(
-                                  _strings.googleSigninTitle,
-                                  fontWeight: FontWeight.bold,
-                                  colorOption: TextColorOptions.light,
-                                  maxLine: 2,
-                                ),
-                              ),
-                            ],
-                          ),
-                          color: _colors.lightTxtColor,
-                          borderedButton: true,
-                          elevation: 0,
-                          onPressed: () {
-                            // todo : use different function based on input google
-                            _authenticationController.login(
-                                _authenticationController.emailController.text,
-                                _authenticationController
-                                    .passwordController.text);
-                          },
-                          radius: _dimens.defaultRadius,
-                          height: _dimens.defaultButtonHeight,
-                        ),
-                      ],
-                    ),
+                  Wrap(
+                    direction: Axis.vertical,
+                    children: [
+                      SizedBox(
+                        height: SizeConfig.heightMultiplier * 1,
+                      ),
+                      GlobalButton(
+                        width: SizeConfig.widthMultiplier * 95,
+                        child: Obx(() =>
+                            (_authenticationController.pageState.value ==
+                                    AuthenticationState.socialLoading)
+                                ? const GlobalIndicator()
+                                : Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Ionicons.logo_google,
+                                        color: _colors.lightTxtColor,
+                                      ),
+                                      SizedBox(
+                                        width: SizeConfig.widthMultiplier * 35,
+                                        child: OptimizedText(
+                                          (isRegister)
+                                              ? _strings.googleSignupTitle
+                                              : _strings.googleSigninTitle,
+                                          fontWeight: FontWeight.bold,
+                                          colorOption: TextColorOptions.light,
+                                          maxLine: 2,
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                        color: _colors.lightTxtColor,
+                        borderedButton: true,
+                        elevation: 0,
+                        onPressed: () {
+                          _authenticationController.socialLogin();
+                        },
+                        radius: _dimens.defaultRadius,
+                        height: _dimens.defaultButtonHeight,
+                      ),
+                    ],
+                  ),
                   SizedBox(
                     height: SizeConfig.heightMultiplier * 7,
                   ),

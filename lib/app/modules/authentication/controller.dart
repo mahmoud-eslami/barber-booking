@@ -1,6 +1,8 @@
 import 'package:barber_booking/app/data/enums/app_state.dart';
+import 'package:barber_booking/app/data/enums/authentication_state.dart';
 import 'package:barber_booking/app/data/services/firebase_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,7 +33,7 @@ class AuthenticationController extends GetxController
   late TextEditingController emailController;
   late TextEditingController passwordController;
 
-  Rx<AppState> appState = AppState.initial.obs;
+  Rx<AuthenticationState> pageState = AuthenticationState.initial.obs;
 
   @override
   void onInit() {
@@ -49,15 +51,35 @@ class AuthenticationController extends GetxController
 
   void login(String email, String password) async {
     try {
-      await _firebaseService.loginUser(email: email, password: password);
+      pageState(AuthenticationState.loginLoading);
+      UserCredential? userCredential =
+          await _firebaseService.loginUser(email: email, password: password);
+
+      if (userCredential != null) {
+        Get.offAndToNamed(_routes.homeRoute);
+      } else {
+        pageState(AuthenticationState.loginError);
+      }
     } catch (e) {
       globalSnackbar(content: e.toString());
+      pageState(AuthenticationState.loginError);
     }
   }
 
-  void socialLogin() {
-    try {} catch (e) {
+  void socialLogin() async {
+    try {
+      pageState(AuthenticationState.socialLoading);
+      UserCredential? userCredential =
+          await _firebaseService.signInWithGoogle();
+
+      if (userCredential != null) {
+        Get.offAndToNamed(_routes.homeRoute);
+      } else {
+        pageState(AuthenticationState.socialError);
+      }
+    } catch (e) {
       globalSnackbar(content: e.toString());
+      pageState(AuthenticationState.socialError);
     }
   }
 
