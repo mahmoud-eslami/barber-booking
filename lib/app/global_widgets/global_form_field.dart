@@ -12,6 +12,7 @@ class GlobalTextFormField extends StatelessWidget {
     required this.label,
     this.isEmailField = false,
     this.isPasswordField = false,
+    this.isEnable = true,
   }) : super(key: key);
 
   final AppColors _colors = Get.find();
@@ -20,10 +21,12 @@ class GlobalTextFormField extends StatelessWidget {
   final String label;
   final bool isEmailField;
   final bool isPasswordField;
+  final bool isEnable;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: isEnable,
       controller: controller,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (val) {
@@ -38,6 +41,7 @@ class GlobalTextFormField extends StatelessWidget {
         } else {
           return "Field Cannot be empty";
         }
+        return null;
       },
       decoration: InputDecoration(
         label: OptimizedText(
@@ -50,6 +54,11 @@ class GlobalTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(_dimens.defaultRadius),
           borderSide:
               BorderSide(color: _colors.focusBorderFormFieldColor, width: 1.0),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(_dimens.defaultRadius),
+          borderSide:
+              BorderSide(color: _colors.enableBorderFormFieldColor, width: 1.0),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(_dimens.defaultRadius),

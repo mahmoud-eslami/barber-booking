@@ -96,6 +96,37 @@ class FirebaseService {
     }
   }
 
+  User? getUser() {
+    try {
+      User? user = _auth.currentUser;
+
+      if (user != null) {
+        return user;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      firebaseErrorHandler(e);
+    }
+    return null;
+  }
+
+  Future<bool> updateUserInfo(
+      {String? email, String? name, String? photo}) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user != null) {
+        if (email != null) user.updateEmail(email);
+        if (name != null) user.updateDisplayName(name);
+        if (photo != null) user.updatePhotoURL(photo);
+      }
+      return true;
+    } catch (e) {
+      firebaseErrorHandler(e);
+      return false;
+    }
+  }
+
   Future checkUserState() async {
     try {
       User? user = FirebaseAuth.instance.currentUser;

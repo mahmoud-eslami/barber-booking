@@ -43,8 +43,8 @@ class CustomBottomNav extends StatelessWidget {
                 borderRadius: BorderRadius.circular(_dimens.defaultRadius),
                 child: BackdropFilter(
                   filter: ImageFilter.blur(
-                    sigmaX: 2,
-                    sigmaY: 2,
+                    sigmaX: 20,
+                    sigmaY: 20,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

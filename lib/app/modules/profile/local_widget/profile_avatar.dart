@@ -1,7 +1,7 @@
 import 'package:barber_booking/app/core/values/dimes.dart';
+import 'package:barber_booking/app/modules/profile/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
 
 import '../../../core/utils/size_config.dart';
 import '../../../core/values/colors.dart';
@@ -13,18 +13,27 @@ class ProfileAvatar extends StatelessWidget {
   final Strings _strings = Get.find();
   final AppColors _colors = Get.find();
   final Dimens _dimens = Get.find();
+  final ProfileController _profileController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Hero(
       tag: _strings.profileImageTag,
-      child: Stack(
-        children: [
-          Image.asset(
-            "assets/images/user.png",
-            width: SizeConfig.widthMultiplier * 35,
-          ),
-        ],
+      child: Material(
+        elevation: 0,
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(_dimens.defaultRadius * 2),
+        clipBehavior: Clip.hardEdge,
+        child: _profileController.getPhotoUrl() != ""
+            ? Image.network(
+                _profileController.getPhotoUrl(),
+                width: SizeConfig.widthMultiplier * 35,
+                fit: BoxFit.contain,
+              )
+            : Image.asset(
+                "assets/images/user.png",
+                width: SizeConfig.widthMultiplier * 35,
+              ),
       ),
     );
   }

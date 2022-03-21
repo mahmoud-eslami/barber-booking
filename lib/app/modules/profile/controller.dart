@@ -1,4 +1,5 @@
 import 'package:barber_booking/app/data/services/firebase_service.dart';
+import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -6,6 +7,9 @@ import '../../exports.dart';
 
 class ProfileController extends GetxController
     with GetTickerProviderStateMixin {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
   final Routes _routes = Get.find();
 
   late ScrollController ageSelectorScrollController;
@@ -21,6 +25,8 @@ class ProfileController extends GetxController
   late Animation<double> fieldFadeAnimation1;
   late Animation<Offset> fieldAnimation2;
   late Animation<double> fieldFadeAnimation2;
+  late Animation<Offset> emailFieldSlideAnimation;
+  late Animation<double> emailFieldFadeAnimation;
   late Animation<Offset> genderSelectorAnimation;
   late Animation<double> genderSelectorFadeAnimation;
   late Animation<Offset> ageSelectorAnimation;
@@ -33,6 +39,8 @@ class ProfileController extends GetxController
   @override
   void onInit() {
     initializeAnimations();
+    getDisplayName();
+    getUserEmail();
     super.onInit();
   }
 
@@ -40,6 +48,8 @@ class ProfileController extends GetxController
   void onClose() {
     ageSelectorScrollController.dispose();
     animationController.dispose();
+    emailController.dispose();
+    nameController.dispose();
     super.onClose();
   }
 
@@ -59,6 +69,28 @@ class ProfileController extends GetxController
       if (selectedAgeIndex.value > 0) {
         decreaseSelectedAgeIndex();
       }
+    }
+  }
+
+  void getUserEmail() =>
+      emailController.text = _firebaseService.getUser()?.email ?? "";
+
+  String getPhotoUrl() => _firebaseService.getUser()?.photoURL ?? "";
+
+  void getDisplayName() =>
+      nameController.text = _firebaseService.getUser()?.displayName ?? "";
+
+  void updateProfile({email, name, photoUrl}) async {
+    try {
+      bool status = await _firebaseService.updateUserInfo(
+          email: email, name: name, photo: photoUrl);
+      if (status) {
+        Get.back();
+      } else {
+        globalSnackbar(content: "Failed please try again!");
+      }
+    } catch (e) {
+      globalSnackbar(content: e.toString());
     }
   }
 
@@ -118,6 +150,19 @@ class ProfileController extends GetxController
       CurvedAnimation(
         parent: animationController,
         curve: const Interval(.46, 1, curve: Curves.ease),
+      ),
+    );
+    emailFieldSlideAnimation =
+        Tween<Offset>(begin: beginOffset, end: Offset.zero).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: const Interval(.52, 1, curve: Curves.ease),
+      ),
+    );
+    emailFieldFadeAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: const Interval(.52, 1, curve: Curves.ease),
       ),
     );
     genderSelectorAnimation =
