@@ -30,6 +30,7 @@ class HomePage extends StatelessWidget {
                 return const GlobalIndicator();
               }
               return FlutterMap(
+                mapController: _homeController.mapController,
                 options: MapOptions(
                   center: LatLng(
                     _homeController.userPosition.latitude,

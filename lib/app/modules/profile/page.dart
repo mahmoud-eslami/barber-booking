@@ -17,6 +17,8 @@ import '../../routes/routes.dart';
 import 'controller.dart';
 
 // todo : create custom document for store gender and age
+// todo : add image cropper and let user to update image
+// todo : use custom cache image instead of built-in widget
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({Key? key}) : super(key: key);

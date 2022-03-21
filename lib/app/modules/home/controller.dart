@@ -17,6 +17,7 @@ import '../../exports.dart';
 class HomeController extends GetxController {
   final FirebaseService _firebaseService = Get.find();
 
+  late MapController mapController;
   RxBool navItemPressed = false.obs;
   late Position userPosition;
   RxBool getLocationLoading = true.obs;
@@ -30,10 +31,13 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    initializeMapController();
     checkLocationStatus();
     checkUserVerificationState();
     super.onInit();
   }
+
+  initializeMapController() => mapController = MapController();
 
   checkUserVerificationState() async {
     try {
@@ -101,10 +105,16 @@ class HomeController extends GetxController {
           userPosition.latitude + element,
           userPosition.longitude - element,
         ),
-        builder: (ctx) => Icon(
-          Ionicons.location_outline,
-          color: _colors.pastelCyan,
-          size: SizeConfig.widthMultiplier * 10,
+        builder: (ctx) => GestureDetector(
+          onTap: () => mapController.move(
+              LatLng(userPosition.latitude + element,
+                  userPosition.longitude - element),
+              12),
+          child: Icon(
+            Ionicons.location,
+            color: _colors.pastelCyan,
+            size: SizeConfig.widthMultiplier * 10,
+          ),
         ),
       );
 

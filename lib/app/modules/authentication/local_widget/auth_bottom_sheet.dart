@@ -80,7 +80,7 @@ class AuthBottomSheet extends StatelessWidget {
                       () => (_authenticationController.pageState.value ==
                                   AuthenticationState.loginLoading ||
                               _authenticationController.pageState.value ==
-                                  AuthenticationState.registerError)
+                                  AuthenticationState.registerLoading)
                           ? GlobalIndicator(
                               color: _colors.darkTxtColor,
                             )
