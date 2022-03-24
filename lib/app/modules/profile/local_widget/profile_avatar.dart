@@ -1,5 +1,6 @@
 import 'package:barber_booking/app/core/values/dimes.dart';
 import 'package:barber_booking/app/modules/profile/controller.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,16 +25,15 @@ class ProfileAvatar extends StatelessWidget {
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(_dimens.defaultRadius * 2),
         clipBehavior: Clip.hardEdge,
-        child: _profileController.getPhotoUrl() != ""
-            ? Image.network(
-                _profileController.getPhotoUrl(),
-                width: SizeConfig.widthMultiplier * 35,
-                fit: BoxFit.contain,
-              )
-            : Image.asset(
-                "assets/images/user.png",
-                width: SizeConfig.widthMultiplier * 35,
-              ),
+        child: ExtendedImage.network(
+          _profileController.getPhotoUrl(),
+          width: SizeConfig.widthMultiplier * 35,
+          height: SizeConfig.widthMultiplier * 35,
+          fit: BoxFit.contain,
+          cache: true,
+          shape: BoxShape.circle,
+          handleLoadingProgress: true,
+        ),
       ),
     );
   }
