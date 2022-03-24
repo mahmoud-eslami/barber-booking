@@ -1,11 +1,15 @@
+import 'dart:async';
 import 'dart:io';
 
+import 'package:barber_booking/app/data/model/user/user_extra_info.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class FirebaseService {
   final FirebaseAuth _auth = Get.find();
+  final FirebaseFirestore _firestore = Get.find();
 
   // errors strings
   String weakPwdError = 'The password provided is too weak.';
@@ -17,6 +21,7 @@ class FirebaseService {
   String userNotExistError = "No user found with this email.";
 
   firebaseErrorHandler(error) {
+    print(error);
     if (error is FirebaseAuthException) {
       switch (error.code) {
         case "ERROR_EMAIL_ALREADY_IN_USE":
@@ -111,7 +116,21 @@ class FirebaseService {
     return null;
   }
 
-  Future<bool> updateUserInfo(
+  Future<UserExtraInfo?> getUserExtraInfo() async {
+    try {
+      DocumentSnapshot userDoc =
+          await _firestore.collection("users").doc(getUser()?.uid).get();
+
+      UserExtraInfo userExtraInfo = UserExtraInfo.fromJson(userDoc.data());
+
+      return userExtraInfo;
+    } catch (e) {
+      firebaseErrorHandler(e);
+      return null;
+    }
+  }
+
+  Future<bool> updateUserBaseInfo(
       {String? email, String? name, String? photo}) async {
     try {
       User? user = _auth.currentUser;
@@ -124,6 +143,54 @@ class FirebaseService {
     } catch (e) {
       firebaseErrorHandler(e);
       return false;
+    }
+  }
+
+  Future<bool> updateUserExtraInfo({int? gender, int? age}) async {
+    try {
+      User? user = _auth.currentUser;
+
+      if (user != null) {
+        String uid = user.uid;
+
+        if (gender != null) {
+          await _firestore
+              .collection("users")
+              .doc(uid)
+              .update({"gender": gender});
+        }
+        if (age != null) {
+          await _firestore.collection("users").doc(uid).update({"age": age});
+        }
+      } else {
+        throw "User not active please logout and login again";
+      }
+      return true;
+    } catch (e) {
+      firebaseErrorHandler(e);
+      return false;
+    }
+  }
+
+  Future createExtraInfoDocumetnation() async {
+    try {
+      User? user = _auth.currentUser;
+
+      if (user != null) {
+        DocumentSnapshot doc =
+            await _firestore.collection("users").doc(user.uid).get();
+
+        if (!doc.exists) {
+          await _firestore
+              .collection("users")
+              .doc(user.uid)
+              .set({"gender": 3, "age": 0});
+        }
+      } else {
+        throw "User not exist";
+      }
+    } catch (e) {
+      firebaseErrorHandler(e);
     }
   }
 

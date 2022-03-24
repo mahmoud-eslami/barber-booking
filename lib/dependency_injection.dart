@@ -15,6 +15,7 @@ import 'package:barber_booking/app/modules/profile/controller.dart';
 import 'package:barber_booking/app/modules/splash/controller.dart';
 import 'package:barber_booking/app/modules/terms_conditions/controller.dart';
 import 'package:barber_booking/app/routes/routes.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
@@ -36,6 +37,7 @@ class DependencyInjection {
     Get.put(Theming());
     Get.put(Dimens());
     Get.put(FirebaseAuth.instance);
+    Get.put(FirebaseFirestore.instance);
     Get.put(FirebaseService());
 
     Get.lazyPut(() => SplashController(), fenix: true);

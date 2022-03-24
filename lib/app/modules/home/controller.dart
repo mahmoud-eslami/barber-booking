@@ -31,11 +31,15 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    createExtraInfoDocument();
     initializeMapController();
     checkLocationStatus();
     checkUserVerificationState();
     super.onInit();
   }
+
+  void createExtraInfoDocument() async =>
+      _firebaseService.createExtraInfoDocumetnation();
 
   initializeMapController() => mapController = MapController();
 

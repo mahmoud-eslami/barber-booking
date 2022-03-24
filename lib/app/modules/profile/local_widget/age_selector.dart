@@ -59,8 +59,7 @@ class AgeSelector extends StatelessWidget {
             itemBuilder: (context, index) {
               return Obx(
                 () {
-                  bool isSelected =
-                      (_profileController.selectedAgeIndex.value == index);
+                  bool isSelected = (_profileController.age.value == index);
                   return Center(
                     child: Padding(
                       padding:

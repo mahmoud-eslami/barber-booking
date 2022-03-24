@@ -1,3 +1,4 @@
+import 'package:barber_booking/app/data/model/user/user_extra_info.dart';
 import 'package:barber_booking/app/data/services/firebase_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,8 +16,8 @@ class ProfileController extends GetxController
   late ScrollController ageSelectorScrollController;
   double pixelHolder = 0.0;
 
-  RxBool genderIsWoman = false.obs;
-  RxInt selectedAgeIndex = 0.obs;
+  RxInt age = 0.obs;
+  RxInt gender = 3.obs;
 
   late AnimationController animationController;
   late Animation<Offset> avatarAnimation;
@@ -41,6 +42,7 @@ class ProfileController extends GetxController
     initializeAnimations();
     getDisplayName();
     getUserEmail();
+    getUserExtraInfo();
     super.onInit();
   }
 
@@ -61,12 +63,12 @@ class ProfileController extends GetxController
   updateSelectedAgeDependOnScroll() {
     if (ageSelectorScrollController.position.pixels > pixelHolder + 50) {
       pixelHolder = ageSelectorScrollController.position.pixels;
-      if (selectedAgeIndex.value < 80) {
+      if (age.value < 80) {
         increaseSelectedAgeIndex();
       }
     } else if (ageSelectorScrollController.position.pixels < pixelHolder - 50) {
       pixelHolder = ageSelectorScrollController.position.pixels;
-      if (selectedAgeIndex.value > 0) {
+      if (age.value > 0) {
         decreaseSelectedAgeIndex();
       }
     }
@@ -80,11 +82,25 @@ class ProfileController extends GetxController
   void getDisplayName() =>
       nameController.text = _firebaseService.getUser()?.displayName ?? "";
 
+  void getUserExtraInfo() async {
+    try {
+      UserExtraInfo? userInfo = await _firebaseService.getUserExtraInfo();
+      if (userInfo != null) {
+        age(userInfo.age);
+        gender(userInfo.gender);
+      }
+    } catch (e) {
+      globalSnackbar(content: e.toString());
+    }
+  }
+
   void updateProfile({email, name, photoUrl}) async {
     try {
-      bool status = await _firebaseService.updateUserInfo(
+      bool status = await _firebaseService.updateUserBaseInfo(
           email: email, name: name, photo: photoUrl);
-      if (status) {
+      bool extraStatus = await _firebaseService.updateUserExtraInfo(
+          age: age.value, gender: gender.value);
+      if (status || extraStatus) {
         Get.back();
       } else {
         globalSnackbar(content: "Failed please try again!");
@@ -94,15 +110,15 @@ class ProfileController extends GetxController
     }
   }
 
-  increaseSelectedAgeIndex() => selectedAgeIndex(selectedAgeIndex.value + 1);
+  increaseSelectedAgeIndex() => age(age.value + 1);
 
-  decreaseSelectedAgeIndex() => selectedAgeIndex(selectedAgeIndex.value - 1);
+  decreaseSelectedAgeIndex() => age(age.value - 1);
 
-  setManAsGender() => genderIsWoman(false);
+  setManAsGender() => gender(1);
 
-  setWomanAsGender() => genderIsWoman(true);
+  setWomanAsGender() => gender(0);
 
-  setSelectedAgeIndex(int index) => selectedAgeIndex(index);
+  setSelectedAgeIndex(int index) => age(index);
 
   initializeAnimations() {
     ageSelectorScrollController = ScrollController()
