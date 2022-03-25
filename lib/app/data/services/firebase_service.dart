@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:barber_booking/app/core/utils/custom_error.dart';
+import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
 import 'package:barber_booking/app/data/model/user/user_extra_info.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -22,8 +21,9 @@ class FirebaseService {
   String wrongPwdError = 'Wrong password provided for that user.';
   String userNotExistError = "No user found with this email.";
 
-  firebaseErrorHandler(error) {
+  firebaseErrorHandler(error, stackTrace) {
     print(error);
+    print(stackTrace);
     if (error is FirebaseAuthException) {
       switch (error.code) {
         case "ERROR_EMAIL_ALREADY_IN_USE":
@@ -57,21 +57,20 @@ class FirebaseService {
     }
   }
 
-  Future<Either<CustomError, List<Map>>> getAllBarberShops() async {
+  Future<List<BarberShopModel>> getAllBarberShops() async {
+    List<BarberShopModel> barbersList = [];
+
     try {
-      print("Called");
       QuerySnapshot barberShops =
           await _firestore.collection("barbershops").get();
 
-      print(barberShops);
-      print(barberShops.docs);
-
       for (var element in barberShops.docs) {
-        print(element.data());
+        barbersList.add(BarberShopModel.fromJson(element.data()));
       }
-    } catch (e) {
-      firebaseErrorHandler(e);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
     }
+    return barbersList;
   }
 
   Future signInWithGoogle() async {
@@ -89,8 +88,8 @@ class FirebaseService {
       return await _auth.signInWithCredential(credential);
     } on SocketException {
       throw internetConnectionError;
-    } catch (e) {
-      firebaseErrorHandler(e);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
     }
   }
 
@@ -102,8 +101,8 @@ class FirebaseService {
       return userCredential;
     } on SocketException {
       throw internetConnectionError;
-    } catch (e) {
-      firebaseErrorHandler(e);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
     }
   }
 
@@ -115,8 +114,8 @@ class FirebaseService {
       return userCredential;
     } on SocketException {
       throw internetConnectionError;
-    } catch (e) {
-      firebaseErrorHandler(e);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
     }
   }
 
@@ -129,8 +128,8 @@ class FirebaseService {
       } else {
         return null;
       }
-    } catch (e) {
-      firebaseErrorHandler(e);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
     }
     return null;
   }
@@ -143,10 +142,10 @@ class FirebaseService {
       UserExtraInfo userExtraInfo = UserExtraInfo.fromJson(userDoc.data());
 
       return userExtraInfo;
-    } catch (e) {
-      firebaseErrorHandler(e);
-      return null;
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
     }
+    return null;
   }
 
   Future<bool> updateUserBaseInfo(
@@ -159,8 +158,8 @@ class FirebaseService {
         if (photo != null) user.updatePhotoURL(photo);
       }
       return true;
-    } catch (e) {
-      firebaseErrorHandler(e);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
       return false;
     }
   }
@@ -185,8 +184,8 @@ class FirebaseService {
         throw "User not active please logout and login again";
       }
       return true;
-    } catch (e) {
-      firebaseErrorHandler(e);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
       return false;
     }
   }
@@ -208,8 +207,9 @@ class FirebaseService {
       } else {
         throw "User not exist";
       }
-    } catch (e) {
-      firebaseErrorHandler(e);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+      return false;
     }
   }
 
@@ -222,8 +222,8 @@ class FirebaseService {
       } else {
         return false;
       }
-    } catch (e) {
-      firebaseErrorHandler(e);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
     }
   }
 
@@ -240,8 +240,8 @@ class FirebaseService {
       } else {
         throw userNotExistError;
       }
-    } catch (e) {
-      firebaseErrorHandler(e);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
     }
   }
 
@@ -253,8 +253,8 @@ class FirebaseService {
       } else {
         throw userNotExistError;
       }
-    } catch (e) {
-      firebaseErrorHandler(e);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
     }
   }
 

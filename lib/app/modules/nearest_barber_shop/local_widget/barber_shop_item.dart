@@ -1,5 +1,7 @@
 import 'package:barber_booking/app/data/enums/text_color_option.dart';
+import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -12,8 +14,10 @@ import 'barber_shop_item_painter.dart';
 
 class BarberShopItem extends StatelessWidget {
   final bool isUpperWidget;
+  final BarberShopModel item;
 
-  BarberShopItem({Key? key, required this.isUpperWidget}) : super(key: key);
+  BarberShopItem({Key? key, required this.isUpperWidget, required this.item})
+      : super(key: key);
 
   final Dimens _dimens = Get.find();
   final AppColors _colors = Get.find();
@@ -44,8 +48,8 @@ class BarberShopItem extends StatelessWidget {
                       borderRadius:
                           BorderRadius.circular(_dimens.defaultRadius * .4),
                       clipBehavior: Clip.hardEdge,
-                      child: Image.asset(
-                        "assets/images/design.png",
+                      child: ExtendedImage.network(
+                        item.imageUrl,
                         height: 130,
                         width: 90,
                         fit: BoxFit.cover,
@@ -114,12 +118,13 @@ class BarberShopItem extends StatelessWidget {
       );
 
   titleWidget() => OptimizedText(
-        "XXXX Barbershop",
+        item.title,
         colorOption: TextColorOptions.light,
         textAlign: TextAlign.start,
         fontWeight: FontWeight.bold,
       );
 
+// todo : calculate rating for here
   ratingWidget() => Row(
         children: [
           for (int i = 0; i < 5; i++)
@@ -135,6 +140,7 @@ class BarberShopItem extends StatelessWidget {
         ],
       );
 
+// todo : calculate state for here
   openStatusWidget() => Row(
         children: [
           Container(
@@ -153,18 +159,20 @@ class BarberShopItem extends StatelessWidget {
       );
 
   workTimeWidget() => Row(
-        children: const [
-          Icon(
+        children: [
+          const Icon(
             Ionicons.time,
             size: 13,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
-          Text("10:00 - 21:00"),
+          Text(
+              "${item.startWorkTime.toString()} - ${item.endWorkTime.toString()}"),
         ],
       );
 
+// todo : calaulate distance from current location
   locationWidget() => Row(
         children: const [
           Icon(

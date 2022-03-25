@@ -1,4 +1,6 @@
+import 'package:barber_booking/app/data/enums/nearest_barber_state.dart';
 import 'package:barber_booking/app/data/services/firebase_service.dart';
+import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +14,20 @@ class NearestBarberShopController extends GetxController
   late Animation<double> fadeSearchResultAnimation;
   late Animation<Offset> slideSearchResultAnimation;
 
-  getAllBarberShops() async => await _firebaseService.getAllBarberShops();
+  RxList barberShopsList = [].obs;
+  Rx<NearestBarberState> pageState = NearestBarberState.init.obs;
+
+  getAllBarberShops() async {
+    try {
+      pageState(NearestBarberState.barberShopsLoading);
+      List data = await _firebaseService.getAllBarberShops();
+      barberShopsList.addAll(data);
+      pageState(NearestBarberState.barberShopsLoadedSuccess);
+    } catch (e) {
+      pageState(NearestBarberState.barberShopsLoadingFailed);
+      globalSnackbar(content: e.toString());
+    }
+  }
 
   @override
   void onInit() {

@@ -57,12 +57,12 @@ class NearestBarberShop extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: OptimizedText(
-                        "14 results",
-                        colorOption: TextColorOptions.light,
-                        textAlign: TextAlign.end,
-                        sizeOption: TextSizeOptions.caption,
-                      ),
+                      child: Obx(() => OptimizedText(
+                            "${_nearestBarberShopController.barberShopsList.length} results",
+                            colorOption: TextColorOptions.light,
+                            textAlign: TextAlign.end,
+                            sizeOption: TextSizeOptions.caption,
+                          )),
                     ),
                   ],
                 ),
