@@ -4,10 +4,6 @@ import 'package:barber_booking/app/modules/news_details/local_widget/news_detail
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../core/utils/size_config.dart';
-import '../../global_widgets/global_button.dart';
-import '../../global_widgets/optimized_text.dart';
-
 class NewsDetailsPage extends StatelessWidget {
   NewsDetailsPage({Key? key}) : super(key: key);
 

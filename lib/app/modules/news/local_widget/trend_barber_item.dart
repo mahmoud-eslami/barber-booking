@@ -1,7 +1,8 @@
 import 'package:barber_booking/app/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../core/utils/size_config.dart';
+
+import '../../../core/utils/size_config_helper.dart';
 
 class TrendBarberItem extends StatelessWidget {
   TrendBarberItem({Key? key}) : super(key: key);

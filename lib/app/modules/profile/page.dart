@@ -1,4 +1,4 @@
-import 'package:barber_booking/app/core/utils/size_config.dart';
+import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:barber_booking/app/core/values/dimes.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/global_form_field.dart';

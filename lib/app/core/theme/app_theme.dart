@@ -1,4 +1,4 @@
-import 'package:barber_booking/app/core/utils/material_color_creator.dart';
+import 'package:barber_booking/app/core/utils/material_color_creator_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

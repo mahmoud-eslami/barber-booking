@@ -4,7 +4,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../core/utils/size_config.dart';
+import '../../../core/utils/size_config_helper.dart';
 import '../../../core/values/colors.dart';
 import '../../../core/values/strings.dart';
 

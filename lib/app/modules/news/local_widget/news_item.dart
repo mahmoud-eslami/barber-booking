@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:barber_booking/app/core/utils/size_config.dart';
+import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:barber_booking/app/data/enums/text_size_option.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:flutter/material.dart';

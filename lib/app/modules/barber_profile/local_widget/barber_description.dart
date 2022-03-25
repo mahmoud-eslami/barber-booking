@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../../core/utils/size_config.dart';
+import '../../../core/utils/size_config_helper.dart';
 import '../../../data/enums/text_color_option.dart';
 import '../../../data/enums/text_size_option.dart';
 import '../../../global_widgets/optimized_text.dart';

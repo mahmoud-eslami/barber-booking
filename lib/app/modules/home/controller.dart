@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import "package:latlong2/latlong.dart";
 
-import '../../core/utils/size_config.dart';
+import '../../core/utils/size_config_helper.dart';
 import '../../exports.dart';
 
 class HomeController extends GetxController {
