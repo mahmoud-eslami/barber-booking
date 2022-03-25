@@ -29,6 +29,9 @@ class Strings {
   String noticeTitle = "Notice!";
   String loginDescription = "Enter your email and password";
   String registerDescription = "Enter your email and set a password";
+  String errorWidgetTitle = "Uh... Error !";
+  String errorWidgetDescription = "Something went wrong, please try again.";
+  String errorWidgetButtonTitle = "try again";
   // lorem
   String lorem =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
