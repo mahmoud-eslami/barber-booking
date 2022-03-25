@@ -4,7 +4,6 @@ import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/global_form_field.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:barber_booking/app/global_widgets/parent_widget.dart';
-import 'package:barber_booking/app/modules/profile/local_widget/age_selector.dart';
 import 'package:barber_booking/app/modules/profile/local_widget/gender_selector.dart';
 import 'package:barber_booking/app/modules/profile/local_widget/profile_avatar.dart';
 import 'package:flutter/material.dart';
@@ -94,6 +93,19 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               SizedBox(
+                height: SizeConfig.heightMultiplier * 1,
+              ),
+              FadeTransition(
+                opacity: _profileController.ageFieldFadeAnimation,
+                child: SlideTransition(
+                  position: _profileController.ageFieldAnimation,
+                  child: GlobalTextFormField(
+                    controller: _profileController.ageController,
+                    label: _strings.ageHint,
+                  ),
+                ),
+              ),
+              SizedBox(
                 height: SizeConfig.heightMultiplier * 2,
               ),
               FadeTransition(
@@ -104,17 +116,7 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: SizeConfig.heightMultiplier * 1,
-              ),
-              FadeTransition(
-                opacity: _profileController.ageSelectorFadeAnimation,
-                child: SlideTransition(
-                  position: _profileController.ageSelectorAnimation,
-                  child: AgeSelector(),
-                ),
-              ),
-              SizedBox(
-                height: SizeConfig.heightMultiplier * 1,
+                height: SizeConfig.heightMultiplier * 4,
               ),
               FadeTransition(
                 opacity: _profileController.buttonFadeAnimation,

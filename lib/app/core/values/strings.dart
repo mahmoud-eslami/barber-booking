@@ -19,6 +19,7 @@ class Strings {
   String profileSubmitBtn = "Submit";
   String nameHint = "Your name";
   String emailHint = "Email";
+  String ageHint = "Age";
   String passwordHint = "Password";
   String birthHint = "Date of birth";
   String newsPageTitle = "News";

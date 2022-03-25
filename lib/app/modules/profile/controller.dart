@@ -10,13 +10,12 @@ class ProfileController extends GetxController
     with GetTickerProviderStateMixin {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
 
   final Routes _routes = Get.find();
 
-  late ScrollController ageSelectorScrollController;
   double pixelHolder = 0.0;
 
-  RxInt age = 0.obs;
   RxInt gender = 3.obs;
 
   late AnimationController animationController;
@@ -30,8 +29,8 @@ class ProfileController extends GetxController
   late Animation<double> emailFieldFadeAnimation;
   late Animation<Offset> genderSelectorAnimation;
   late Animation<double> genderSelectorFadeAnimation;
-  late Animation<Offset> ageSelectorAnimation;
-  late Animation<double> ageSelectorFadeAnimation;
+  late Animation<Offset> ageFieldAnimation;
+  late Animation<double> ageFieldFadeAnimation;
   late Animation<Offset> buttonAnimation;
   late Animation<double> buttonFadeAnimation;
 
@@ -48,30 +47,16 @@ class ProfileController extends GetxController
 
   @override
   void onClose() {
-    ageSelectorScrollController.dispose();
     animationController.dispose();
     emailController.dispose();
     nameController.dispose();
+    ageController.dispose();
     super.onClose();
   }
 
   logout() async {
     await _firebaseService.logout();
     Get.offAllNamed(_routes.authRoute);
-  }
-
-  updateSelectedAgeDependOnScroll() {
-    if (ageSelectorScrollController.position.pixels > pixelHolder + 50) {
-      pixelHolder = ageSelectorScrollController.position.pixels;
-      if (age.value < 80) {
-        increaseSelectedAgeIndex();
-      }
-    } else if (ageSelectorScrollController.position.pixels < pixelHolder - 50) {
-      pixelHolder = ageSelectorScrollController.position.pixels;
-      if (age.value > 0) {
-        decreaseSelectedAgeIndex();
-      }
-    }
   }
 
   void getUserEmail() =>
@@ -86,7 +71,7 @@ class ProfileController extends GetxController
     try {
       UserExtraInfo? userInfo = await _firebaseService.getUserExtraInfo();
       if (userInfo != null) {
-        age(userInfo.age);
+        ageController.text = userInfo.age.toString();
         gender(userInfo.gender);
       }
     } catch (e) {
@@ -99,7 +84,7 @@ class ProfileController extends GetxController
       bool status = await _firebaseService.updateUserBaseInfo(
           email: email, name: name, photo: photoUrl);
       bool extraStatus = await _firebaseService.updateUserExtraInfo(
-          age: age.value, gender: gender.value);
+          age: int.parse(ageController.text), gender: gender.value);
       if (status || extraStatus) {
         Get.back();
       } else {
@@ -110,21 +95,11 @@ class ProfileController extends GetxController
     }
   }
 
-  increaseSelectedAgeIndex() => age(age.value + 1);
-
-  decreaseSelectedAgeIndex() => age(age.value - 1);
-
   setManAsGender() => gender(1);
 
   setWomanAsGender() => gender(0);
 
-  setSelectedAgeIndex(int index) => age(index);
-
   initializeAnimations() {
-    ageSelectorScrollController = ScrollController()
-      ..addListener(() {
-        updateSelectedAgeDependOnScroll();
-      });
     const duration = Duration(milliseconds: 800);
     const beginOffset = Offset(0, .6);
     animationController = AnimationController(vsync: this, duration: duration)
@@ -181,27 +156,28 @@ class ProfileController extends GetxController
         curve: const Interval(.52, 1, curve: Curves.ease),
       ),
     );
-    genderSelectorAnimation =
+    ageFieldAnimation =
         Tween<Offset>(begin: beginOffset, end: Offset.zero).animate(
       CurvedAnimation(
         parent: animationController,
         curve: const Interval(.59, 1, curve: Curves.ease),
       ),
     );
-    genderSelectorFadeAnimation = Tween<double>(begin: 0, end: 1).animate(
+    ageFieldFadeAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: animationController,
         curve: const Interval(.59, 1, curve: Curves.ease),
       ),
     );
-    ageSelectorAnimation =
+
+    genderSelectorAnimation =
         Tween<Offset>(begin: beginOffset, end: Offset.zero).animate(
       CurvedAnimation(
         parent: animationController,
         curve: const Interval(.72, 1, curve: Curves.ease),
       ),
     );
-    ageSelectorFadeAnimation = Tween<double>(begin: 0, end: 1).animate(
+    genderSelectorFadeAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: animationController,
         curve: const Interval(.72, 1, curve: Curves.ease),
