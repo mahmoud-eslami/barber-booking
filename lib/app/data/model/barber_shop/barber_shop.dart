@@ -15,11 +15,10 @@ class BarberShop {
   });
 
   factory BarberShop.fromJson(doc) => BarberShop(
-        title: doc["title"],
-        subTitle: doc["subTitle"],
-        tags: doc["tags"],
-        description: doc["description"],
-        lat: doc["lat"],
-        long: doc["long"],
-      );
+      title: doc["title"],
+      subTitle: doc["subTitle"],
+      tags: doc["tags"],
+      description: doc["description"],
+      lat: double.parse(doc["lat"]),
+      long: double.parse(doc["long"]));
 }

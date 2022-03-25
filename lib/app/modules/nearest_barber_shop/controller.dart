@@ -1,17 +1,22 @@
-import 'package:flutter/animation.dart';
+import 'package:barber_booking/app/data/services/firebase_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class NearestBarberShopController extends GetxController
     with GetTickerProviderStateMixin {
+  final FirebaseService _firebaseService = Get.find();
+
   late AnimationController animationController;
   late Animation<double> fadeSearchBarAnimation;
   late Animation<Offset> slideSearchBarAnimation;
   late Animation<double> fadeSearchResultAnimation;
   late Animation<Offset> slideSearchResultAnimation;
 
+  getAllBarberShops() async => await _firebaseService.getAllBarberShops();
+
   @override
   void onInit() {
+    getAllBarberShops();
     const duration = Duration(milliseconds: 600);
     const beginOffset = Offset(0, .6);
 

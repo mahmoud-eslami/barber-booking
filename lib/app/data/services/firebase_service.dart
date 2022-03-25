@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:barber_booking/app/core/utils/custom_error.dart';
 import 'package:barber_booking/app/data/model/user/user_extra_info.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -52,6 +54,23 @@ class FirebaseService {
       throw internetConnectionError;
     } else {
       throw unknownError;
+    }
+  }
+
+  Future<Either<CustomError, List<Map>>> getAllBarberShops() async {
+    try {
+      print("Called");
+      QuerySnapshot barberShops =
+          await _firestore.collection("barbershops").get();
+
+      print(barberShops);
+      print(barberShops.docs);
+
+      for (var element in barberShops.docs) {
+        print(element.data());
+      }
+    } catch (e) {
+      firebaseErrorHandler(e);
     }
   }
 
