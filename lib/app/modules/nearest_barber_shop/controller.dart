@@ -1,4 +1,5 @@
 import 'package:barber_booking/app/data/enums/nearest_barber_state.dart';
+import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
 import 'package:barber_booking/app/data/services/firebase_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,13 +15,28 @@ class NearestBarberShopController extends GetxController
   late Animation<double> fadeSearchResultAnimation;
   late Animation<Offset> slideSearchResultAnimation;
 
-  RxList barberShopsList = [].obs;
+  RxList<BarberShopModel> barberShopsList = <BarberShopModel>[].obs;
+  RxList<BarberShopModel> filteredList = <BarberShopModel>[].obs;
+  RxString searchQuery = ''.obs;
   Rx<NearestBarberState> pageState = NearestBarberState.init.obs;
+
+  getFilteredItems(String query) {
+    clearFilteredList();
+    List<BarberShopModel> temp = barberShopsList;
+    filteredList(
+        temp.where((element) => element.title.contains(query)).toList());
+  }
+
+  clearQuery() => searchQuery("");
+
+  updateQuery(String query) => searchQuery(query);
+
+  clearFilteredList() => filteredList.clear();
 
   getAllBarberShops() async {
     try {
       pageState(NearestBarberState.barberShopsLoading);
-      List data = await _firebaseService.getAllBarberShops();
+      List<BarberShopModel> data = await _firebaseService.getAllBarberShops();
       barberShopsList.addAll(data);
       pageState(NearestBarberState.barberShopsLoadedSuccess);
     } catch (e) {

@@ -33,8 +33,9 @@ class NearestBarberShop extends StatelessWidget {
             SlideTransition(
               position: _nearestBarberShopController.slideSearchBarAnimation,
               child: FadeTransition(
-                  opacity: _nearestBarberShopController.fadeSearchBarAnimation,
-                  child: NearBarberShopSearchBar()),
+                opacity: _nearestBarberShopController.fadeSearchBarAnimation,
+                child: NearBarberShopSearchBar(),
+              ),
             ),
             SizedBox(
               height: SizeConfig.heightMultiplier * 2,

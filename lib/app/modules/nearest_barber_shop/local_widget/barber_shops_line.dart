@@ -23,6 +23,10 @@ class BarberShopsItemsList extends StatelessWidget {
         bool failed = _nearestBarberShopController.pageState.value ==
             NearestBarberState.barberShopsLoadingFailed;
 
+        List itemsList = (_nearestBarberShopController.searchQuery.value == "")
+            ? _nearestBarberShopController.barberShopsList
+            : _nearestBarberShopController.filteredList;
+
         return loading
             ? const GlobalIndicator()
             : failed
@@ -31,13 +35,11 @@ class BarberShopsItemsList extends StatelessWidget {
                         _nearestBarberShopController.getAllBarberShops()))
                 : ListView.builder(
                     padding: EdgeInsets.only(top: _dimens.defaultPadding * 3),
-                    itemCount:
-                        _nearestBarberShopController.barberShopsList.length,
+                    itemCount: itemsList.length,
                     itemBuilder: (context, index) {
                       return BarberShopItem(
                         isUpperWidget: (index % 2 == 0),
-                        item:
-                            _nearestBarberShopController.barberShopsList[index],
+                        item: itemsList[index],
                       );
                     },
                   );

@@ -23,7 +23,7 @@ class BarberShopModel {
         title: doc["title"],
         subTitle: doc["subTitle"],
         tags: converTagsToStringList(doc["tags"]),
-        description: doc["descriptions"],
+        description: doc["description"],
         lat: double.parse(doc["lat"]),
         long: double.parse(doc["long"]),
         imageUrl: doc["image"],
