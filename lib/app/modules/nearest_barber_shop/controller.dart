@@ -1,14 +1,19 @@
+import 'dart:math';
+
 import 'package:barber_booking/app/data/enums/nearest_barber_state.dart';
 import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
 import 'package:barber_booking/app/data/services/firebase_service.dart';
+import 'package:barber_booking/app/data/services/location_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class NearestBarberShopController extends GetxController
     with GetTickerProviderStateMixin {
   final FirebaseService _firebaseService = Get.find();
 
+  late Position userPosition;
   late AnimationController animationController;
   late Animation<double> fadeSearchBarAnimation;
   late Animation<Offset> slideSearchBarAnimation;
@@ -25,6 +30,27 @@ class NearestBarberShopController extends GetxController
     List<BarberShopModel> temp = barberShopsList;
     filteredList(
         temp.where((element) => element.title.contains(query)).toList());
+  }
+
+  getCurrentUserLocation() async =>
+      userPosition = await CustomLocationService.determinePosition();
+
+  String distanceBetweenTwoPoints({required lat1, required lon1}) {
+    var lat2 = userPosition.latitude;
+    var lon2 = userPosition.longitude;
+    var p = 0.017453292519943295;
+    var c = cos;
+    var a = 0.5 -
+        c((lat2 - lat1) * p) / 2 +
+        c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
+
+    var kmResult = 12742 * asin(sqrt(a));
+    var meterResult = 1000 * kmResult;
+
+    // check for distance and return ditance per meter if distance in less than one kilometer
+    return (kmResult >= 1)
+        ? "${kmResult.toStringAsFixed(2)} Kilometers away"
+        : "${meterResult.toStringAsFixed(2)} meters away";
   }
 
   clearQuery() => searchQuery("");
@@ -47,6 +73,7 @@ class NearestBarberShopController extends GetxController
 
   @override
   void onInit() {
+    getCurrentUserLocation();
     getAllBarberShops();
     const duration = Duration(milliseconds: 600);
     const beginOffset = Offset(0, .6);

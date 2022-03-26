@@ -1,6 +1,7 @@
 import 'package:barber_booking/app/data/enums/text_color_option.dart';
 import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
+import 'package:barber_booking/app/modules/nearest_barber_shop/controller.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,7 @@ class BarberShopItem extends StatelessWidget {
   final Dimens _dimens = Get.find();
   final AppColors _colors = Get.find();
   final Routes _routes = Get.find();
+  final NearestBarberShopController _barberShopController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -174,15 +176,16 @@ class BarberShopItem extends StatelessWidget {
 
 // todo : calaulate distance from current location
   locationWidget() => Row(
-        children: const [
-          Icon(
+        children: [
+          const Icon(
             Ionicons.location_outline,
             size: 15,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
-          Text("1.2 kilometers away"),
+          Text(_barberShopController.distanceBetweenTwoPoints(
+              lat1: item.lat, lon1: item.long)),
         ],
       );
 }
