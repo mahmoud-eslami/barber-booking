@@ -1,5 +1,6 @@
 import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:barber_booking/app/core/values/dimes.dart';
+import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,8 @@ import 'controller.dart';
 import 'local_widget/barber_shop_description.dart';
 
 class BarberShopProfile extends StatelessWidget {
-  BarberShopProfile({Key? key}) : super(key: key);
+  BarberShopProfile({Key? key, required this.item}) : super(key: key);
+  final BarberShopModel item;
 
   final AppColors _colors = Get.find();
   final Strings _strings = Get.find();
@@ -35,13 +37,13 @@ class BarberShopProfile extends StatelessWidget {
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   title: Text(
-                    "XXXXX Barbershop",
+                    item.title,
                     style: TextStyle(color: _colors.lightTxtColor),
                   ),
                   background: Stack(
                     children: [
-                      Image.asset(
-                        'assets/images/design.png',
+                      Image.network(
+                        item.imageUrl,
                         fit: BoxFit.fill,
                       ),
                       Container(
@@ -62,7 +64,7 @@ class BarberShopProfile extends StatelessWidget {
               ),
               SliverList(
                 delegate: SliverChildListDelegate([
-                  BarberShopDescriptionWidget(),
+                  BarberShopDescriptionWidget(item: item),
                 ]),
               ),
             ],

@@ -28,7 +28,11 @@ class Pages {
     GetPage(name: _routes.newsRoute, page: () => NewsPage()),
     GetPage(name: _routes.storyRoute, page: () => StoryPage()),
     GetPage(name: _routes.barberProfile, page: () => BarberProfile()),
-    GetPage(name: _routes.barberShopProfile, page: () => BarberShopProfile()),
+    GetPage(
+        name: _routes.barberShopProfile,
+        page: () => BarberShopProfile(
+              item: Get.arguments,
+            )),
     GetPage(name: _routes.addStory, page: () => AddStory()),
     GetPage(name: _routes.nearestBarberShop, page: () => NearestBarberShop()),
     GetPage(name: _routes.newsDetails, page: () => NewsDetailsPage()),

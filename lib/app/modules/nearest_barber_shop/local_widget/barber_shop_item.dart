@@ -28,7 +28,7 @@ class BarberShopItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(_routes.barberShopProfile),
+      onTap: () => Get.toNamed(_routes.barberShopProfile, arguments: item),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
