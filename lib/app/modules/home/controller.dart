@@ -6,7 +6,6 @@ import 'package:barber_booking/app/data/services/location_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import "package:latlong2/latlong.dart";
@@ -16,10 +15,10 @@ import '../../exports.dart';
 
 class HomeController extends GetxController {
   final FirebaseService _firebaseService = Get.find();
+  final CustomLocationService _customLocationService = Get.find();
 
   late MapController mapController;
   RxBool navItemPressed = false.obs;
-  late Position userPosition;
   RxBool getLocationLoading = true.obs;
   Set<Marker> markers = {};
 
@@ -86,8 +85,8 @@ class HomeController extends GetxController {
       width: 80.0,
       height: 80.0,
       point: LatLng(
-        userPosition.latitude,
-        userPosition.longitude,
+        _customLocationService.userPosition.latitude,
+        _customLocationService.userPosition.longitude,
       ),
       builder: (ctx) => Icon(
         Ionicons.pin_sharp,
@@ -106,13 +105,13 @@ class HomeController extends GetxController {
         width: 80.0,
         height: 80.0,
         point: LatLng(
-          userPosition.latitude + element,
-          userPosition.longitude - element,
+          _customLocationService.userPosition.latitude + element,
+          _customLocationService.userPosition.longitude - element,
         ),
         builder: (ctx) => GestureDetector(
           onTap: () => mapController.move(
-              LatLng(userPosition.latitude + element,
-                  userPosition.longitude - element),
+              LatLng(_customLocationService.userPosition.latitude + element,
+                  _customLocationService.userPosition.longitude - element),
               12),
           child: Icon(
             Ionicons.location,
@@ -128,7 +127,6 @@ class HomeController extends GetxController {
 
   checkLocationStatus() async {
     try {
-      userPosition = await CustomLocationService.determinePosition();
       await addUserLocationMarker();
       await createFakeBarberShopNearUser();
       getLocationLoading(false);

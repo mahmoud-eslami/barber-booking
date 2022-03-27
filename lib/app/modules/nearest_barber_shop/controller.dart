@@ -6,14 +6,13 @@ import 'package:barber_booking/app/data/services/firebase_service.dart';
 import 'package:barber_booking/app/data/services/location_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
 class NearestBarberShopController extends GetxController
     with GetTickerProviderStateMixin {
   final FirebaseService _firebaseService = Get.find();
+  final CustomLocationService _customLocationService = Get.find();
 
-  late Position userPosition;
   late AnimationController animationController;
   late Animation<double> fadeSearchBarAnimation;
   late Animation<Offset> slideSearchBarAnimation;
@@ -46,12 +45,9 @@ class NearestBarberShopController extends GetxController
     }
   }
 
-  getCurrentUserLocation() async =>
-      userPosition = await CustomLocationService.determinePosition();
-
   String distanceBetweenTwoPoints({required lat1, required lon1}) {
-    var lat2 = userPosition.latitude;
-    var lon2 = userPosition.longitude;
+    var lat2 = _customLocationService.userPosition.latitude;
+    var lon2 = _customLocationService.userPosition.longitude;
     var p = 0.017453292519943295;
     var c = cos;
     var a = 0.5 -

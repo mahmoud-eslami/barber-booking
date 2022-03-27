@@ -21,6 +21,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
 import 'app/core/values/strings.dart';
+import 'app/data/services/location_service.dart';
 import 'app/modules/barber_profile/controller.dart';
 
 class DependencyInjection {
@@ -39,6 +40,7 @@ class DependencyInjection {
     Get.put(FirebaseAuth.instance);
     Get.put(FirebaseFirestore.instance);
     Get.put(FirebaseService());
+    Get.put(CustomLocationService());
 
     Get.lazyPut(() => SplashController(), fenix: true);
     Get.lazyPut(() => AuthenticationController(), fenix: true);

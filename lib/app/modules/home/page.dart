@@ -9,6 +9,7 @@ import "package:latlong2/latlong.dart";
 
 import '../../core/values/colors.dart';
 import '../../core/values/strings.dart';
+import '../../data/services/location_service.dart';
 import '../../routes/routes.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,6 +19,7 @@ class HomePage extends StatelessWidget {
   final Strings _strings = Get.find();
   final Routes _routes = Get.find();
   final HomeController _homeController = Get.find();
+  final CustomLocationService _customLocationService = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +35,8 @@ class HomePage extends StatelessWidget {
                 mapController: _homeController.mapController,
                 options: MapOptions(
                   center: LatLng(
-                    _homeController.userPosition.latitude,
-                    _homeController.userPosition.longitude,
+                    _customLocationService.userPosition.latitude,
+                    _customLocationService.userPosition.longitude,
                   ),
                   zoom: 13.0,
                 ),
