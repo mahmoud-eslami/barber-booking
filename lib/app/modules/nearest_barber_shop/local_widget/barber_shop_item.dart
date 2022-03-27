@@ -23,7 +23,7 @@ class BarberShopItem extends StatelessWidget {
   final Dimens _dimens = Get.find();
   final AppColors _colors = Get.find();
   final Routes _routes = Get.find();
-  final NearestBarberShopController _barberShopController = Get.find();
+  final NearestBarberShopController _nearestBarberShopController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -142,23 +142,29 @@ class BarberShopItem extends StatelessWidget {
         ],
       );
 
-// todo : calculate state for here
-  openStatusWidget() => Row(
-        children: [
-          Container(
-            width: 10,
-            height: 10,
-            decoration: BoxDecoration(
-              color: _colors.pastelCyan,
-              shape: BoxShape.circle,
-            ),
+  openStatusWidget() {
+    bool status = _nearestBarberShopController.getStateOfBarberShop(
+        item.startWorkTime, item.endWorkTime);
+    return Row(
+      children: [
+        Container(
+          width: 10,
+          height: 10,
+          decoration: BoxDecoration(
+            color: status ? _colors.barberOpen : _colors.barberClose,
+            shape: BoxShape.circle,
           ),
-          const SizedBox(
-            width: 5,
-          ),
-          const Text("Open")
-        ],
-      );
+        ),
+        const SizedBox(
+          width: 5,
+        ),
+        Text(_nearestBarberShopController.getStateOfBarberShop(
+                item.startWorkTime, item.endWorkTime)
+            ? "Open"
+            : "Close")
+      ],
+    );
+  }
 
   workTimeWidget() => Row(
         children: [
@@ -174,7 +180,6 @@ class BarberShopItem extends StatelessWidget {
         ],
       );
 
-// todo : calaulate distance from current location
   locationWidget() => Row(
         children: [
           const Icon(
@@ -184,7 +189,7 @@ class BarberShopItem extends StatelessWidget {
           const SizedBox(
             width: 5,
           ),
-          Text(_barberShopController.distanceBetweenTwoPoints(
+          Text(_nearestBarberShopController.distanceBetweenTwoPoints(
               lat1: item.lat, lon1: item.long)),
         ],
       );

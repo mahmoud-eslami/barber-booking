@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -15,6 +13,8 @@ class AppColors {
   Color coloredBorder = const Color(0xff13DAE9);
   Color starColor = Colors.amber;
   Color barberShopsLocationColors = Colors.amber;
+  Color barberOpen = const Color(0xff13DAE9);
+  Color barberClose = const Color(0xffFF0000);
 
   Color enableBorderFormFieldColor = const Color(0xffffffff);
   Color focusBorderFormFieldColor = const Color(0xff13DAE9);

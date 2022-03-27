@@ -32,6 +32,20 @@ class NearestBarberShopController extends GetxController
         temp.where((element) => element.title.contains(query)).toList());
   }
 
+  bool getStateOfBarberShop(String startTime, String endTime) {
+    DateTime now = DateTime.now();
+    DateTime start = DateTime(now.year, now.month, now.day,
+        int.parse(startTime.split(":")[0]), int.parse(startTime.split(":")[1]));
+    DateTime end = DateTime(now.year, now.month, now.day,
+        int.parse(endTime.split(":")[0]), int.parse(endTime.split(":")[1]));
+
+    if (start.isBefore(now) && end.isAfter(now)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   getCurrentUserLocation() async =>
       userPosition = await CustomLocationService.determinePosition();
 
@@ -73,8 +87,9 @@ class NearestBarberShopController extends GetxController
 
   @override
   void onInit() {
-    getCurrentUserLocation();
     getAllBarberShops();
+    getStateOfBarberShop("10:00", "23:00");
+
     const duration = Duration(milliseconds: 600);
     const beginOffset = Offset(0, .6);
 
