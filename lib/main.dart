@@ -7,10 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'app/core/utils/size_config.dart';
+import 'app/core/utils/size_config_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await DependencyInjection.injectFirebase();
   DependencyInjection.injector();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
   SystemChrome.setPreferredOrientations([

@@ -1,7 +1,6 @@
-import 'package:barber_booking/app/core/utils/size_config.dart';
+import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
 
 import '../../../core/values/colors.dart';
 import '../../../core/values/dimes.dart';

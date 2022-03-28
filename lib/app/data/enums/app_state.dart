@@ -1,7 +1,5 @@
 enum AppState {
-  loading,
-  success,
-  failed,
+  initial,
   authenticated,
   unaAuthenticated,
 }

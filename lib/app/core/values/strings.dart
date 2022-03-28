@@ -12,17 +12,26 @@ class Strings {
   String findBarberDescription = "Let's find Best and Nearest \nbarber Shop";
   String registerTitle = "Sign up";
   String loginTitle = "Sign in";
+  String googleSigninTitle = "Google sign in";
+  String googleSignupTitle = "Google sign up";
   String termsAndConditionsTitle = "Terms and Conditions";
   String profileTitle = "Personal Data";
   String profileSubmitBtn = "Submit";
   String nameHint = "Your name";
   String emailHint = "Email";
+  String ageHint = "Age";
+  String passwordHint = "Password";
   String birthHint = "Date of birth";
   String newsPageTitle = "News";
   String barberShopNewsTitle = "Barber Shops news";
   String trendingBarberTitle = "Trending Barber Shops";
   String addStoryAppBarTitle = "Add Story";
-
+  String noticeTitle = "Notice!";
+  String loginDescription = "Enter your email and password";
+  String registerDescription = "Enter your email and set a password";
+  String errorWidgetTitle = "Uh... Error !";
+  String errorWidgetDescription = "Something went wrong, please try again.";
+  String errorWidgetButtonTitle = "try again";
   // lorem
   String lorem =
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";

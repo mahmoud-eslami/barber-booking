@@ -1,14 +1,15 @@
-import 'package:barber_booking/app/core/utils/size_config.dart';
+import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:barber_booking/app/core/values/dimes.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:barber_booking/app/global_widgets/parent_widget.dart';
 import 'package:barber_booking/app/modules/authentication/controller.dart';
-import 'package:barber_booking/app/modules/authentication/local_widget/barber_title.dart';
 import 'package:barber_booking/app/modules/authentication/local_widget/auth_bottom_sheet.dart';
+import 'package:barber_booking/app/modules/authentication/local_widget/barber_title.dart';
 import 'package:barber_booking/app/modules/authentication/local_widget/terms_conditions_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../core/values/colors.dart';
 import '../../core/values/strings.dart';
 import '../../routes/routes.dart';

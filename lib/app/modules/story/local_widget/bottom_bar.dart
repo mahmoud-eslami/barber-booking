@@ -1,10 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../../core/utils/size_config.dart';
+import '../../../core/utils/size_config_helper.dart';
 import '../../../core/values/colors.dart';
 import '../../../core/values/dimes.dart';
 import '../../../core/values/strings.dart';
@@ -32,52 +30,32 @@ class BottomBar extends StatelessWidget {
               child: SizedBox(
                 width: SizeConfig.widthMultiplier * 100,
                 height: SizeConfig.heightMultiplier * 8,
-                child: ClipRRect(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(
-                      sigmaX: 20,
-                      sigmaY: 20,
-                    ),
-                    child: Material(
-                      color: Colors.transparent,
-                      elevation: 0,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: _dimens.defaultPadding * 2),
-                        child: Row(
-                          children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Ionicons.heart_outline,
-                                size: _dimens.defaultIconSize * 1.2,
-                              ),
-                            ),
-                            SizedBox(
-                              width: SizeConfig.widthMultiplier * 3,
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Ionicons.chatbox_ellipses_outline,
-                                size: _dimens.defaultIconSize * 1.2,
-                              ),
-                            ),
-                            const Expanded(
-                              child: SizedBox(
-                                width: 1,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Ionicons.flag_outline,
-                                size: _dimens.defaultIconSize * 1.2,
-                              ),
-                            ),
-                          ],
+                child: Material(
+                  color: _colors.frostedBlack,
+                  elevation: 0,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: _dimens.defaultPadding * 2),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Ionicons.heart_outline,
+                            size: _dimens.defaultIconSize * 1.2,
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          width: SizeConfig.widthMultiplier * 3,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Ionicons.chatbox_ellipses_outline,
+                            size: _dimens.defaultIconSize * 1.2,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

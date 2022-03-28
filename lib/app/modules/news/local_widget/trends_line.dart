@@ -2,7 +2,7 @@ import 'package:barber_booking/app/modules/news/local_widget/trend_barber_item.d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../core/utils/size_config.dart';
+import '../../../core/utils/size_config_helper.dart';
 import '../../../core/values/colors.dart';
 import '../../../core/values/dimes.dart';
 import '../../../core/values/strings.dart';

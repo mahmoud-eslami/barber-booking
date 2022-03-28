@@ -1,4 +1,3 @@
-import 'package:barber_booking/app/core/utils/size_config.dart';
 import 'package:barber_booking/app/core/values/secret.dart';
 import 'package:barber_booking/app/global_widgets/global_indicator.dart';
 import 'package:barber_booking/app/modules/home/controller.dart';
@@ -6,10 +5,11 @@ import 'package:barber_booking/app/modules/home/local_widget/custom_bottom_nav.d
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
 import "package:latlong2/latlong.dart";
+
 import '../../core/values/colors.dart';
 import '../../core/values/strings.dart';
+import '../../data/services/location_service.dart';
 import '../../routes/routes.dart';
 
 class HomePage extends StatelessWidget {
@@ -19,6 +19,7 @@ class HomePage extends StatelessWidget {
   final Strings _strings = Get.find();
   final Routes _routes = Get.find();
   final HomeController _homeController = Get.find();
+  final CustomLocationService _customLocationService = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +32,11 @@ class HomePage extends StatelessWidget {
                 return const GlobalIndicator();
               }
               return FlutterMap(
+                mapController: _homeController.mapController,
                 options: MapOptions(
                   center: LatLng(
-                    _homeController.userPosition.latitude,
-                    _homeController.userPosition.longitude,
+                    _customLocationService.userPosition.latitude,
+                    _customLocationService.userPosition.longitude,
                   ),
                   zoom: 13.0,
                 ),

@@ -1,4 +1,4 @@
-import 'package:barber_booking/app/core/utils/size_config.dart';
+import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:barber_booking/app/modules/news/local_widget/news_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

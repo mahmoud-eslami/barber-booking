@@ -1,4 +1,4 @@
-import 'package:barber_booking/app/core/utils/size_config.dart';
+import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:barber_booking/app/core/values/dimes.dart';
 import 'package:barber_booking/app/data/enums/text_color_option.dart';
 import 'package:barber_booking/app/data/enums/text_size_option.dart';
@@ -33,8 +33,9 @@ class NearestBarberShop extends StatelessWidget {
             SlideTransition(
               position: _nearestBarberShopController.slideSearchBarAnimation,
               child: FadeTransition(
-                  opacity: _nearestBarberShopController.fadeSearchBarAnimation,
-                  child: NearBarberShopSearchBar()),
+                opacity: _nearestBarberShopController.fadeSearchBarAnimation,
+                child: NearBarberShopSearchBar(),
+              ),
             ),
             SizedBox(
               height: SizeConfig.heightMultiplier * 2,
@@ -57,12 +58,12 @@ class NearestBarberShop extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: OptimizedText(
-                        "14 results",
-                        colorOption: TextColorOptions.light,
-                        textAlign: TextAlign.end,
-                        sizeOption: TextSizeOptions.caption,
-                      ),
+                      child: Obx(() => OptimizedText(
+                            "${_nearestBarberShopController.barberShopsList.length} results",
+                            colorOption: TextColorOptions.light,
+                            textAlign: TextAlign.end,
+                            sizeOption: TextSizeOptions.caption,
+                          )),
                     ),
                   ],
                 ),

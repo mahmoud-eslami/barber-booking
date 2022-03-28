@@ -1,8 +1,20 @@
+import 'package:barber_booking/app/data/enums/app_state.dart';
+import 'package:barber_booking/app/data/enums/authentication_state.dart';
+import 'package:barber_booking/app/data/services/firebase_service.dart';
+import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../exports.dart';
+
 class AuthenticationController extends GetxController
     with GetTickerProviderStateMixin {
+  final Strings _strings = Get.find();
+  final Routes _routes = Get.find();
+  final FirebaseService _firebaseService = Get.find();
+
+  // animations variables
   late Animation<double> titleAnimation;
   late Animation<double> imageAnimation;
   late Animation<double> descriptionAnimation;
@@ -16,15 +28,85 @@ class AuthenticationController extends GetxController
   late Animation<Offset> loginBtnSlideAnimation;
   late Animation<Offset> termsSlideAnimation;
   late AnimationController fadeAnimationController;
+  // animations variables
 
   late TextEditingController emailController;
   late TextEditingController passwordController;
+
+  Rx<AuthenticationState> pageState = AuthenticationState.initial.obs;
 
   @override
   void onInit() {
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    initializeAnimation();
+    super.onInit();
+  }
 
+  @override
+  void onClose() {
+    clearControllers();
+    super.onClose();
+  }
+
+  void login(String email, String password) async {
+    try {
+      pageState(AuthenticationState.loginLoading);
+      UserCredential? userCredential =
+          await _firebaseService.loginUser(email: email, password: password);
+
+      if (userCredential != null) {
+        Get.offAndToNamed(_routes.homeRoute);
+      } else {
+        pageState(AuthenticationState.loginError);
+      }
+    } catch (e) {
+      globalSnackbar(content: e.toString());
+      pageState(AuthenticationState.loginError);
+    }
+  }
+
+  void socialLogin() async {
+    try {
+      pageState(AuthenticationState.socialLoading);
+      UserCredential? userCredential =
+          await _firebaseService.signInWithGoogle();
+
+      if (userCredential != null) {
+        Get.offAndToNamed(_routes.homeRoute);
+      } else {
+        pageState(AuthenticationState.socialError);
+      }
+    } catch (e) {
+      globalSnackbar(content: e.toString());
+      pageState(AuthenticationState.socialError);
+    }
+  }
+
+  void register(String email, String password) async {
+    try {
+      pageState(AuthenticationState.registerLoading);
+      UserCredential? userCredential =
+          await _firebaseService.registerUser(email: email, password: password);
+
+      if (userCredential != null) {
+        Get.offAndToNamed(_routes.homeRoute);
+      } else {
+        pageState(AuthenticationState.registerError);
+      }
+    } catch (e) {
+      globalSnackbar(content: e.toString());
+      pageState(AuthenticationState.registerError);
+    }
+  }
+
+  void clearControllers() {
+    fadeAnimationController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  void initializeAnimation() {
     const duration = Duration(milliseconds: 600);
     const startOffset = Offset(0.0, .2);
     const endOffset = Offset.zero;
@@ -89,14 +171,5 @@ class AuthenticationController extends GetxController
       parent: fadeAnimationController,
       curve: const Interval(0.9, 1, curve: Curves.ease),
     ));
-    super.onInit();
-  }
-
-  @override
-  void onClose() {
-    fadeAnimationController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    super.onClose();
   }
 }

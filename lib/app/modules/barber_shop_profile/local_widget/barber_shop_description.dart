@@ -1,16 +1,18 @@
+import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
 import 'package:barber_booking/app/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../../../core/utils/size_config.dart';
+import '../../../core/utils/size_config_helper.dart';
 import '../../../data/enums/text_color_option.dart';
 import '../../../data/enums/text_size_option.dart';
 import '../../../global_widgets/optimized_text.dart';
 import '../controller.dart';
 
 class BarberShopDescriptionWidget extends StatelessWidget {
-  BarberShopDescriptionWidget({Key? key}) : super(key: key);
+  BarberShopDescriptionWidget({Key? key, required this.item}) : super(key: key);
+  final BarberShopModel item;
 
   final AppColors _colors = Get.find();
   final Strings _strings = Get.find();
@@ -34,7 +36,7 @@ class BarberShopDescriptionWidget extends StatelessWidget {
                     child: Column(
                       children: [
                         OptimizedText(
-                          "USA - new street in somewhere that is exist !",
+                          item.subTitle,
                           colorOption: TextColorOptions.light,
                           textAlign: TextAlign.start,
                           sizeOption: TextSizeOptions.caption,
@@ -60,7 +62,7 @@ class BarberShopDescriptionWidget extends StatelessWidget {
             child: FadeTransition(
               opacity: _profileController.fadeDescriptionAnimation,
               child: OptimizedText(
-                _strings.lorem + _strings.lorem + _strings.lorem,
+                item.description,
                 colorOption: TextColorOptions.light,
                 maxLine: 100,
                 textAlign: TextAlign.justify,
@@ -84,7 +86,7 @@ class BarberShopDescriptionWidget extends StatelessWidget {
             crossAxisAlignment: WrapCrossAlignment.start,
             runAlignment: WrapAlignment.start,
             children: [
-              for (int i = 0; i < 4; i++)
+              for (int i = 0; i < item.tags.length; i++)
                 Container(
                   margin: EdgeInsets.all(_dimens.defaultMargin * .3),
                   padding: EdgeInsets.all(_dimens.defaultPadding),
@@ -95,7 +97,7 @@ class BarberShopDescriptionWidget extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    "Tags num $i",
+                    " ${item.tags[i]} ",
                     style: TextStyle(
                       color: _colors.pastelCyan,
                       fontWeight: FontWeight.bold,

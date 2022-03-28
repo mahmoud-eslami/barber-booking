@@ -1,4 +1,3 @@
-import 'package:barber_booking/app/core/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -6,8 +5,6 @@ import 'package:ionicons/ionicons.dart';
 import '../../../core/values/colors.dart';
 import '../../../core/values/dimes.dart';
 import '../../../core/values/strings.dart';
-import '../../../data/enums/text_color_option.dart';
-import '../../../global_widgets/optimized_text.dart';
 import '../../../routes/routes.dart';
 import '../controller.dart';
 
@@ -34,7 +31,7 @@ class GenderSelector extends StatelessWidget {
               child: AnimatedContainer(
                 curve: Curves.easeOut,
                 decoration: BoxDecoration(
-                  color: _profileController.genderIsWoman.value
+                  color: (_profileController.gender.value != 1)
                       ? _colors.pastelCyan.withOpacity(.05)
                       : _colors.pastelCyan,
                   shape: BoxShape.circle,
@@ -45,7 +42,7 @@ class GenderSelector extends StatelessWidget {
                   child: Icon(
                     Ionicons.man_outline,
                     size: _dimens.defaultIconSize * 2.5,
-                    color: _profileController.genderIsWoman.value
+                    color: (_profileController.gender.value != 1)
                         ? _colors.pastelCyan
                         : _colors.frostedBlack,
                   ),
@@ -58,7 +55,7 @@ class GenderSelector extends StatelessWidget {
                 curve: Curves.easeOut,
                 duration: duration,
                 decoration: BoxDecoration(
-                  color: !_profileController.genderIsWoman.value
+                  color: (_profileController.gender.value != 0)
                       ? _colors.pastelCyan.withOpacity(.05)
                       : _colors.pastelCyan,
                   shape: BoxShape.circle,
@@ -68,7 +65,7 @@ class GenderSelector extends StatelessWidget {
                   child: Icon(
                     Ionicons.woman_outline,
                     size: _dimens.defaultIconSize * 2.5,
-                    color: !_profileController.genderIsWoman.value
+                    color: (_profileController.gender.value != 0)
                         ? _colors.pastelCyan
                         : _colors.frostedBlack,
                   ),

@@ -21,6 +21,13 @@ dependencies:
   flutter_map: ^0.14.0
   geolocator: ^8.2.0
   camera: ^0.9.4+16
+  firebase_auth: ^3.3.11
+  firebase_core: ^1.13.1
+  google_sign_in: ^5.2.4
+  extended_image: ^6.0.2+1
+  cloud_firestore: ^3.1.10
+  dartz: ^0.10.1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
