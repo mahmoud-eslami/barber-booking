@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:barber_booking/app/data/model/barber/barber.dart';
 import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
+import 'package:barber_booking/app/data/model/story/story.dart';
 import 'package:barber_booking/app/data/model/user/user_extra_info.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -54,6 +56,35 @@ class FirebaseService {
       throw internetConnectionError;
     } else {
       throw unknownError;
+    }
+  }
+
+  Future<List<StoryModel>> getAllStories() async {
+    List<StoryModel> list = [];
+    try {
+      QuerySnapshot docs = await _firestore.collection("story").get();
+      for (var element in docs.docs) {
+        list.add(StoryModel.fromJson(element));
+      }
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+    }
+
+    return list;
+  }
+
+  Future<BarberModel?> getSpeceficProfile(String docId) async {
+    try {
+      DocumentSnapshot document =
+          await _firestore.collection("barber").doc(docId).get();
+
+      if (!document.exists) {
+        throw "This profile not existed";
+      }
+      return BarberModel.fromJson(document);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+      return null;
     }
   }
 
