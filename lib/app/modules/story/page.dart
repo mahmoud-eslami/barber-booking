@@ -1,4 +1,5 @@
 import 'package:barber_booking/app/core/utils/size_config_helper.dart';
+import 'package:barber_booking/app/data/model/story/story.dart';
 import 'package:barber_booking/app/modules/story/local_widget/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,12 +13,10 @@ import 'local_widget/back_button.dart';
 class StoryPage extends StatelessWidget {
   StoryPage({
     Key? key,
-    this.imagePath,
-    this.barberShopName,
+    required this.item,
   }) : super(key: key);
 
-  final String? imagePath;
-  final String? barberShopName;
+  final StoryModel item;
 
   final AppColors _colors = Get.find();
   final Strings _strings = Get.find();
@@ -30,8 +29,8 @@ class StoryPage extends StatelessWidget {
       children: [
         SizedBox(
           height: SizeConfig.heightMultiplier * 100,
-          child: Image.asset(
-            imagePath ?? "assets/images/design.png",
+          child: Image.network(
+            item.image,
             fit: BoxFit.cover,
           ),
         ),

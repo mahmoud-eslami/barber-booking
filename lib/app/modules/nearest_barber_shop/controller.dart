@@ -27,8 +27,10 @@ class NearestBarberShopController extends GetxController
   getFilteredItems(String query) {
     clearFilteredList();
     List<BarberShopModel> temp = barberShopsList;
-    filteredList(
-        temp.where((element) => element.title.contains(query)).toList());
+    filteredList(temp
+        .where((element) =>
+            element.title.toLowerCase().contains(query.toLowerCase()))
+        .toList());
   }
 
   bool getStateOfBarberShop(String startTime, String endTime) {

@@ -1,9 +1,17 @@
 import 'dart:ui';
 
+import 'package:barber_booking/app/data/enums/news_state.dart';
+import 'package:barber_booking/app/data/model/story/story.dart';
+import 'package:barber_booking/app/data/services/firebase_service.dart';
+import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 
 class NewsController extends GetxController with GetTickerProviderStateMixin {
+  final FirebaseService _firebaseService = Get.find();
+  RxList<StoryModel> storiesList = <StoryModel>[].obs;
+  Rx<NewsState> pageState = NewsState.init.obs;
+
   late AnimationController animationController;
   late Animation<double> storyLineFadeAnimation;
   late Animation<Offset> storyLineSlideAnimation;
@@ -16,8 +24,33 @@ class NewsController extends GetxController with GetTickerProviderStateMixin {
   late Animation<double> trendLineFadeAnimation;
   late Animation<Offset> trendLineSlideAnimation;
 
+  Future getAllStories() async {
+    try {
+      pageState(NewsState.loadingStories);
+      List<StoryModel> stories = await _firebaseService.getAllStories();
+      print(stories);
+      storiesList.addAll(stories);
+      pageState(NewsState.getStoriesSuccess);
+    } catch (e) {
+      pageState(NewsState.getStoriesFailed);
+
+      globalSnackbar(content: e.toString());
+    }
+  }
+
   @override
   void onInit() {
+    getAllStories().then((value) => initializeAnimations());
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    animationController.dispose();
+    super.onClose();
+  }
+
+  initializeAnimations() {
     const duration = Duration(milliseconds: 600);
     const startOffset = Offset(0.0, .2);
     const endOffset = Offset.zero;
@@ -76,13 +109,5 @@ class NewsController extends GetxController with GetTickerProviderStateMixin {
       parent: animationController,
       curve: const Interval(0.8, 1, curve: Curves.ease),
     ));
-
-    super.onInit();
-  }
-
-  @override
-  void onClose() {
-    animationController.dispose();
-    super.onClose();
   }
 }

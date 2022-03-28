@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,11 +21,8 @@ class StoryBackButton extends StatelessWidget {
           onTap: () => Get.back(),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(_dimens.defaultRadius * 100),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 20,
-                sigmaY: 20,
-              ),
+            child: Container(
+              color: _colors.frostedBlack,
               child: Padding(
                 padding: EdgeInsets.all(_dimens.defaultPadding * 3),
                 child: Icon(

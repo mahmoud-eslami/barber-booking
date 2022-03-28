@@ -1,6 +1,6 @@
+import 'package:barber_booking/app/data/model/story/story.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
 
 import '../../../core/values/colors.dart';
 import '../../../core/values/dimes.dart';
@@ -10,11 +10,10 @@ import '../../../routes/routes.dart';
 class StoryItem extends StatelessWidget {
   StoryItem({
     Key? key,
-    this.imagePath,
+    required this.item,
   }) : super(key: key);
 
-  final String? imagePath;
-
+  final StoryModel item;
   final AppColors _colors = Get.find();
   final Dimens _dimens = Get.find();
   final Strings _strings = Get.find();
@@ -24,7 +23,7 @@ class StoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(_routes.storyRoute);
+        Get.toNamed(_routes.storyRoute, arguments: item);
       },
       child: Container(
         width: _dimens.storyItemHeight,
@@ -57,8 +56,8 @@ class StoryItem extends StatelessWidget {
               _dimens.defaultRadius * .4,
             ),
             clipBehavior: Clip.hardEdge,
-            child: Image.asset(
-              imagePath ?? "assets/images/design.png",
+            child: Image.network(
+              item.thumbnail,
               fit: BoxFit.cover,
             ),
           ),
