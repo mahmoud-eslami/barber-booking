@@ -59,6 +59,18 @@ class FirebaseService {
     }
   }
 
+  Future<StoryModel?> getSpeceficData(String storyId) async {
+    try {
+      DocumentSnapshot story =
+          await _firestore.collection("story").doc(storyId).get();
+
+      return StoryModel.fromJson(story);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+    }
+    return null;
+  }
+
   Future<bool> seenStory(String storyId) async {
     try {
       User? user = _auth.currentUser;

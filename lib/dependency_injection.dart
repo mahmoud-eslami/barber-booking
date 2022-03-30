@@ -13,6 +13,7 @@ import 'package:barber_booking/app/modules/news/controller.dart';
 import 'package:barber_booking/app/modules/news_details/controller.dart';
 import 'package:barber_booking/app/modules/profile/controller.dart';
 import 'package:barber_booking/app/modules/splash/controller.dart';
+import 'package:barber_booking/app/modules/story/controller.dart';
 import 'package:barber_booking/app/modules/terms_conditions/controller.dart';
 import 'package:barber_booking/app/routes/routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -54,5 +55,6 @@ class DependencyInjection {
     Get.lazyPut(() => BarberProfileController(), fenix: true);
     Get.lazyPut(() => NewsDetailsController(), fenix: true);
     Get.lazyPut(() => AppointmentsController(), fenix: true);
+    Get.lazyPut(() => StoryController(), fenix: true);
   }
 }
