@@ -1,6 +1,7 @@
 class StoryModel {
   final String thumbnail;
   final String image;
+  final String id;
   final List<String> comments;
   final List<String> likes;
   final List<String> seens;
@@ -8,6 +9,7 @@ class StoryModel {
   StoryModel({
     required this.thumbnail,
     required this.image,
+    required this.id,
     required this.comments,
     required this.likes,
     required this.seens,
@@ -16,6 +18,7 @@ class StoryModel {
   factory StoryModel.fromJson(doc) => StoryModel(
         thumbnail: doc["thumbnail"],
         image: doc["image"],
+        id: doc["id"],
         comments: converDynamicListToStringList(doc["comments"]),
         likes: converDynamicListToStringList(doc["likes"]),
         seens: converDynamicListToStringList(doc["seens"]),

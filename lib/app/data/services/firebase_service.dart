@@ -23,11 +23,11 @@ class FirebaseService {
   String wrongPwdError = 'Wrong password provided for that user.';
   String userNotExistError = "No user found with this email.";
 
-  firebaseErrorHandler(error, stackTrace) {
-    print(error);
-    print(stackTrace);
-    if (error is FirebaseAuthException) {
-      switch (error.code) {
+  firebaseErrorHandler(e, s) {
+    print(e);
+    print(s);
+    if (e is FirebaseAuthException) {
+      switch (e.code) {
         case "ERROR_EMAIL_ALREADY_IN_USE":
         case "account-exists-with-different-credential":
         case "email-already-in-use":
@@ -52,10 +52,58 @@ class FirebaseService {
         default:
           throw unknownError;
       }
-    } else if (error is SocketException) {
+    } else if (e is SocketException) {
       throw internetConnectionError;
     } else {
-      throw unknownError;
+      throw e.toString();
+    }
+  }
+
+  Future<bool> seenStory(String storyId) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) {
+        throw "Please first login";
+      } else {
+        return _firestore.collection("story").doc(storyId).update({
+          "seens": FieldValue.arrayUnion([user.uid])
+        }).then((value) => true);
+      }
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+      return false;
+    }
+  }
+
+  Future likeStory(String storyId) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) {
+        throw "Please first login";
+      } else {
+        return _firestore.collection("story").doc(storyId).update({
+          "likes": FieldValue.arrayUnion([user.uid])
+        }).then((value) => true);
+      }
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+      return false;
+    }
+  }
+
+  Future commentOnStory(String storyId, String comment) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) {
+        throw "Please first login";
+      } else {
+        return _firestore.collection("story").doc(storyId).update({
+          "comments": FieldValue.arrayUnion(["${user.uid}/$comment"])
+        }).then((value) => true);
+      }
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+      return false;
     }
   }
 
