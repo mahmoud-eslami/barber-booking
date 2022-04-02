@@ -1,4 +1,5 @@
 class BarberShopModel {
+  final String id;
   final String title;
   final String subTitle;
   final List<String> tags;
@@ -8,6 +9,7 @@ class BarberShopModel {
   final String startWorkTime, endWorkTime;
 
   BarberShopModel({
+    required this.id,
     required this.title,
     required this.subTitle,
     required this.tags,
@@ -20,6 +22,7 @@ class BarberShopModel {
   });
 
   factory BarberShopModel.fromJson(doc) => BarberShopModel(
+        id: doc["id"],
         title: doc["title"],
         subTitle: doc["subTitle"],
         tags: converTagsToStringList(doc["tags"]),

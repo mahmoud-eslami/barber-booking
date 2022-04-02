@@ -124,16 +124,22 @@ class BarberShopDescriptionWidget extends StatelessWidget {
         ],
       );
 
-  likeButton() => Container(
-        decoration: BoxDecoration(
-          color: _colors.pastelCyan,
-          shape: BoxShape.circle,
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(_dimens.defaultPadding * 2),
-          child: Icon(
-            Ionicons.heart,
-            color: _colors.frostedBlack,
+  likeButton() => Obx(
+        () => GestureDetector(
+          onTap: () => _profileController.likeBarberShop(),
+          child: Container(
+            decoration: BoxDecoration(
+              color: _colors.pastelCyan,
+              shape: BoxShape.circle,
+            ),
+            child: Padding(
+                padding: EdgeInsets.all(_dimens.defaultPadding * 2),
+                child: Icon(
+                  Ionicons.heart,
+                  color: _profileController.likeStatus.value
+                      ? _colors.likedHearth
+                      : _colors.frostedBlack,
+                )),
           ),
         ),
       );

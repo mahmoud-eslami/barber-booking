@@ -71,6 +71,40 @@ class FirebaseService {
     return null;
   }
 
+  Future<bool?> checkBarberShopLikeStatus(String id) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) throw "User not exist";
+      DocumentSnapshot doc =
+          await _firestore.collection("users").doc(user.uid).get();
+      List favBarberShops = doc["favouriteBarberShops"];
+      return (favBarberShops.contains(id)) ? true : false;
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+      return null;
+    }
+  }
+
+  Future<void> likeBarberShop(String id) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) throw "User not exist";
+      bool? isExist = await checkBarberShopLikeStatus(id);
+      if (isExist == null) throw unknownError;
+      if (isExist) {
+        await _firestore.collection("users").doc(user.uid).update({
+          'favouriteBarberShops': FieldValue.arrayRemove([id]),
+        });
+      } else {
+        await _firestore.collection("users").doc(user.uid).update({
+          'favouriteBarberShops': FieldValue.arrayUnion([id]),
+        });
+      }
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+    }
+  }
+
   Future<bool> seenStory(String storyId) async {
     try {
       User? user = _auth.currentUser;
