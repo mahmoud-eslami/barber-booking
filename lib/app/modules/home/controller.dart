@@ -37,6 +37,8 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+  String getPhotoUrl() => _firebaseService.getUser()?.photoURL ?? "";
+
   void createExtraInfoDocument() async =>
       _firebaseService.createExtraInfoDocumetnation();
 
