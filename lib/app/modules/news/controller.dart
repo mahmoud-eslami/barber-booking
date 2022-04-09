@@ -1,11 +1,12 @@
 import 'dart:ui';
 
-import 'package:barber_booking/app/data/enums/news_state.dart';
 import 'package:barber_booking/app/data/model/story/story.dart';
 import 'package:barber_booking/app/data/services/firebase_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
+
+import '../../data/enums/pages_states/news_state.dart';
 
 class NewsController extends GetxController with GetTickerProviderStateMixin {
   final FirebaseService _firebaseService = Get.find();

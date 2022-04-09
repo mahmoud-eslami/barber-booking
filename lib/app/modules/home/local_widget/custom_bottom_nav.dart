@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:barber_booking/app/core/values/dimes.dart';
-import 'package:barber_booking/app/data/enums/home_state.dart';
 import 'package:barber_booking/app/modules/home/controller.dart';
 import 'package:barber_booking/app/modules/home/local_widget/bottom_nav_item.dart';
 import 'package:barber_booking/app/modules/home/local_widget/profile_nav_item.dart';
@@ -11,6 +10,7 @@ import 'package:ionicons/ionicons.dart';
 
 import '../../../core/values/colors.dart';
 import '../../../core/values/strings.dart';
+import '../../../data/enums/pages_states/home_state.dart';
 import '../../../routes/routes.dart';
 
 class CustomBottomNav extends StatelessWidget {

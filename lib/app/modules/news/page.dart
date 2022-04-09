@@ -1,4 +1,3 @@
-import 'package:barber_booking/app/data/enums/news_state.dart';
 import 'package:barber_booking/app/data/enums/text_size_option.dart';
 import 'package:barber_booking/app/global_widgets/global_indicator.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
@@ -13,6 +12,7 @@ import 'package:get/get.dart';
 import '../../core/values/colors.dart';
 import '../../core/values/dimes.dart';
 import '../../core/values/strings.dart';
+import '../../data/enums/pages_states/news_state.dart';
 import '../../routes/routes.dart';
 
 class NewsPage extends StatelessWidget {

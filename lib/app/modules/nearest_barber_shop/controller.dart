@@ -1,12 +1,13 @@
 import 'dart:math';
 
-import 'package:barber_booking/app/data/enums/nearest_barber_state.dart';
 import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
 import 'package:barber_booking/app/data/services/firebase_service.dart';
 import 'package:barber_booking/app/data/services/location_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+
+import '../../data/enums/pages_states/nearest_barber_state.dart';
 
 class NearestBarberShopController extends GetxController
     with GetTickerProviderStateMixin {

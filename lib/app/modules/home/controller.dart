@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:barber_booking/app/data/enums/home_state.dart';
 import 'package:barber_booking/app/data/services/firebase_service.dart';
 import 'package:barber_booking/app/data/services/location_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
@@ -11,6 +10,7 @@ import 'package:ionicons/ionicons.dart';
 import "package:latlong2/latlong.dart";
 
 import '../../core/utils/size_config_helper.dart';
+import '../../data/enums/pages_states/home_state.dart';
 import '../../exports.dart';
 
 class HomeController extends GetxController {

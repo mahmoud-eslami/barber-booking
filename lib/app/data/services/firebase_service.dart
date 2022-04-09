@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:barber_booking/app/data/model/appointments/appointments.dart';
 import 'package:barber_booking/app/data/model/barber/barber.dart';
 import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
 import 'package:barber_booking/app/data/model/story/story.dart';
@@ -57,6 +58,46 @@ class FirebaseService {
     } else {
       throw e.toString();
     }
+  }
+
+  Future<DocumentSnapshot?> getSnapShotFromRefrence(
+      DocumentReference refrence) async {
+    try {
+      return await refrence.get();
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+      return null;
+    }
+  }
+
+  Future<List<AppointmentsModel>> getAppointments() async {
+    List<AppointmentsModel> appointmentsList = [];
+    List<Map> rawData = [];
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) throw "User not exist";
+      QuerySnapshot appointments = await _firestore
+          .collection("users")
+          .doc(user.uid)
+          .collection("appointments")
+          .get();
+
+      // todo : check for best practices to parse refrence
+      for (var element in appointments.docs) {
+        Map data = element.data() as Map;
+        rawData.add({
+          "appointmentTime": data["appointmentTime"],
+          "barberShop": await getSnapShotFromRefrence(data["barberShop"]),
+        });
+      }
+
+      for (var element in rawData) {
+        appointmentsList.add(AppointmentsModel.fromJson(element));
+      }
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+    }
+    return appointmentsList;
   }
 
   Future<StoryModel?> getSpeceficData(String storyId) async {

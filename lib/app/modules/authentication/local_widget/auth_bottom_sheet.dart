@@ -1,7 +1,6 @@
 import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:barber_booking/app/core/values/colors.dart';
 import 'package:barber_booking/app/core/values/strings.dart';
-import 'package:barber_booking/app/data/enums/authentication_state.dart';
 import 'package:barber_booking/app/data/enums/text_color_option.dart';
 import 'package:barber_booking/app/data/enums/text_size_option.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
@@ -17,6 +16,7 @@ import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../../../core/values/dimes.dart';
+import '../../../data/enums/pages_states/authentication_state.dart';
 
 class AuthBottomSheet extends StatelessWidget {
   final bool isRegister;

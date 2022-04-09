@@ -1,3 +1,5 @@
+import 'package:barber_booking/app/data/enums/pages_states/appointments_state.dart';
+import 'package:barber_booking/app/global_widgets/global_indicator.dart';
 import 'package:barber_booking/app/modules/appointments/controller.dart';
 import 'package:barber_booking/app/modules/appointments/local_widget/appointments_line.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +24,14 @@ class AppointmentsPage extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: _dimens.defaultPadding * 2),
-        child: AppointmentsItemsList(),
+        child: Obx(
+          () => _appointmentsController.pageState.value ==
+                  AppointmentsState.loading
+              ? const Center(
+                  child: GlobalIndicator(),
+                )
+              : AppointmentsItemsList(),
+        ),
       ),
     );
   }

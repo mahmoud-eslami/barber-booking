@@ -1,4 +1,5 @@
 import 'package:barber_booking/app/data/enums/text_color_option.dart';
+import 'package:barber_booking/app/data/model/appointments/appointments_item_data.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +13,9 @@ import '../../../routes/routes.dart';
 import 'appointments_item_painter.dart';
 
 class AppointmentsItem extends StatelessWidget {
-  final bool isUpperWidget;
+  final AppointmentsItemModel data;
 
-  AppointmentsItem({Key? key, required this.isUpperWidget}) : super(key: key);
+  AppointmentsItem({Key? key, required this.data}) : super(key: key);
 
   final Dimens _dimens = Get.find();
   final AppColors _colors = Get.find();
@@ -31,7 +32,7 @@ class AppointmentsItem extends StatelessWidget {
           height: 190,
           color: Colors.transparent,
           child: CustomPaint(
-            painter: AppointmentsItemPainter(isUpperWidget: isUpperWidget),
+            painter: AppointmentsItemPainter(isUpperWidget: data.isUpper),
             child: Padding(
               padding:
                   EdgeInsets.symmetric(horizontal: _dimens.defaultPadding * 3),
@@ -91,7 +92,7 @@ class AppointmentsItem extends StatelessWidget {
             ),
           ),
         ),
-        if (!isUpperWidget) const SizedBox(height: 20),
+        if (!data.isUpper) const SizedBox(height: 20),
       ],
     );
   }
