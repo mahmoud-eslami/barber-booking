@@ -20,8 +20,9 @@ class AppointmentsItemsList extends StatelessWidget {
         itemCount: _appointmentsController.appointments.length,
         itemBuilder: (context, index) => AppointmentsItem(
           data: AppointmentsItemModel(
-              isUpper: (index % 2 == 1),
-              item: _appointmentsController.appointments[index]),
+            isUpper: (index % 2 == 0),
+            item: _appointmentsController.appointments[index],
+          ),
         ),
       ),
     );
