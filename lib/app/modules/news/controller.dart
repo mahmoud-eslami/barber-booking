@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
 import 'package:barber_booking/app/data/model/story/story.dart';
 import 'package:barber_booking/app/data/services/firebase_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
@@ -11,6 +12,7 @@ import '../../data/enums/pages_states/news_state.dart';
 class NewsController extends GetxController with GetTickerProviderStateMixin {
   final FirebaseService _firebaseService = Get.find();
   RxList<StoryModel> storiesList = <StoryModel>[].obs;
+  RxList<BarberShopModel> barberShopsList = <BarberShopModel>[].obs;
   Rx<NewsState> pageState = NewsState.init.obs;
 
   late AnimationController animationController;
@@ -29,7 +31,6 @@ class NewsController extends GetxController with GetTickerProviderStateMixin {
     try {
       pageState(NewsState.loadingStories);
       List<StoryModel> stories = await _firebaseService.getAllStories();
-      print(stories);
       storiesList.addAll(stories);
       pageState(NewsState.getStoriesSuccess);
     } catch (e) {
@@ -39,10 +40,34 @@ class NewsController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
+  Future getAllBarberShops() async {
+    try {
+      pageState(NewsState.loadingBarberShops);
+      List<BarberShopModel> barberShops =
+          await _firebaseService.getAllBarberShops();
+      barberShopsList.addAll(barberShops);
+      pageState(NewsState.getBarberShopsSuccess);
+    } catch (e) {
+      pageState(NewsState.getBarberShopsFailed);
+
+      globalSnackbar(content: e.toString());
+    }
+  }
+
   @override
   void onInit() {
-    getAllStories().then((value) => initializeAnimations());
+    clearAllListForInitialize();
+    getAllStories().then(
+      (value) => getAllBarberShops().then(
+        (value) => initializeAnimations(),
+      ),
+    );
     super.onInit();
+  }
+
+  clearAllListForInitialize() {
+    barberShopsList.clear();
+    storiesList.clear();
   }
 
   @override
