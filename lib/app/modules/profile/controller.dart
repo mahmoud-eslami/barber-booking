@@ -1,3 +1,4 @@
+import 'package:barber_booking/app/data/enums/pages_states/profile_state.dart';
 import 'package:barber_booking/app/data/model/user/user_extra_info.dart';
 import 'package:barber_booking/app/data/services/firebase_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
@@ -11,6 +12,7 @@ class ProfileController extends GetxController
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController ageController = TextEditingController();
+  Rx<ProfileState> pageState = ProfileState.loadingToGetData.obs;
 
   final Routes _routes = Get.find();
 
@@ -38,10 +40,7 @@ class ProfileController extends GetxController
 
   @override
   void onInit() {
-    initializeAnimations();
-    getDisplayName();
-    getUserEmail();
-    getUserExtraInfo();
+    getInitData().then((value) => initializeAnimations());
     super.onInit();
   }
 
@@ -52,6 +51,13 @@ class ProfileController extends GetxController
     nameController.dispose();
     ageController.dispose();
     super.onClose();
+  }
+
+  Future getInitData() async {
+    pageState(ProfileState.loadingToGetData);
+    getDisplayName();
+    getUserEmail();
+    getUserExtraInfo();
   }
 
   logout() async {
@@ -100,6 +106,7 @@ class ProfileController extends GetxController
   setWomanAsGender() => gender(0);
 
   initializeAnimations() {
+    pageState(ProfileState.dataFetchedSuccess);
     const duration = Duration(milliseconds: 800);
     const beginOffset = Offset(0, .6);
     animationController = AnimationController(vsync: this, duration: duration)
