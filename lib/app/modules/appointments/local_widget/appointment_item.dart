@@ -1,4 +1,6 @@
+import 'package:barber_booking/app/core/utils/distance_calculator.dart';
 import 'package:barber_booking/app/data/enums/text_color_option.dart';
+import 'package:barber_booking/app/data/model/appointments/appointments_item_data.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:flutter/material.dart';
@@ -8,17 +10,19 @@ import 'package:ionicons/ionicons.dart';
 import '../../../core/utils/size_config_helper.dart';
 import '../../../core/values/colors.dart';
 import '../../../core/values/dimes.dart';
+import '../../../data/services/location_service.dart';
 import '../../../routes/routes.dart';
 import 'appointments_item_painter.dart';
 
 class AppointmentsItem extends StatelessWidget {
-  final bool isUpperWidget;
+  final AppointmentsItemModel data;
 
-  AppointmentsItem({Key? key, required this.isUpperWidget}) : super(key: key);
+  AppointmentsItem({Key? key, required this.data}) : super(key: key);
 
   final Dimens _dimens = Get.find();
   final AppColors _colors = Get.find();
   final Routes _routes = Get.find();
+  final CustomLocationService _customLocationService = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +35,7 @@ class AppointmentsItem extends StatelessWidget {
           height: 190,
           color: Colors.transparent,
           child: CustomPaint(
-            painter: AppointmentsItemPainter(isUpperWidget: isUpperWidget),
+            painter: AppointmentsItemPainter(isUpperWidget: data.isUpper),
             child: Padding(
               padding:
                   EdgeInsets.symmetric(horizontal: _dimens.defaultPadding * 3),
@@ -91,41 +95,47 @@ class AppointmentsItem extends StatelessWidget {
             ),
           ),
         ),
-        if (!isUpperWidget) const SizedBox(height: 20),
+        if (!data.isUpper) const SizedBox(height: 20),
       ],
     );
   }
 
   titleWidget() => OptimizedText(
-        "XXXX Barbershop",
+        data.item.barberShopModel.title,
         colorOption: TextColorOptions.light,
         textAlign: TextAlign.start,
         fontWeight: FontWeight.bold,
       );
 
   workTimeWidget() => Row(
-        children: const [
-          Icon(
+        children: [
+          const Icon(
             Ionicons.time,
             size: 13,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
-          Text("10:00 - 21:00"),
+          Text(data.item.appointmentTime),
         ],
       );
 
   locationWidget() => Row(
-        children: const [
-          Icon(
+        children: [
+          const Icon(
             Ionicons.location_outline,
             size: 15,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
-          Text("1.2 kilometers away"),
+          Text(
+            distanceBetweenTwoPoints(
+                myLat: _customLocationService.userPosition.latitude,
+                mylon: _customLocationService.userPosition.longitude,
+                lat1: data.item.barberShopModel.lat,
+                lon1: data.item.barberShopModel.long),
+          ),
         ],
       );
 }

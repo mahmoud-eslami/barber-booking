@@ -1,11 +1,10 @@
-import 'package:barber_booking/app/data/enums/app_state.dart';
-import 'package:barber_booking/app/data/enums/authentication_state.dart';
 import 'package:barber_booking/app/data/services/firebase_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../data/enums/pages_states/authentication_state.dart';
 import '../../exports.dart';
 
 class AuthenticationController extends GetxController

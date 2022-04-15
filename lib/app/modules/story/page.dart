@@ -1,5 +1,6 @@
 import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:barber_booking/app/data/model/story/story.dart';
+import 'package:barber_booking/app/modules/story/controller.dart';
 import 'package:barber_booking/app/modules/story/local_widget/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,7 @@ class StoryPage extends StatelessWidget {
   final Strings _strings = Get.find();
   final Routes _routes = Get.find();
   final Dimens _dimens = Get.find();
+  final StoryController _storyController = Get.find();
 
   @override
   Widget build(BuildContext context) {

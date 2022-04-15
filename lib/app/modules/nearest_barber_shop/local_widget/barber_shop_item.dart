@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 
+import '../../../core/utils/distance_calculator.dart';
 import '../../../core/utils/size_config_helper.dart';
 import '../../../core/values/colors.dart';
 import '../../../core/values/dimes.dart';
+import '../../../data/services/location_service.dart';
 import '../../../routes/routes.dart';
 import 'barber_shop_item_painter.dart';
 
@@ -24,6 +26,7 @@ class BarberShopItem extends StatelessWidget {
   final AppColors _colors = Get.find();
   final Routes _routes = Get.find();
   final NearestBarberShopController _nearestBarberShopController = Get.find();
+  final CustomLocationService _customLocationService = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -189,8 +192,14 @@ class BarberShopItem extends StatelessWidget {
           const SizedBox(
             width: 5,
           ),
-          Text(_nearestBarberShopController.distanceBetweenTwoPoints(
-              lat1: item.lat, lon1: item.long)),
+          Text(
+            distanceBetweenTwoPoints(
+              lat1: item.lat,
+              lon1: item.long,
+              myLat: _customLocationService.userPosition.latitude,
+              mylon: _customLocationService.userPosition.longitude,
+            ),
+          ),
         ],
       );
 }

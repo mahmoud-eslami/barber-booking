@@ -1,4 +1,3 @@
-import 'package:barber_booking/app/data/enums/news_state.dart';
 import 'package:barber_booking/app/modules/news/controller.dart';
 import 'package:barber_booking/app/modules/news/local_widget/story_item.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:ionicons/ionicons.dart';
 
 import '../../../core/values/colors.dart';
 import '../../../core/values/dimes.dart';
+import '../../../data/enums/pages_states/news_state.dart';
 
 class StoriesLine extends StatelessWidget {
   StoriesLine({Key? key}) : super(key: key);

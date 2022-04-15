@@ -7,6 +7,7 @@ import '../../../core/values/colors.dart';
 import '../../../core/values/dimes.dart';
 import '../../../core/values/strings.dart';
 import '../../../routes/routes.dart';
+import '../controller.dart';
 
 class BottomBar extends StatelessWidget {
   BottomBar({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class BottomBar extends StatelessWidget {
   final Strings _strings = Get.find();
   final Routes _routes = Get.find();
   final Dimens _dimens = Get.find();
+  final StoryController _storyController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -61,19 +63,21 @@ class BottomBar extends StatelessWidget {
                 ),
               ),
             ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                width: SizeConfig.widthMultiplier * 50,
-                height: 5,
-                decoration: BoxDecoration(
-                  color: _colors.pastelCyan,
-                  borderRadius: BorderRadius.circular(
-                    _dimens.defaultRadius,
+            Obx(() => Align(
+                  alignment: Alignment.topLeft,
+                  child: AnimatedContainer(
+                    width: SizeConfig.widthMultiplier *
+                        (_storyController.timerLimit.value * 10),
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color: _colors.pastelCyan,
+                      borderRadius: BorderRadius.circular(
+                        _dimens.defaultRadius,
+                      ),
+                    ),
+                    duration: const Duration(seconds: 1),
                   ),
-                ),
-              ),
-            ),
+                )),
           ],
         ),
       ),

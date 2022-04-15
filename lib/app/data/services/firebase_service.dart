@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:barber_booking/app/data/model/appointments/appointments.dart';
 import 'package:barber_booking/app/data/model/barber/barber.dart';
 import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
 import 'package:barber_booking/app/data/model/story/story.dart';
@@ -23,11 +24,11 @@ class FirebaseService {
   String wrongPwdError = 'Wrong password provided for that user.';
   String userNotExistError = "No user found with this email.";
 
-  firebaseErrorHandler(error, stackTrace) {
-    print(error);
-    print(stackTrace);
-    if (error is FirebaseAuthException) {
-      switch (error.code) {
+  firebaseErrorHandler(e, s) {
+    print(e);
+    print(s);
+    if (e is FirebaseAuthException) {
+      switch (e.code) {
         case "ERROR_EMAIL_ALREADY_IN_USE":
         case "account-exists-with-different-credential":
         case "email-already-in-use":
@@ -52,10 +53,144 @@ class FirebaseService {
         default:
           throw unknownError;
       }
-    } else if (error is SocketException) {
+    } else if (e is SocketException) {
       throw internetConnectionError;
     } else {
-      throw unknownError;
+      throw e.toString();
+    }
+  }
+
+  Future<DocumentSnapshot?> getSnapShotFromRefrence(
+      DocumentReference refrence) async {
+    try {
+      return await refrence.get();
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+      return null;
+    }
+  }
+
+  Future<List<AppointmentsModel>> getAppointments() async {
+    List<AppointmentsModel> appointmentsList = [];
+    List<Map> rawData = [];
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) throw "User not exist";
+      QuerySnapshot appointments = await _firestore
+          .collection("users")
+          .doc(user.uid)
+          .collection("appointments")
+          .get();
+
+      // todo : check for best practices to parse refrence
+      for (var element in appointments.docs) {
+        Map data = element.data() as Map;
+        rawData.add({
+          "appointmentTime": data["appointmentTime"],
+          "barberShop": await getSnapShotFromRefrence(data["barberShop"]),
+        });
+      }
+
+      for (var element in rawData) {
+        appointmentsList.add(AppointmentsModel.fromJson(element));
+      }
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+    }
+    return appointmentsList;
+  }
+
+  Future<StoryModel?> getSpeceficData(String storyId) async {
+    try {
+      DocumentSnapshot story =
+          await _firestore.collection("story").doc(storyId).get();
+
+      return StoryModel.fromJson(story);
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+    }
+    return null;
+  }
+
+  Future<bool?> checkBarberShopLikeStatus(String id) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) throw "User not exist";
+      DocumentSnapshot doc =
+          await _firestore.collection("users").doc(user.uid).get();
+      List favBarberShops = doc["favouriteBarberShops"];
+      return (favBarberShops.contains(id)) ? true : false;
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+      return null;
+    }
+  }
+
+  Future<void> likeBarberShop(String id) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) throw "User not exist";
+      bool? isExist = await checkBarberShopLikeStatus(id);
+      if (isExist == null) throw unknownError;
+      if (isExist) {
+        await _firestore.collection("users").doc(user.uid).update({
+          'favouriteBarberShops': FieldValue.arrayRemove([id]),
+        });
+      } else {
+        await _firestore.collection("users").doc(user.uid).update({
+          'favouriteBarberShops': FieldValue.arrayUnion([id]),
+        });
+      }
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+    }
+  }
+
+  Future<bool> seenStory(String storyId) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) {
+        throw "Please first login";
+      } else {
+        return _firestore.collection("story").doc(storyId).update({
+          "seens": FieldValue.arrayUnion([user.uid])
+        }).then((value) => true);
+      }
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+      return false;
+    }
+  }
+
+  Future likeStory(String storyId) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) {
+        throw "Please first login";
+      } else {
+        return _firestore.collection("story").doc(storyId).update({
+          "likes": FieldValue.arrayUnion([user.uid])
+        }).then((value) => true);
+      }
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+      return false;
+    }
+  }
+
+  Future commentOnStory(String storyId, String comment) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) {
+        throw "Please first login";
+      } else {
+        return _firestore.collection("story").doc(storyId).update({
+          "comments": FieldValue.arrayUnion(["${user.uid}/$comment"])
+        }).then((value) => true);
+      }
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+      return false;
     }
   }
 

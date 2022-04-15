@@ -15,6 +15,7 @@ class AppColors {
   Color barberShopsLocationColors = Colors.amber;
   Color barberOpen = const Color(0xff13DAE9);
   Color barberClose = const Color(0xffFF0000);
+  Color likedHearth = const Color(0xffFF0000);
 
   Color enableBorderFormFieldColor = const Color(0xffffffff);
   Color focusBorderFormFieldColor = const Color(0xff13DAE9);

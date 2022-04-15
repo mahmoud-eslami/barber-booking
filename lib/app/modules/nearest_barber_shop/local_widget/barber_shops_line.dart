@@ -1,4 +1,3 @@
-import 'package:barber_booking/app/data/enums/nearest_barber_state.dart';
 import 'package:barber_booking/app/global_widgets/global_error.dart';
 import 'package:barber_booking/app/global_widgets/global_indicator.dart';
 import 'package:barber_booking/app/modules/nearest_barber_shop/controller.dart';
@@ -6,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/values/dimes.dart';
+import '../../../data/enums/pages_states/nearest_barber_state.dart';
 import 'barber_shop_item.dart';
 
 class BarberShopsItemsList extends StatelessWidget {
