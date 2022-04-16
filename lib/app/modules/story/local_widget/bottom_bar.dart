@@ -1,3 +1,4 @@
+import 'package:barber_booking/app/modules/story/local_widget/comments_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -17,6 +18,18 @@ class BottomBar extends StatelessWidget {
   final Routes _routes = Get.find();
   final Dimens _dimens = Get.find();
   final StoryController _storyController = Get.find();
+
+  showBottomSheet(child, context) {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(_dimens.defaultRadius),
+          ),
+        ),
+        context: context,
+        builder: (context) => child);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +64,9 @@ class BottomBar extends StatelessWidget {
                           width: SizeConfig.widthMultiplier * 3,
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showBottomSheet(CommentsBottomSheet(), context);
+                          },
                           icon: Icon(
                             Ionicons.chatbox_ellipses_outline,
                             size: _dimens.defaultIconSize * 1.2,
