@@ -1,3 +1,4 @@
+import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:barber_booking/app/global_widgets/global_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class CommentsBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100,
+      height: SizeConfig.heightMultiplier * 50,
       child: Padding(
         padding: EdgeInsets.all(_dimens.defaultPadding),
         child: Stack(
@@ -25,8 +26,14 @@ class CommentsBottomSheet extends StatelessWidget {
             Align(alignment: Alignment.topCenter, child: BottomSheetLine()),
             Column(
               children: [
-                GlobalTextFormField(
-                    controller: TextEditingController(), label: "Comment"),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: _dimens.defaultPadding * 4,
+                    horizontal: _dimens.defaultPadding,
+                  ),
+                  child: GlobalTextFormField(
+                      controller: TextEditingController(), label: "Comment"),
+                ),
               ],
             ),
           ],
