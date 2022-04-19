@@ -15,9 +15,7 @@ class ProfileController extends GetxController
   Rx<ProfileState> pageState = ProfileState.loadingToGetData.obs;
 
   final Routes _routes = Get.find();
-
   double pixelHolder = 0.0;
-
   RxInt gender = 3.obs;
 
   late AnimationController animationController;
@@ -87,6 +85,7 @@ class ProfileController extends GetxController
 
   void updateProfile({email, name, photoUrl}) async {
     try {
+      pageState(ProfileState.loadingToSubmitData);
       bool status = await _firebaseService.updateUserBaseInfo(
           email: email, name: name, photo: photoUrl);
       bool extraStatus = await _firebaseService.updateUserExtraInfo(
@@ -96,7 +95,9 @@ class ProfileController extends GetxController
       } else {
         globalSnackbar(content: "Failed please try again!");
       }
+      pageState(ProfileState.submitDataSuccess);
     } catch (e) {
+      pageState(ProfileState.submitDataFailed);
       globalSnackbar(content: e.toString());
     }
   }

@@ -18,8 +18,6 @@ import '../../routes/routes.dart';
 import 'controller.dart';
 
 // todo : create custom document for store gender and age
-// todo : add image cropper and let user to update image
-// todo : use custom cache image instead of built-in widget
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({Key? key}) : super(key: key);
@@ -133,9 +131,16 @@ class ProfilePage extends StatelessWidget {
                           child: SlideTransition(
                             position: _profileController.buttonAnimation,
                             child: GlobalButton(
-                              child: OptimizedText(
-                                _strings.profileSubmitBtn,
-                                fontWeight: FontWeight.bold,
+                              child: Obx(
+                                () => _profileController.pageState.value ==
+                                        ProfileState.loadingToSubmitData
+                                    ? GlobalIndicator(
+                                        color: _colors.frostedBlack,
+                                      )
+                                    : OptimizedText(
+                                        _strings.profileSubmitBtn,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                               ),
                               color: _colors.pastelCyan,
                               onPressed: () {
