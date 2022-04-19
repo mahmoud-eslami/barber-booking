@@ -1,7 +1,5 @@
 import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:barber_booking/app/core/values/dimes.dart';
-import 'package:barber_booking/app/global_widgets/global_button.dart';
-import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -67,23 +65,6 @@ class BarberProfile extends StatelessWidget {
                 ]),
               ),
             ],
-          ),
-          SlideTransition(
-            position: _profileController.slideBookButtonAnimation,
-            child: FadeTransition(
-              opacity: _profileController.fadeBookButtonAnimation,
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: GlobalButton(
-                  width: SizeConfig.widthMultiplier * 80,
-                  height: _dimens.defaultButtonHeight,
-                  child: OptimizedText("Booking"),
-                  color: _colors.pastelCyan,
-                  onPressed: () {},
-                  radius: _dimens.defaultRadius,
-                ),
-              ),
-            ),
           ),
         ],
       ),

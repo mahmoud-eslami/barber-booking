@@ -28,27 +28,12 @@ class BarberDescriptionWidget extends StatelessWidget {
             position: _profileController.slideLikeButtonAnimation,
             child: FadeTransition(
               opacity: _profileController.fadeLikeButtonAnimation,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        OptimizedText(
-                          "USA - street 2 3 4 5 ",
-                          colorOption: TextColorOptions.light,
-                          textAlign: TextAlign.start,
-                          sizeOption: TextSizeOptions.caption,
-                          maxLine: 2,
-                        ),
-                        ratingWidget(),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: SizeConfig.widthMultiplier * 2,
-                  ),
-                  likeButton(),
-                ],
+              child: OptimizedText(
+                "USA - street",
+                colorOption: TextColorOptions.light,
+                textAlign: TextAlign.start,
+                sizeOption: TextSizeOptions.button,
+                maxLine: 2,
               ),
             ),
           ),
@@ -72,21 +57,6 @@ class BarberDescriptionWidget extends StatelessWidget {
       ),
     );
   }
-
-  ratingWidget() => Row(
-        children: [
-          for (int i = 0; i < 5; i++)
-            Icon(
-              Ionicons.star,
-              color: _colors.starColor,
-              size: 12,
-            ),
-          const SizedBox(
-            width: 5,
-          ),
-          const Text("37 ratings")
-        ],
-      );
 
   likeButton() => Container(
         decoration: BoxDecoration(
