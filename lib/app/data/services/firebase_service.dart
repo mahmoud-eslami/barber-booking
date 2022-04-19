@@ -73,6 +73,8 @@ class FirebaseService {
   Future<List<AppointmentsModel>> getAppointments() async {
     List<AppointmentsModel> appointmentsList = [];
     List<Map> rawData = [];
+    List<Future> rawFutures = [];
+    List completedFutures = [];
     try {
       User? user = _auth.currentUser;
       if (user == null) throw "User not exist";
@@ -82,12 +84,20 @@ class FirebaseService {
           .collection("appointments")
           .get();
 
-      // todo : check for best practices to parse refrence
+      // add all futures to a raw list
       for (var element in appointments.docs) {
         Map data = element.data() as Map;
+        rawFutures.add(getSnapShotFromRefrence(data["barberShop"]));
+      }
+
+      // get list of completed futures
+      completedFutures.addAll(await Future.wait(rawFutures));
+
+      for (var i = 0; i < appointments.docs.length; i++) {
+        Map data = appointments.docs[i].data() as Map;
         rawData.add({
           "appointmentTime": data["appointmentTime"],
-          "barberShop": await getSnapShotFromRefrence(data["barberShop"]),
+          "barberShop": completedFutures[i],
         });
       }
 
