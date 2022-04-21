@@ -34,15 +34,17 @@ class NewsPage extends StatelessWidget {
       body: ParentWidget(
         child: Obx(
           () {
-            bool isLoading =
-                (_newsController.pageState.value == NewsState.loadingStories ||
-                    _newsController.pageState.value ==
-                        NewsState.loadingBarberShops);
+            bool isLoading = (_newsController.pageState.value ==
+                    NewsState.loadingStories ||
+                _newsController.pageState.value ==
+                    NewsState.loadingBarberShops ||
+                _newsController.pageState.value == NewsState.getPostsLoading);
 
             bool hasError = (_newsController.pageState.value ==
                     NewsState.getStoriesFailed ||
                 _newsController.pageState.value ==
-                    NewsState.getBarberShopsFailed);
+                    NewsState.getBarberShopsFailed ||
+                _newsController.pageState.value == NewsState.getPostsFailed);
             return isLoading
                 ? GlobalIndicator(
                     color: _colors.pastelCyan,

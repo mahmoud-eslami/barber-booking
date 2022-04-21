@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:barber_booking/app/data/enums/text_size_option.dart';
+import 'package:barber_booking/app/data/model/post/post.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +13,8 @@ import '../../../core/values/strings.dart';
 import '../../../routes/routes.dart';
 
 class NewsItem extends StatelessWidget {
-  NewsItem({Key? key}) : super(key: key);
+  NewsItem({Key? key, required this.item}) : super(key: key);
+  final PostModel item;
 
   final AppColors _colors = Get.find();
   final Strings _strings = Get.find();
@@ -33,8 +35,8 @@ class NewsItem extends StatelessWidget {
             child: Material(
               borderRadius: BorderRadius.circular(_dimens.defaultRadius),
               clipBehavior: Clip.hardEdge,
-              child: Image.asset(
-                "assets/images/design.png",
+              child: Image.network(
+                item.image,
                 width: SizeConfig.widthMultiplier * 90,
                 fit: BoxFit.cover,
               ),
@@ -74,7 +76,7 @@ class NewsItem extends StatelessWidget {
                           ),
                         ),
                         OptimizedText(
-                          _strings.lorem,
+                          item.title,
                           customColor: _colors.lightTxtColor,
                           textAlign: TextAlign.start,
                           maxLine: 2,
@@ -87,7 +89,7 @@ class NewsItem extends StatelessWidget {
                           ),
                         ),
                         OptimizedText(
-                          _strings.lorem,
+                          item.description,
                           customColor: _colors.lightTxtColor,
                           textAlign: TextAlign.start,
                           maxLine: 3,
@@ -107,7 +109,7 @@ class NewsItem extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   OptimizedText(
-                                    "2 min read",
+                                    "${item.timeToRead} min read",
                                     customColor: _colors.lightTxtColor,
                                     textAlign: TextAlign.start,
                                     fontWeight: FontWeight.bold,
@@ -117,7 +119,7 @@ class NewsItem extends StatelessWidget {
                                     height: 5,
                                   ),
                                   OptimizedText(
-                                    "5:12 PM",
+                                    item.releaseTime,
                                     customColor: _colors.lightTxtColor,
                                     textAlign: TextAlign.start,
                                     fontWeight: FontWeight.w300,
@@ -132,8 +134,8 @@ class NewsItem extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(
                                     _dimens.defaultRadius * .5),
                                 clipBehavior: Clip.hardEdge,
-                                child: Image.asset(
-                                  "assets/images/avatar.jpeg",
+                                child: Image.network(
+                                  item.barber.image,
                                   width: 59,
                                   height: 59,
                                 ),

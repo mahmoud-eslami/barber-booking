@@ -6,4 +6,7 @@ enum NewsState {
   loadingBarberShops,
   getBarberShopsSuccess,
   getBarberShopsFailed,
+  getPostsLoading,
+  getPostsSuccess,
+  getPostsFailed,
 }

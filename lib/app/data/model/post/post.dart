@@ -17,12 +17,12 @@ class PostModel {
     required this.barber,
   });
 
-  factory PostModel.fromJson(doc) => PostModel(
+  factory PostModel.fromJson({required doc, required barberData}) => PostModel(
         title: doc["title"],
         description: doc["description"],
         image: doc["image"],
         releaseTime: doc["releaseTime"],
         timeToRead: doc["timeToRead"],
-        barber: BarberModel.fromJson(doc["barber"]),
+        barber: BarberModel.fromJson(barberData),
       );
 }

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:barber_booking/app/data/model/appointments/appointments.dart';
 import 'package:barber_booking/app/data/model/barber/barber.dart';
 import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
+import 'package:barber_booking/app/data/model/post/post.dart';
 import 'package:barber_booking/app/data/model/story/story.dart';
 import 'package:barber_booking/app/data/model/user/user_extra_info.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -215,6 +216,35 @@ class FirebaseService {
       firebaseErrorHandler(e, s);
     }
 
+    return list;
+  }
+
+  Future<List<PostModel>> getAllPosts() async {
+    List<PostModel> list = [];
+    List<Future> rawFutures = [];
+    List completedFutures = [];
+    try {
+      QuerySnapshot posts = await _firestore.collection('posts').get();
+
+      // add refrence to raw list
+      for (var element in posts.docs) {
+        Map data = element.data() as Map;
+        rawFutures.add(getSnapShotFromRefrence(data["barber"]));
+      }
+
+      completedFutures.addAll(await Future.wait(rawFutures));
+
+      for (var i = 0; i < posts.docs.length; i++) {
+        list.add(
+          PostModel.fromJson(
+            doc: posts.docs[i],
+            barberData: completedFutures[i],
+          ),
+        );
+      }
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+    }
     return list;
   }
 
