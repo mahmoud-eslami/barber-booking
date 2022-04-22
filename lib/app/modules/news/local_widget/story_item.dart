@@ -1,4 +1,5 @@
 import 'package:barber_booking/app/data/model/story/story.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -56,7 +57,7 @@ class StoryItem extends StatelessWidget {
               _dimens.defaultRadius * .4,
             ),
             clipBehavior: Clip.hardEdge,
-            child: Image.network(
+            child: ExtendedImage.network(
               item.thumbnail,
               fit: BoxFit.cover,
             ),

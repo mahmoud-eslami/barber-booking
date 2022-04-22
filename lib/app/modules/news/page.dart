@@ -107,9 +107,9 @@ class NewsPage extends StatelessWidget {
                           FadeTransition(
                             opacity: _newsController.trendLineFadeAnimation,
                             child: SlideTransition(
-                                position:
-                                    _newsController.trendLineSlideAnimation,
-                                child: TrendsLine()),
+                              position: _newsController.trendLineSlideAnimation,
+                              child: TrendsLine(),
+                            ),
                           ),
                         ],
                       );

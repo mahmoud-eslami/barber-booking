@@ -4,6 +4,7 @@ import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:barber_booking/app/data/enums/text_size_option.dart';
 import 'package:barber_booking/app/data/model/post/post.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +25,7 @@ class NewsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed(_routes.newsDetails),
+      onTap: () => Get.toNamed(_routes.newsDetails, arguments: item),
       child: Stack(
         children: [
           Container(
@@ -35,7 +36,7 @@ class NewsItem extends StatelessWidget {
             child: Material(
               borderRadius: BorderRadius.circular(_dimens.defaultRadius),
               clipBehavior: Clip.hardEdge,
-              child: Image.network(
+              child: ExtendedImage.network(
                 item.image,
                 width: SizeConfig.widthMultiplier * 90,
                 fit: BoxFit.cover,
@@ -129,12 +130,16 @@ class NewsItem extends StatelessWidget {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () => Get.toNamed(_routes.barberProfile),
+                              onTap: () => Get.toNamed(
+                                _routes.barberProfile,
+                                arguments: item.barber,
+                              ),
                               child: Material(
                                 borderRadius: BorderRadius.circular(
-                                    _dimens.defaultRadius * .5),
+                                  _dimens.defaultRadius * .5,
+                                ),
                                 clipBehavior: Clip.hardEdge,
-                                child: Image.network(
+                                child: ExtendedImage.network(
                                   item.barber.image,
                                   width: 59,
                                   height: 59,

@@ -1,3 +1,4 @@
+import 'package:barber_booking/app/data/model/barber/barber.dart';
 import 'package:barber_booking/app/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,9 @@ import '../../../global_widgets/optimized_text.dart';
 import '../controller.dart';
 
 class BarberDescriptionWidget extends StatelessWidget {
-  BarberDescriptionWidget({Key? key}) : super(key: key);
+  BarberDescriptionWidget({Key? key, required this.barber}) : super(key: key);
+
+  final BarberModel barber;
 
   final AppColors _colors = Get.find();
   final Strings _strings = Get.find();
@@ -29,7 +32,7 @@ class BarberDescriptionWidget extends StatelessWidget {
             child: FadeTransition(
               opacity: _profileController.fadeLikeButtonAnimation,
               child: OptimizedText(
-                "USA - street",
+                barber.location,
                 colorOption: TextColorOptions.light,
                 textAlign: TextAlign.start,
                 sizeOption: TextSizeOptions.button,
@@ -43,7 +46,7 @@ class BarberDescriptionWidget extends StatelessWidget {
             child: FadeTransition(
               opacity: _profileController.fadeDescriptionAnimation,
               child: OptimizedText(
-                _strings.lorem,
+                barber.description,
                 colorOption: TextColorOptions.light,
                 maxLine: 100,
                 textAlign: TextAlign.justify,
