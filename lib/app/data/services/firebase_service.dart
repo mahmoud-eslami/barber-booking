@@ -179,9 +179,18 @@ class FirebaseService {
       if (user == null) {
         throw "Please first login";
       } else {
-        return _firestore.collection("story").doc(storyId).update({
-          "likes": FieldValue.arrayUnion([user.uid])
-        }).then((value) => true);
+        DocumentSnapshot storyData =
+            await _firestore.collection("story").doc(storyId).get();
+        List likes = storyData["likes"];
+        if (likes.contains(user.uid)) {
+          await _firestore.collection("story").doc(storyId).update({
+            "likes": FieldValue.arrayRemove([user.uid])
+          }).then((value) => true);
+        } else {
+          await _firestore.collection("story").doc(storyId).update({
+            "likes": FieldValue.arrayUnion([user.uid])
+          }).then((value) => true);
+        }
       }
     } catch (e, s) {
       firebaseErrorHandler(e, s);

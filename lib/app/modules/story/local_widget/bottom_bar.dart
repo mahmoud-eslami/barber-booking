@@ -54,10 +54,19 @@ class BottomBar extends StatelessWidget {
                     child: Row(
                       children: [
                         IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Ionicons.heart_outline,
-                            size: _dimens.defaultIconSize * 1.2,
+                          onPressed: () {
+                            _storyController.likeStory();
+                          },
+                          icon: Obx(
+                            () => Icon(
+                              _storyController.storyLiked.value
+                                  ? Ionicons.heart
+                                  : Ionicons.heart_outline,
+                              color: _storyController.storyLiked.value
+                                  ? _colors.likedHearth
+                                  : null,
+                              size: _dimens.defaultIconSize * 1.2,
+                            ),
                           ),
                         ),
                         SizedBox(
