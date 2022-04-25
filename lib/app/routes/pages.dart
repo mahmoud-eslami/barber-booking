@@ -32,7 +32,11 @@ class Pages {
         item: Get.arguments,
       ),
     ),
-    GetPage(name: _routes.barberProfile, page: () => BarberProfile()),
+    GetPage(
+        name: _routes.barberProfile,
+        page: () => BarberProfile(
+              barber: Get.arguments,
+            )),
     GetPage(
       name: _routes.barberShopProfile,
       page: () => BarberShopProfile(
@@ -41,7 +45,10 @@ class Pages {
     ),
     GetPage(name: _routes.addStory, page: () => AddStory()),
     GetPage(name: _routes.nearestBarberShop, page: () => NearestBarberShop()),
-    GetPage(name: _routes.newsDetails, page: () => NewsDetailsPage()),
+    GetPage(
+      name: _routes.newsDetails,
+      page: () => NewsDetailsPage(item: Get.arguments),
+    ),
     GetPage(name: _routes.appointments, page: () => AppointmentsPage()),
   ];
 }

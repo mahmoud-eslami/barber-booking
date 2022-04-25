@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
+import 'package:barber_booking/app/data/model/post/post.dart';
 import 'package:barber_booking/app/data/model/story/story.dart';
 import 'package:barber_booking/app/data/services/firebase_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
@@ -14,6 +15,7 @@ class NewsController extends GetxController with GetTickerProviderStateMixin {
   RxList<StoryModel> storiesList = <StoryModel>[].obs;
   RxList<BarberShopModel> barberShopsList = <BarberShopModel>[].obs;
   Rx<NewsState> pageState = NewsState.init.obs;
+  RxList<PostModel> postsList = <PostModel>[].obs;
 
   late AnimationController animationController;
   late Animation<double> storyLineFadeAnimation;
@@ -40,6 +42,19 @@ class NewsController extends GetxController with GetTickerProviderStateMixin {
     }
   }
 
+  Future getAllPosts() async {
+    try {
+      pageState(NewsState.getPostsLoading);
+      List<PostModel> posts = await _firebaseService.getAllPosts();
+      postsList.addAll(posts);
+      pageState(NewsState.getPostsSuccess);
+    } catch (e) {
+      pageState(NewsState.getPostsFailed);
+
+      globalSnackbar(content: e.toString());
+    }
+  }
+
   Future getAllBarberShops() async {
     try {
       pageState(NewsState.loadingBarberShops);
@@ -59,7 +74,9 @@ class NewsController extends GetxController with GetTickerProviderStateMixin {
     clearAllListForInitialize();
     getAllStories().then(
       (value) => getAllBarberShops().then(
-        (value) => initializeAnimations(),
+        (value) => getAllPosts().then(
+          (value) => initializeAnimations(),
+        ),
       ),
     );
     super.onInit();

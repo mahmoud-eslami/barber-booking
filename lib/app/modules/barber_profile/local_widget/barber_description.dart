@@ -1,3 +1,4 @@
+import 'package:barber_booking/app/data/model/barber/barber.dart';
 import 'package:barber_booking/app/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +11,9 @@ import '../../../global_widgets/optimized_text.dart';
 import '../controller.dart';
 
 class BarberDescriptionWidget extends StatelessWidget {
-  BarberDescriptionWidget({Key? key}) : super(key: key);
+  BarberDescriptionWidget({Key? key, required this.barber}) : super(key: key);
+
+  final BarberModel barber;
 
   final AppColors _colors = Get.find();
   final Strings _strings = Get.find();
@@ -28,27 +31,12 @@ class BarberDescriptionWidget extends StatelessWidget {
             position: _profileController.slideLikeButtonAnimation,
             child: FadeTransition(
               opacity: _profileController.fadeLikeButtonAnimation,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        OptimizedText(
-                          "USA - street 2 3 4 5 ",
-                          colorOption: TextColorOptions.light,
-                          textAlign: TextAlign.start,
-                          sizeOption: TextSizeOptions.caption,
-                          maxLine: 2,
-                        ),
-                        ratingWidget(),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: SizeConfig.widthMultiplier * 2,
-                  ),
-                  likeButton(),
-                ],
+              child: OptimizedText(
+                barber.location,
+                colorOption: TextColorOptions.light,
+                textAlign: TextAlign.start,
+                sizeOption: TextSizeOptions.button,
+                maxLine: 2,
               ),
             ),
           ),
@@ -58,7 +46,7 @@ class BarberDescriptionWidget extends StatelessWidget {
             child: FadeTransition(
               opacity: _profileController.fadeDescriptionAnimation,
               child: OptimizedText(
-                _strings.lorem,
+                barber.description,
                 colorOption: TextColorOptions.light,
                 maxLine: 100,
                 textAlign: TextAlign.justify,
@@ -72,21 +60,6 @@ class BarberDescriptionWidget extends StatelessWidget {
       ),
     );
   }
-
-  ratingWidget() => Row(
-        children: [
-          for (int i = 0; i < 5; i++)
-            Icon(
-              Ionicons.star,
-              color: _colors.starColor,
-              size: 12,
-            ),
-          const SizedBox(
-            width: 5,
-          ),
-          const Text("37 ratings")
-        ],
-      );
 
   likeButton() => Container(
         decoration: BoxDecoration(

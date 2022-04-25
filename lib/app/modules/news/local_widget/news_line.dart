@@ -1,4 +1,5 @@
 import 'package:barber_booking/app/core/utils/size_config_helper.dart';
+import 'package:barber_booking/app/modules/news/controller.dart';
 import 'package:barber_booking/app/modules/news/local_widget/news_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ class NewsLine extends StatelessWidget {
   final Strings _strings = Get.find();
   final Routes _routes = Get.find();
   final Dimens _dimens = Get.find();
+  final NewsController _newsController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +30,10 @@ class NewsLine extends StatelessWidget {
           left: _dimens.defaultPadding * 2,
         ),
         scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        itemBuilder: (context, index) => NewsItem(),
+        itemCount: _newsController.postsList.length,
+        itemBuilder: (context, index) => NewsItem(
+          item: _newsController.postsList[index],
+        ),
       ),
     );
   }

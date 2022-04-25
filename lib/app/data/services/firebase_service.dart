@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:barber_booking/app/data/model/appointments/appointments.dart';
 import 'package:barber_booking/app/data/model/barber/barber.dart';
 import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
+import 'package:barber_booking/app/data/model/post/post.dart';
 import 'package:barber_booking/app/data/model/story/story.dart';
 import 'package:barber_booking/app/data/model/user/user_extra_info.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -73,6 +74,8 @@ class FirebaseService {
   Future<List<AppointmentsModel>> getAppointments() async {
     List<AppointmentsModel> appointmentsList = [];
     List<Map> rawData = [];
+    List<Future> rawFutures = [];
+    List completedFutures = [];
     try {
       User? user = _auth.currentUser;
       if (user == null) throw "User not exist";
@@ -82,12 +85,20 @@ class FirebaseService {
           .collection("appointments")
           .get();
 
-      // todo : check for best practices to parse refrence
+      // add all futures to a raw list
       for (var element in appointments.docs) {
         Map data = element.data() as Map;
+        rawFutures.add(getSnapShotFromRefrence(data["barberShop"]));
+      }
+
+      // get list of completed futures
+      completedFutures.addAll(await Future.wait(rawFutures));
+
+      for (var i = 0; i < appointments.docs.length; i++) {
+        Map data = appointments.docs[i].data() as Map;
         rawData.add({
           "appointmentTime": data["appointmentTime"],
-          "barberShop": await getSnapShotFromRefrence(data["barberShop"]),
+          "barberShop": completedFutures[i],
         });
       }
 
@@ -168,9 +179,18 @@ class FirebaseService {
       if (user == null) {
         throw "Please first login";
       } else {
-        return _firestore.collection("story").doc(storyId).update({
-          "likes": FieldValue.arrayUnion([user.uid])
-        }).then((value) => true);
+        DocumentSnapshot storyData =
+            await _firestore.collection("story").doc(storyId).get();
+        List likes = storyData["likes"];
+        if (likes.contains(user.uid)) {
+          await _firestore.collection("story").doc(storyId).update({
+            "likes": FieldValue.arrayRemove([user.uid])
+          }).then((value) => true);
+        } else {
+          await _firestore.collection("story").doc(storyId).update({
+            "likes": FieldValue.arrayUnion([user.uid])
+          }).then((value) => true);
+        }
       }
     } catch (e, s) {
       firebaseErrorHandler(e, s);
@@ -205,6 +225,35 @@ class FirebaseService {
       firebaseErrorHandler(e, s);
     }
 
+    return list;
+  }
+
+  Future<List<PostModel>> getAllPosts() async {
+    List<PostModel> list = [];
+    List<Future> rawFutures = [];
+    List completedFutures = [];
+    try {
+      QuerySnapshot posts = await _firestore.collection('posts').get();
+
+      // add refrence to raw list
+      for (var element in posts.docs) {
+        Map data = element.data() as Map;
+        rawFutures.add(getSnapShotFromRefrence(data["barber"]));
+      }
+
+      completedFutures.addAll(await Future.wait(rawFutures));
+
+      for (var i = 0; i < posts.docs.length; i++) {
+        list.add(
+          PostModel.fromJson(
+            doc: posts.docs[i],
+            barberData: completedFutures[i],
+          ),
+        );
+      }
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+    }
     return list;
   }
 

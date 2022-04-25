@@ -1,11 +1,17 @@
+import 'package:barber_booking/app/core/utils/size_config_helper.dart';
 import 'package:barber_booking/app/exports.dart';
 import 'package:barber_booking/app/modules/news_details/controller.dart';
 import 'package:barber_booking/app/modules/news_details/local_widget/news_details_description.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../data/model/post/post.dart';
+
 class NewsDetailsPage extends StatelessWidget {
-  NewsDetailsPage({Key? key}) : super(key: key);
+  NewsDetailsPage({Key? key, required this.item}) : super(key: key);
+
+  final PostModel item;
 
   final AppColors _colors = Get.find();
   final Strings _strings = Get.find();
@@ -26,9 +32,10 @@ class NewsDetailsPage extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               background: Stack(
                 children: [
-                  Image.asset(
-                    'assets/images/design.png',
-                    fit: BoxFit.fill,
+                  ExtendedImage.network(
+                    item.image,
+                    fit: BoxFit.cover,
+                    width: SizeConfig.widthMultiplier * 100,
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -48,7 +55,7 @@ class NewsDetailsPage extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildListDelegate([
-              NewsDetailsDescription(),
+              NewsDetailsDescription(item: item),
             ]),
           ),
         ],

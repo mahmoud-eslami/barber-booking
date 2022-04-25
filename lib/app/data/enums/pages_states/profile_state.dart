@@ -4,4 +4,6 @@ enum ProfileState {
   dataFetchedSuccess,
   dataFetchedFailed,
   loadingToSubmitData,
+  submitDataSuccess,
+  submitDataFailed,
 }
