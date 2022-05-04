@@ -62,26 +62,30 @@ class FirebaseService {
     }
   }
 
-  Future submitNewBooking(String barberId) async {
-    User? user = _auth.currentUser;
-    if (user == null) throw "User not exist";
-    DocumentSnapshot barber =
-        await _firestore.collection("barber").doc(barberId).get();
-    var docId = DateTime.now().toIso8601String();
-    _firestore
-        .collection("users")
-        .doc(user.uid)
-        .collection("appointments")
-        .doc(docId)
-        .set({
-      "barberShop": barber,
-      "appointmentTime": DateTime.now().toString(),
-      "id": docId,
-    }).then((value) {
-      print("appointment created");
-    }).catchError((e) {
-      throw e;
-    });
+  Future submitNewBooking(String barberShopId) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) throw "User not exist";
+      DocumentReference barber =
+          _firestore.collection("barbershops").doc(barberShopId);
+      String docId = DateTime.now().toIso8601String();
+      _firestore
+          .collection("users")
+          .doc(user.uid)
+          .collection("appointments")
+          .doc(docId)
+          .set({
+        "barberShop": barber,
+        "appointmentTime": "${DateTime.now().hour}:${DateTime.now().minute}",
+        "id": docId,
+      }).then((value) {
+        print("appointment created");
+      }).catchError((e) {
+        throw e;
+      });
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+    }
   }
 
   Future cancelBooking(String appointmentId) async {
