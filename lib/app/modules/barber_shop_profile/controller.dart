@@ -4,11 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../data/model/barber_shop/barber_shop.dart';
+import '../../exports.dart';
 
 class BarberShopProfileController extends GetxController
     with GetTickerProviderStateMixin {
   final BarberShopModel _barberShopItemModel = Get.arguments;
   final FirebaseService _firebaseService = Get.find();
+  final Routes _routes = Get.find();
 
   late AnimationController animationController;
 
@@ -34,6 +36,19 @@ class BarberShopProfileController extends GetxController
   void onClose() {
     animationController.dispose();
     super.onClose();
+  }
+
+  void submitAppointment(barberShopId) async {
+    try {
+      _firebaseService
+          .submitNewBooking(barberShopId)
+          .then((value) => Get.toNamed(_routes.announce, arguments: false))
+          .catchError((e) {
+        globalSnackbar(content: e.toString());
+      });
+    } catch (e, s) {
+      globalSnackbar(content: e.toString());
+    }
   }
 
   void getBarberShopStatus() async => likeStatus(await _firebaseService

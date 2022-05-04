@@ -1,3 +1,4 @@
+import 'package:barber_booking/app/modules/announce/page.dart';
 import 'package:barber_booking/app/modules/appointments/page.dart';
 import 'package:barber_booking/app/modules/barber_profile/page.dart';
 import 'package:barber_booking/app/modules/barber_shop_profile/page.dart';
@@ -50,5 +51,11 @@ class Pages {
       page: () => NewsDetailsPage(item: Get.arguments),
     ),
     GetPage(name: _routes.appointments, page: () => AppointmentsPage()),
+    GetPage(
+      name: _routes.announce,
+      page: () => AnnouncePage(
+        cancelBooking: Get.arguments,
+      ),
+    ),
   ];
 }

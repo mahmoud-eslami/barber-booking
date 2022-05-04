@@ -80,7 +80,9 @@ class BarberShopProfile extends StatelessWidget {
                   height: _dimens.defaultButtonHeight,
                   child: OptimizedText("Booking"),
                   color: _colors.pastelCyan,
-                  onPressed: () {},
+                  onPressed: () {
+                    _profileController.submitAppointment(item.id);
+                  },
                   radius: _dimens.defaultRadius,
                 ),
               ),

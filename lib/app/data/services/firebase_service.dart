@@ -7,6 +7,7 @@ import 'package:barber_booking/app/data/model/barber_shop/barber_shop.dart';
 import 'package:barber_booking/app/data/model/post/post.dart';
 import 'package:barber_booking/app/data/model/story/story.dart';
 import 'package:barber_booking/app/data/model/user/user_extra_info.dart';
+import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -61,10 +62,56 @@ class FirebaseService {
     }
   }
 
-  Future<DocumentSnapshot?> getSnapShotFromRefrence(
-      DocumentReference refrence) async {
+  Future submitNewBooking(String barberShopId) async {
     try {
-      return await refrence.get();
+      User? user = _auth.currentUser;
+      if (user == null) throw "User not exist";
+      DocumentReference barber =
+          _firestore.collection("barbershops").doc(barberShopId);
+      String docId = DateTime.now().toIso8601String();
+      _firestore
+          .collection("users")
+          .doc(user.uid)
+          .collection("appointments")
+          .doc(docId)
+          .set({
+        "barberShop": barber,
+        "appointmentTime": "${DateTime.now().hour}:${DateTime.now().minute}",
+        "id": docId,
+      }).then((value) {
+        print("appointment created");
+      }).catchError((e) {
+        throw e;
+      });
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+    }
+  }
+
+  Future cancelBooking(String appointmentId) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) throw "User not exist";
+      _firestore
+          .collection("users")
+          .doc(user.uid)
+          .collection("appointments")
+          .doc(appointmentId)
+          .delete()
+          .then((value) {
+        print("appointment canceled");
+      }).catchError((e) {
+        throw e;
+      });
+    } catch (e, s) {
+      firebaseErrorHandler(e, s);
+    }
+  }
+
+  Future<DocumentSnapshot?> getSnapShotFromReference(
+      DocumentReference reference) async {
+    try {
+      return await reference.get();
     } catch (e, s) {
       firebaseErrorHandler(e, s);
       return null;
@@ -88,7 +135,7 @@ class FirebaseService {
       // add all futures to a raw list
       for (var element in appointments.docs) {
         Map data = element.data() as Map;
-        rawFutures.add(getSnapShotFromRefrence(data["barberShop"]));
+        rawFutures.add(getSnapShotFromReference(data["barberShop"]));
       }
 
       // get list of completed futures
@@ -99,6 +146,7 @@ class FirebaseService {
         rawData.add({
           "appointmentTime": data["appointmentTime"],
           "barberShop": completedFutures[i],
+          "id": data["id"]
         });
       }
 
@@ -238,7 +286,7 @@ class FirebaseService {
       // add refrence to raw list
       for (var element in posts.docs) {
         Map data = element.data() as Map;
-        rawFutures.add(getSnapShotFromRefrence(data["barber"]));
+        rawFutures.add(getSnapShotFromReference(data["barber"]));
       }
 
       completedFutures.addAll(await Future.wait(rawFutures));
