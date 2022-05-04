@@ -4,11 +4,13 @@ import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:get/get.dart';
 
 import '../../data/enums/pages_states/appointments_state.dart';
+import '../../exports.dart';
 
 class AppointmentsController extends GetxController {
   final FirebaseService _firebaseService = Get.find();
   Rx<AppointmentsState> pageState = AppointmentsState.init.obs;
   List<AppointmentsModel> appointments = <AppointmentsModel>[].obs;
+  final Routes _routes = Get.find();
 
   void getAppointments() async {
     try {
@@ -22,6 +24,13 @@ class AppointmentsController extends GetxController {
       globalSnackbar(content: e.toString());
     }
   }
+
+  void cancelAppointments(id) async => _firebaseService
+          .cancelBooking(id)
+          .then((value) => Get.offAndToNamed(_routes.announce, arguments: true))
+          .catchError((e) {
+        globalSnackbar(content: e.toString());
+      });
 
   @override
   void onInit() {

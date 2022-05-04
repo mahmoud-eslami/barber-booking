@@ -3,6 +3,7 @@ import 'package:barber_booking/app/data/enums/text_color_option.dart';
 import 'package:barber_booking/app/data/model/appointments/appointments_item_data.dart';
 import 'package:barber_booking/app/global_widgets/global_button.dart';
 import 'package:barber_booking/app/global_widgets/optimized_text.dart';
+import 'package:barber_booking/app/modules/appointments/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
@@ -23,6 +24,7 @@ class AppointmentsItem extends StatelessWidget {
   final AppColors _colors = Get.find();
   final Routes _routes = Get.find();
   final CustomLocationService _customLocationService = Get.find();
+  final AppointmentsController _appointmentsController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +81,8 @@ class AppointmentsItem extends StatelessWidget {
                                 width: SizeConfig.widthMultiplier * 30,
                                 color: _colors.pastelCyan,
                                 onPressed: () {
-                                  // todo : delete appointment from here
-                                  Get.offAndToNamed(_routes.announce,
-                                      arguments: true);
+                                  _appointmentsController
+                                      .cancelAppointments(data.item.id);
                                 },
                                 radius: _dimens.defaultRadius),
                           ),
