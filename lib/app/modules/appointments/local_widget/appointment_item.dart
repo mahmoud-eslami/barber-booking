@@ -80,6 +80,8 @@ class AppointmentsItem extends StatelessWidget {
                                 color: _colors.pastelCyan,
                                 onPressed: () {
                                   // todo : delete appointment from here
+                                  Get.offAndToNamed(_routes.announce,
+                                      arguments: true);
                                 },
                                 radius: _dimens.defaultRadius),
                           ),
