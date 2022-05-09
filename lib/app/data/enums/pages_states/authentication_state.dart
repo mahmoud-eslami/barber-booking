@@ -4,6 +4,7 @@ enum AuthenticationState {
   loginError,
   registerLoading,
   registerError,
+  registerSuccessful,
   socialLoading,
   socialError,
   authenticated,

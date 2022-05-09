@@ -52,6 +52,13 @@ class HomeController extends GetxController {
       if (verificationState) {
         pageState(HomeState.userVerified);
       } else {
+        _firebaseService.sendVerificationEmail().then((value) {
+          globalSnackbar(
+            content: _strings.verificationEmailSentTitle,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        });
+
         showVerificationSnackBar();
         pageState(HomeState.userNotVerified);
       }

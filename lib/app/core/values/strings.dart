@@ -38,6 +38,9 @@ class Strings {
   String bookingCanceledTitle = "Booking canceled";
   String successEmoji = "✅";
   String cancelEmoji = "🚫";
+  String verificationEmailSentTitle = "Verification email sent successful";
+  String verificationEmailAlarmTitle =
+      "Verification email sent please verify your email and then sign in to your account.";
 
   // lorem
   String lorem =
