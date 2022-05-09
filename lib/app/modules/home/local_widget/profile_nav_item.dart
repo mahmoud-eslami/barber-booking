@@ -35,6 +35,11 @@ class ProfileNavItem extends StatelessWidget {
           cache: true,
           shape: BoxShape.circle,
           handleLoadingProgress: true,
+          loadStateChanged: (ExtendedImageState state) {
+            if (state.extendedImageLoadState == LoadState.failed) {
+              return Image.asset("assets/images/user.png");
+            }
+          },
         ),
       ),
     );

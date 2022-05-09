@@ -55,7 +55,7 @@ class CustomBottomNav extends StatelessWidget {
                               HomeState.userVerified) {
                             Get.toNamed(_routes.appointments);
                           } else {
-                            _homeController.showVerificationSnackbar();
+                            _homeController.showVerificationSnackBar();
                           }
                         },
                         iconData: Ionicons.time_sharp,
@@ -66,7 +66,7 @@ class CustomBottomNav extends StatelessWidget {
                               HomeState.userVerified) {
                             Get.toNamed(_routes.newsRoute);
                           } else {
-                            _homeController.showVerificationSnackbar();
+                            _homeController.showVerificationSnackBar();
                           }
                         },
                         iconData: Ionicons.newspaper,
@@ -77,7 +77,7 @@ class CustomBottomNav extends StatelessWidget {
                               HomeState.userVerified) {
                             Get.toNamed(_routes.nearestBarberShop);
                           } else {
-                            _homeController.showVerificationSnackbar();
+                            _homeController.showVerificationSnackBar();
                           }
                         },
                         iconData: Ionicons.navigate,

@@ -52,7 +52,7 @@ class HomeController extends GetxController {
       if (verificationState) {
         pageState(HomeState.userVerified);
       } else {
-        showVerificationSnackbar();
+        showVerificationSnackBar();
         pageState(HomeState.userNotVerified);
       }
     } catch (e) {
@@ -61,7 +61,7 @@ class HomeController extends GetxController {
     }
   }
 
-  showVerificationSnackbar() {
+  showVerificationSnackBar() {
     if (!Get.isSnackbarOpen) {
       globalSnackbar(
         content:
@@ -133,6 +133,7 @@ class HomeController extends GetxController {
       await createFakeBarberShopNearUser();
       getLocationLoading(false);
     } catch (e, s) {
+      getLocationLoading(false);
       print(e);
       print(s);
     }
