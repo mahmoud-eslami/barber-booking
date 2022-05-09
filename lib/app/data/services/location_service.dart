@@ -19,7 +19,8 @@ class CustomLocationService extends GetxController {
     super.onClose();
   }
 
-  init() {
+  init() async {
+    determinePosition();
     const LocationSettings locationSettings = LocationSettings(
       accuracy: LocationAccuracy.high,
       distanceFilter: 100,

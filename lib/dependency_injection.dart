@@ -21,14 +21,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
-
 import 'app/core/values/strings.dart';
 import 'app/data/services/location_service.dart';
 import 'app/modules/barber_profile/controller.dart';
 
 class DependencyInjection {
   static injectFirebase() async {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+        // options: DefaultFirebaseOptions.currentPlatform,
+        );
   }
 
   static void injector() {
