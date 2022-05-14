@@ -1,16 +1,82 @@
-# barber_booking
+# 🔥🔥 Barber-shop booking 💇🏻‍♂️💇🏻
 
-A new Flutter project.
 
-## Getting Started
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/MOCKUP-1.png?token=GHSAT0AAAAAABSXJHQUIWTMXIFO35W4BDG4YT7A2BA" width="500"> <img src="https://github.com/mahmoud-eslami/barber_booking/blob/master/screen_shots/MOCKUP-2.png" width="500">
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Project / Folder structure :
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```yaml
+- /app  
+# This is where all the application's directories will be contained  
+    - /data
+        - /enums 
+        - /services
+             # Here our repositories are just classes that will mediate the communication between our controller and our data.
+             # Our controllers won't need to know where the data comes from, and you can use more than one repository on a controller if you need to.
+        - /model
+        # Our classes, or data models responsible for abstracting our objects.
+            - model.dart
+    - /modules
+        - /my_module
+            - page.dart
+            - controller.dart
+	    - local_widget/
+	# Here we create all local widget's of specefic pages
+
+    - /global_widgets 
+    # Widgets that can be reused by multiple **modules**.  
+
+    - /routes
+        - routes.dart
+        # class Routes { const HOME = '/ home'; }  
+        - pages.dart
+        # class AppPages { static final pages = [  
+        #  GetPage(name: Routes.HOME, page:()=> HomePage()) 
+        # ]};  
+    - /core
+        - /values
+	# Here we store all colors / strings and dimens
+        - /theme
+        # Here we can create themes for our app
+        - /utils
+        # Here you can insert utilities for your application, such as masks, form keys or widgets
+	- exports.dart
+	#Export all required file into one file (like material.dart :D)
+- dependency_injection.dart
+# inject all required dependencies in this file
+
+- main.dart  
+# main file
+```
+
+---
+
+## Packages :
+ #### state management :
+- get: `^4.6.1`
+ #### icon :
+- cupertino_icons: `^1.0.2`
+- ionicons: `^0.1.2`
+ #### firebase :
+ - firebase_auth: `^3.3.11`
+ - firebase_core: `^1.13.1`
+ - google_sign_in: `^5.2.4`
+ - cloud_firestore: `^3.1.10`
+ #### utils :
+- dartz: `^0.10.1`
+- intl: `^0.17.0`
+ - camera: `^0.9.4+16`
+ #### navigation system :
+- get: `^4.6.1`
+ #### responsive :
+- auto_size_text: `^3.0.0`
+ #### cache :
+ - extended_image: `^6.0.2+1`
+ #### location / map :
+- flutter_map: `^0.14.0`
+ - geolocator: `^8.2.0`
+
+
