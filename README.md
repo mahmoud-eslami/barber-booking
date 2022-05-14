@@ -6,6 +6,51 @@ This is a barber-shop booking platform . `Firebase 💛` as Backend service and 
 
 
 ---
+## Firebase Firestore Structure :
+```
+barber 💇🏻‍♂️ ---
+	---
+	- description [String]
+	- image [String]
+	- location [String]
+	- name [String]
+barbershops 🏠 ---
+	---
+	- description [String]
+	- endWorkTime [String]
+	- id [String][documentId]
+	- image [String]
+	- lat [String]
+	- long [String]
+	- startWorkTime [String]
+	- subTitle [String]
+	- tags [List<String>]
+	- title [String]
+posts 🌁 ---
+	---
+	- description [String]
+	- image [String]
+	- releaseTime [String]
+	- timeToRead [String]
+	- title [String]
+	- barber [barber document refrence]
+story 🌃 ---
+	---
+	- comments [List<String>]
+	- image [String]
+	- id [String][documentId]
+	- likes [List<String>]
+	- seens [List<String>]
+	- thumbnail [String]
+users 🙋🏻‍♀️🙋🏻‍♂️ ---
+	---
+	- age [int]
+	- gender [int]
+	--- appointments ---
+			- appointmentTime [String]
+			- barberShop [barber shop document refrence]
+			- id [String][documentId]
+```
 
 ## Project / Folder structure :
 
