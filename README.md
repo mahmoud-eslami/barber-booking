@@ -54,7 +54,7 @@ users 🙋🏻‍♀️🙋🏻‍♂️ ---
 
 ## Project / Folder structure :
 
-```yaml
+```python
 - /app  
 # This is where all the application's directories will be contained  
     - /data
