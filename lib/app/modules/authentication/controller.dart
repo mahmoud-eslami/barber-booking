@@ -27,6 +27,7 @@ class AuthenticationController extends GetxController
   late Animation<Offset> loginBtnSlideAnimation;
   late Animation<Offset> termsSlideAnimation;
   late AnimationController fadeAnimationController;
+
   // animations variables
 
   late TextEditingController emailController;
@@ -89,7 +90,10 @@ class AuthenticationController extends GetxController
           await _firebaseService.registerUser(email: email, password: password);
 
       if (userCredential != null) {
-        Get.offAndToNamed(_routes.homeRoute);
+        await _firebaseService.sendVerificationEmail();
+        Get.back();
+        globalSnackbar(content: _strings.verificationEmailAlarmTitle);
+        pageState(AuthenticationState.registerSuccessful);
       } else {
         pageState(AuthenticationState.registerError);
       }
