@@ -1,5 +1,6 @@
 # 🔥🔥 Barber-shop booking 💇🏻‍♂️💇🏻
 
+This is a barber-shop booking platform . `Firebase 💛` as Backend service and `Flutter 💙` used as client technology.
 
 <img src="https://github.com/mahmoud-eslami/barber_booking/blob/master/screen_shots/MOCKUP-1.png" width="400"> <img src="https://github.com/mahmoud-eslami/barber_booking/blob/master/screen_shots/MOCKUP-2.png" width="400">
 
@@ -78,6 +79,13 @@
  #### location / map :
 - flutter_map: `^0.14.0`
  - geolocator: `^8.2.0`
+
+----
+## Next changes : 
+
+☑️ Add Firestore structure to the document
+
+☑️ Add ability to add comment for each story
 
 ----
 # Thanks for all supports 🙏🏻
