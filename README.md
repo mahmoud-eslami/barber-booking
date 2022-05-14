@@ -1,7 +1,7 @@
 # 🔥🔥 Barber-shop booking 💇🏻‍♂️💇🏻
 
 
-<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/MOCKUP-1.png?token=GHSAT0AAAAAABSXJHQUIWTMXIFO35W4BDG4YT7A2BA" width="500"> <img src="https://github.com/mahmoud-eslami/barber_booking/blob/master/screen_shots/MOCKUP-2.png" width="500">
+<img src="https://github.com/mahmoud-eslami/barber_booking/blob/master/screen_shots/MOCKUP-1.png" width="500"> <img src="https://github.com/mahmoud-eslami/barber_booking/blob/master/screen_shots/MOCKUP-2.png" width="500">
 
 
 ---
