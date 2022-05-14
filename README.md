@@ -79,4 +79,6 @@
 - flutter_map: `^0.14.0`
  - geolocator: `^8.2.0`
 
+----
+# Thanks for all supports 🙏🏻
 
