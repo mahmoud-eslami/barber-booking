@@ -98,33 +98,6 @@ users 🙋🏻‍♀️🙋🏻‍♂️ ---
 # main file
 ```
 
----
-
-## Packages :
- #### state management :
-- get: `^4.6.1`
- #### icon :
-- cupertino_icons: `^1.0.2`
-- ionicons: `^0.1.2`
- #### firebase :
- - firebase_auth: `^3.3.11`
- - firebase_core: `^1.13.1`
- - google_sign_in: `^5.2.4`
- - cloud_firestore: `^3.1.10`
- #### utils :
-- dartz: `^0.10.1`
-- intl: `^0.17.0`
- - camera: `^0.9.4+16`
- #### navigation system :
-- get: `^4.6.1`
- #### responsive :
-- auto_size_text: `^3.0.0`
- #### cache :
- - extended_image: `^6.0.2+1`
- #### location / map :
-- flutter_map: `^0.14.0`
- - geolocator: `^8.2.0`
-
 ----
 ## Next changes : 
 
