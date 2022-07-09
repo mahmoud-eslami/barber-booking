@@ -56,7 +56,12 @@ class AuthenticationController extends GetxController
           await _firebaseService.loginUser(email: email, password: password);
 
       if (userCredential != null) {
-        Get.offAndToNamed(_routes.homeRoute);
+        if (userCredential.user!.emailVerified) {
+          Get.offAndToNamed(_routes.homeRoute);
+        } else {
+          pageState(AuthenticationState.loginError);
+          globalSnackbar(content: "Please verify email!");
+        }
       } else {
         pageState(AuthenticationState.loginError);
       }

@@ -37,6 +37,13 @@
             {
               "client_id": "1066886691623-mfn0rk9r5pq6ibe62vr5auf1npjg0oi7.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1066886691623-f9uo4lurpf8vfrfk9k461qhakdpashjb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mahmoud.barberBooking"
+              }
             }
           ]
         }

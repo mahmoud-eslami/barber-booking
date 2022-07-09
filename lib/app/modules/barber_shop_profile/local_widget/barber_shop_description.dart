@@ -49,7 +49,7 @@ class BarberShopDescriptionWidget extends StatelessWidget {
                   SizedBox(
                     width: SizeConfig.widthMultiplier * 2,
                   ),
-                  likeButton(),
+                  // likeButton(),
                 ],
               ),
             ),

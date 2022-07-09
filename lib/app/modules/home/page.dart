@@ -31,6 +31,7 @@ class HomePage extends StatelessWidget {
               if (_homeController.getLocationLoading.value) {
                 return const GlobalIndicator();
               }
+
               return FlutterMap(
                 mapController: _homeController.mapController,
                 options: MapOptions(
