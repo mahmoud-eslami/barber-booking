@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
+late Position userPosition;
+
 class CustomLocationService extends GetxController {
-  late Position userPosition;
   late StreamSubscription<Position> positionStream;
 
   @override
@@ -13,14 +14,8 @@ class CustomLocationService extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onClose() {
-    positionStream.cancel();
-    super.onClose();
-  }
-
   init() async {
-    determinePosition();
+    userPosition = await determinePosition();
     const LocationSettings locationSettings = LocationSettings(
       accuracy: LocationAccuracy.high,
       distanceFilter: 100,
@@ -34,7 +29,7 @@ class CustomLocationService extends GetxController {
     });
   }
 
-  Future<Position> determinePosition() async {
+  static Future<Position> determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
     serviceEnabled = await Geolocator.isLocationServiceEnabled();

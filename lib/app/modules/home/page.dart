@@ -36,8 +36,8 @@ class HomePage extends StatelessWidget {
                 mapController: _homeController.mapController,
                 options: MapOptions(
                   center: LatLng(
-                    _customLocationService.userPosition.latitude,
-                    _customLocationService.userPosition.longitude,
+                    userPosition.latitude,
+                    userPosition.longitude,
                   ),
                   zoom: 13.0,
                 ),

@@ -1,4 +1,5 @@
 import 'package:barber_booking/app/data/services/firebase_service.dart';
+import 'package:barber_booking/app/data/services/location_service.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -52,19 +53,25 @@ class AuthenticationController extends GetxController
   void login(String email, String password) async {
     try {
       pageState(AuthenticationState.loginLoading);
-      UserCredential? userCredential =
-          await _firebaseService.loginUser(email: email, password: password);
 
-      if (userCredential != null) {
-        if (userCredential.user!.emailVerified) {
-          Get.offAndToNamed(_routes.homeRoute);
+      CustomLocationService.determinePosition().then((value) async {
+        UserCredential? userCredential =
+            await _firebaseService.loginUser(email: email, password: password);
+
+        if (userCredential != null) {
+          if (userCredential.user!.emailVerified) {
+            Get.offAndToNamed(_routes.homeRoute);
+          } else {
+            pageState(AuthenticationState.loginError);
+            globalSnackbar(content: "Please verify email!");
+          }
         } else {
           pageState(AuthenticationState.loginError);
-          globalSnackbar(content: "Please verify email!");
         }
-      } else {
+      }).catchError((e) {
+        globalSnackbar(content: e.toString());
         pageState(AuthenticationState.loginError);
-      }
+      });
     } catch (e) {
       globalSnackbar(content: e.toString());
       pageState(AuthenticationState.loginError);

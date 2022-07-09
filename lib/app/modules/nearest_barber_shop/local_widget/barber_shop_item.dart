@@ -196,8 +196,8 @@ class BarberShopItem extends StatelessWidget {
             distanceBetweenTwoPoints(
               lat1: item.lat,
               lon1: item.long,
-              myLat: _customLocationService.userPosition.latitude,
-              mylon: _customLocationService.userPosition.longitude,
+              myLat: userPosition.latitude,
+              mylon: userPosition.longitude,
             ),
           ),
         ],

@@ -134,8 +134,8 @@ class AppointmentsItem extends StatelessWidget {
           ),
           Text(
             distanceBetweenTwoPoints(
-                myLat: _customLocationService.userPosition.latitude,
-                mylon: _customLocationService.userPosition.longitude,
+                myLat: userPosition.latitude,
+                mylon: userPosition.longitude,
                 lat1: data.item.barberShopModel.lat,
                 lon1: data.item.barberShopModel.long),
           ),
