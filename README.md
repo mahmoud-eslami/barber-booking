@@ -1,14 +1,60 @@
 # 🔥🔥 Barber-shop booking 💇🏻‍♂️💇🏻
 
+This is a barber-shop booking platform . `Firebase 💛` as Backend service and `Flutter 💙` used as client technology.
 
 <img src="https://github.com/mahmoud-eslami/barber_booking/blob/master/screen_shots/MOCKUP-1.png" width="400"> <img src="https://github.com/mahmoud-eslami/barber_booking/blob/master/screen_shots/MOCKUP-2.png" width="400">
 
 
 ---
+## Firebase Firestore Structure :
+```
+barber 💇🏻‍♂️ ---
+	---
+	- description [String]
+	- image [String]
+	- location [String]
+	- name [String]
+barbershops 🏠 ---
+	---
+	- description [String]
+	- endWorkTime [String]
+	- id [String][documentId]
+	- image [String]
+	- lat [String]
+	- long [String]
+	- startWorkTime [String]
+	- subTitle [String]
+	- tags [List<String>]
+	- title [String]
+posts 🌁 ---
+	---
+	- description [String]
+	- image [String]
+	- releaseTime [String]
+	- timeToRead [String]
+	- title [String]
+	- barber [barber document refrence]
+story 🌃 ---
+	---
+	- comments [List<String>]
+	- image [String]
+	- id [String][documentId]
+	- likes [List<String>]
+	- seens [List<String>]
+	- thumbnail [String]
+users 🙋🏻‍♀️🙋🏻‍♂️ ---
+	---
+	- age [int]
+	- gender [int]
+	--- appointments ---
+			- appointmentTime [String]
+			- barberShop [barber shop document refrence]
+			- id [String][documentId]
+```
 
 ## Project / Folder structure :
 
-```yaml
+```python
 - /app  
 # This is where all the application's directories will be contained  
     - /data
@@ -52,32 +98,12 @@
 # main file
 ```
 
----
+----
+## Next changes : 
 
-## Packages :
- #### state management :
-- get: `^4.6.1`
- #### icon :
-- cupertino_icons: `^1.0.2`
-- ionicons: `^0.1.2`
- #### firebase :
- - firebase_auth: `^3.3.11`
- - firebase_core: `^1.13.1`
- - google_sign_in: `^5.2.4`
- - cloud_firestore: `^3.1.10`
- #### utils :
-- dartz: `^0.10.1`
-- intl: `^0.17.0`
- - camera: `^0.9.4+16`
- #### navigation system :
-- get: `^4.6.1`
- #### responsive :
-- auto_size_text: `^3.0.0`
- #### cache :
- - extended_image: `^6.0.2+1`
- #### location / map :
-- flutter_map: `^0.14.0`
- - geolocator: `^8.2.0`
+☑️ Add Firestore structure to the document
+
+☑️ Add ability to add comment for each story
 
 ----
 # Thanks for all supports 🙏🏻
