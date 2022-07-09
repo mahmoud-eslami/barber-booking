@@ -1,9 +1,30 @@
-# 🔥🔥 Barber-shop booking 💇🏻‍♂️💇🏻
+<p align="center">
+    <img src="https://github.com/mahmoud-eslami/barber_booking/blob/master/screen_shots/MOCKUP-1.png" width="140">
+    <h3 align="center">Barber-shop booking</h3>
+    <h6 align="center">This is a barber-shop booking platform . Firebase 💛 as Backend service and Flutter 💙 used as client technology.</h6>
+    <p align="center">
+    <span>
+        <img src="https://forthebadge.com/images/badges/built-with-love.svg" alt="Version">
+        <img src="https://forthebadge.com/images/badges/open-source.svg">
+    </span>
+</p><br>
 
-This is a barber-shop booking platform . `Firebase 💛` as Backend service and `Flutter 💙` used as client technology.
+# Showcase
 
-<img src="https://github.com/mahmoud-eslami/barber_booking/blob/master/screen_shots/MOCKUP-1.png" width="400"> <img src="https://github.com/mahmoud-eslami/barber_booking/blob/master/screen_shots/MOCKUP-2.png" width="400">
-
+<p align="center">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/1.png" width="160"> <img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/2.png" width="160">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/3.png" width="160">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/4.png" width="160">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/5.png" width="160">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/6.png" width="160">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/7.png" width="160">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/8.png" width="160">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/9.png" width="160">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/10.png" width="160">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/11.png" width="160">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/12.png" width="160">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/13.png" width="160">
+</p>
 
 ---
 ## Firebase Firestore Structure :
