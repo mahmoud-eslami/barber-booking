@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/mahmoud-eslami/barber_booking/blob/master/screen_shots/MOCKUP-1.png" width="140">
+    <img src="https://github.com/mahmoud-eslami/barber_booking/blob/master/screen_shots/cut.png" width="140">
     <h3 align="center">Barber-shop booking</h3>
     <h6 align="center">This is a barber-shop booking platform . Firebase 💛 as Backend service and Flutter 💙 used as client technology.</h6>
     <p align="center">
@@ -30,7 +30,9 @@
 </p>
 
 ---
+
 ## Firebase Firestore Structure :
+
 ```
 barber 💇🏻‍♂️ ---
 	---
@@ -123,12 +125,14 @@ users 🙋🏻‍♀️🙋🏻‍♂️ ---
 ```
 
 ----
-## Next changes : 
+
+## Next changes :
 
 ☑️ Add Firestore structure to the document
 
 ☑️ Add ability to add comment for each story
 
 ----
+
 # Thanks for all supports 🙏🏻
 
