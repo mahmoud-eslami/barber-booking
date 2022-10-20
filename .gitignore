@@ -33,7 +33,6 @@
 
 # Web related
 lib/generated_plugin_registrant.dart
-lib/app/core/values/secret.dart
 
 # Symbolication related
 app.*.symbols
