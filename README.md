@@ -56,18 +56,18 @@
 # Showcase
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/1.png" width="160"> <img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/2.png" width="160">
-<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/3.png" width="160">
-<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/4.png" width="160">
-<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/5.png" width="160">
-<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/6.png" width="160">
-<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/7.png" width="160">
-<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/8.png" width="160">
-<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/9.png" width="160">
-<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/10.png" width="160">
-<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/11.png" width="160">
-<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/12.png" width="160">
-<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/13.png" width="160">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/1.png" width="120"> <img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/2.png" width="120">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/3.png" width="120">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/4.png" width="120">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/5.png" width="120">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/6.png" width="120">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/7.png" width="120">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/8.png" width="120">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/9.png" width="120">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/10.png" width="120">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/11.png" width="120">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/12.png" width="120">
+<img src="https://raw.githubusercontent.com/mahmoud-eslami/barber_booking/master/screen_shots/13.png" width="120">
 </p>
 
 
