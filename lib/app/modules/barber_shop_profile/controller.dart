@@ -46,7 +46,7 @@ class BarberShopProfileController extends GetxController
           .catchError((e) {
         globalSnackbar(content: e.toString());
       });
-    } catch (e, s) {
+    } catch (e) {
       globalSnackbar(content: e.toString());
     }
   }
