@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master,hotfix/worker-issue ]
 
 jobs:
   build_android:
@@ -26,10 +26,10 @@ jobs:
         run: ls /home/runner/work
 
       - name: Create the keystore
-        run: echo "${{ secrets.KEY }}" | base64 -d > /home/runner/work/barber_booking/barber_booking/android/key.jks
+        run: echo "${{ secrets.KEY }}" | base64 -d > /home/runner/work/barber-booking/barber-booking/android/key.jks
 
       - name: Create the properties
-        run: echo "${{ secrets.PROPERTIES }}" | base64 -d > /home/runner/work/barber_booking/barber_booking/android/key.properties
+        run: echo "${{ secrets.PROPERTIES }}" | base64 -d > /home/runner/work/barber-booking/barber-booking/android/key.properties
 
       - name: Get packages
         run: flutter pub get
@@ -38,10 +38,10 @@ jobs:
         run: flutter build apk --release
 
       - name: Rename app
-        run: cd build/app/outputs/apk/release/ && mv app-release.apk barber_booking.apk
+        run: cd build/app/outputs/apk/release/ && mv app-release.apk barber-booking.apk
 
       - name: Publish apk artefacts
         uses: actions/upload-artifact@v1
         with:
           name: barber_booking
-          path: build/app/outputs/apk/release/barber_booking.apk
+          path: build/app/outputs/apk/release/barber-booking.apk
