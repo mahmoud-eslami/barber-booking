@@ -19,8 +19,10 @@ import 'package:barber_booking/app/modules/terms_conditions/controller.dart';
 import 'package:barber_booking/app/routes/routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart' show Firebase;
 import 'package:get/get.dart';
+
+import 'firebase_options.dart';
 
 import 'app/core/values/strings.dart';
 import 'app/data/services/location_service.dart';
@@ -29,8 +31,8 @@ import 'app/modules/barber_profile/controller.dart';
 class DependencyInjection {
   static injectFirebase() async {
     await Firebase.initializeApp(
-        // options: DefaultFirebaseOptions.currentPlatform,
-        );
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
   }
 
   static void injector() {
