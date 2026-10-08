@@ -28,5 +28,22 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera is used to capture stories.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location is used to find nearby barber shops.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Location is used to find nearby barber shops.</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1066886691623-f9uo4lurpf8vfrfk9k461qhakdpashjb</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
