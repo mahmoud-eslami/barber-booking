@@ -8,6 +8,7 @@ import 'package:barber_booking/app/data/model/post/post.dart';
 import 'package:barber_booking/app/data/model/story/story.dart';
 import 'package:barber_booking/app/data/model/user/user_extra_info.dart';
 import 'package:barber_booking/app/global_widgets/global_snackbar.dart';
+import 'package:barber_booking/firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -338,14 +339,16 @@ class FirebaseService {
 
   Future signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final googleSignIn = GoogleSignIn.instance;
+      await googleSignIn.initialize(
+        clientId: DefaultFirebaseOptions.currentPlatform.iosClientId,
+      );
+      final GoogleSignInAccount googleUser = await googleSignIn.authenticate();
 
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
+        idToken: googleAuth.idToken,
       );
 
       return await _auth.signInWithCredential(credential);
@@ -416,7 +419,7 @@ class FirebaseService {
     try {
       User? user = _auth.currentUser;
       if (user != null) {
-        if (email != null) user.updateEmail(email);
+        if (email != null) user.verifyBeforeUpdateEmail(email);
         if (name != null) user.updateDisplayName(name);
         if (photo != null) user.updatePhotoURL(photo);
       }
