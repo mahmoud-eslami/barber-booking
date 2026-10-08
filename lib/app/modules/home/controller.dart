@@ -97,8 +97,8 @@ class HomeController extends GetxController {
         userPosition.latitude,
         userPosition.longitude,
       ),
-      builder: (ctx) => Icon(
-        Ionicons.pin_sharp,
+      child: Icon(
+        Ionicons.pinSharp,
         color: _colors.pastelCyan,
         size: SizeConfig.widthMultiplier * 10,
       ),
@@ -117,7 +117,7 @@ class HomeController extends GetxController {
           userPosition.latitude + element,
           userPosition.longitude - element,
         ),
-        builder: (ctx) => GestureDetector(
+        child: GestureDetector(
           onTap: () => mapController.move(
               LatLng(userPosition.latitude + element,
                   userPosition.longitude - element),
