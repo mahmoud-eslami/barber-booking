@@ -40,7 +40,7 @@ class GenderSelector extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.all(_dimens.defaultPadding * 3),
                   child: Icon(
-                    Ionicons.man_outline,
+                    Ionicons.manOutline,
                     size: _dimens.defaultIconSize * 2.5,
                     color: (_profileController.gender.value != 1)
                         ? _colors.pastelCyan
@@ -63,7 +63,7 @@ class GenderSelector extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.all(_dimens.defaultPadding * 3),
                   child: Icon(
-                    Ionicons.woman_outline,
+                    Ionicons.womanOutline,
                     size: _dimens.defaultIconSize * 2.5,
                     color: (_profileController.gender.value != 0)
                         ? _colors.pastelCyan

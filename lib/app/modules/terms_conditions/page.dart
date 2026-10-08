@@ -32,7 +32,7 @@ class TermsConditionsPage extends StatelessWidget {
             onPressed: () {
               _termsConditionsController.scrollToTop();
             },
-            child: const Icon(Ionicons.arrow_up),
+            child: const Icon(Ionicons.arrowUp),
           ),
         ),
       ),
