@@ -35,7 +35,7 @@ class BottomNavItem extends StatelessWidget {
       onTap: onTap,
       child: customWidget ??
           Icon(
-            iconData ?? Ionicons.sad_outline,
+            iconData ?? Ionicons.sadOutline,
             size: _dimens.defaultIconSize,
           ),
     );

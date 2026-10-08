@@ -186,7 +186,7 @@ class BarberShopItem extends StatelessWidget {
   locationWidget() => Row(
         children: [
           const Icon(
-            Ionicons.location_outline,
+            Ionicons.locationOutline,
             size: 15,
           ),
           const SizedBox(

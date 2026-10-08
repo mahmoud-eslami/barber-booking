@@ -58,7 +58,7 @@ class CustomBottomNav extends StatelessWidget {
                             _homeController.showVerificationSnackBar();
                           }
                         },
-                        iconData: Ionicons.time_sharp,
+                        iconData: Ionicons.timeSharp,
                       ),
                       BottomNavItem(
                         onTap: () {

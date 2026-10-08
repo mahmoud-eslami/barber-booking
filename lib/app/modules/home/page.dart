@@ -35,21 +35,19 @@ class HomePage extends StatelessWidget {
               return FlutterMap(
                 mapController: _homeController.mapController,
                 options: MapOptions(
-                  center: LatLng(
+                  initialCenter: LatLng(
                     userPosition.latitude,
                     userPosition.longitude,
                   ),
-                  zoom: 13.0,
+                  initialZoom: 13.0,
                 ),
-                layers: [
-                  TileLayerOptions(
+                children: [
+                  TileLayer(
                     urlTemplate: darkMapUrl,
-                    subdomains: ['a', 'b', 'c'],
-                    attributionBuilder: (_) {
-                      return Container();
-                    },
+                    subdomains: const ['a', 'b', 'c'],
+                    userAgentPackageName: 'com.example.barber_booking',
                   ),
-                  MarkerLayerOptions(
+                  MarkerLayer(
                     markers: _homeController.markers.toList(),
                   ),
                 ],

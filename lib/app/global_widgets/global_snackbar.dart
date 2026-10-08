@@ -23,7 +23,7 @@ void globalSnackbar({
         ? TextButton(
             onPressed: onTap,
             child: Icon(
-              Ionicons.refresh_outline,
+              Ionicons.refreshOutline,
               color: _colors.darkTxtColor,
             ))
         : null,

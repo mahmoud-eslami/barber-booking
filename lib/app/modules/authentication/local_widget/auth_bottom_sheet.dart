@@ -122,7 +122,7 @@ class AuthBottomSheet extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(
-                                        Ionicons.logo_google,
+                                        Ionicons.logoGoogle,
                                         color: _colors.lightTxtColor,
                                       ),
                                       SizedBox(

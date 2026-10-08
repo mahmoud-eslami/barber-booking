@@ -41,7 +41,7 @@ class ProfilePage extends StatelessWidget {
               _profileController.logout();
             },
             icon: Icon(
-              Ionicons.log_out_outline,
+              Ionicons.logOutOutline,
               size: _dimens.defaultIconSize * 1.2,
             ),
           ),

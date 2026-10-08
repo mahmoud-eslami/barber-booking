@@ -61,7 +61,7 @@ class BottomBar extends StatelessWidget {
                             () => Icon(
                               _storyController.storyLiked.value
                                   ? Ionicons.heart
-                                  : Ionicons.heart_outline,
+                                  : Ionicons.heartOutline,
                               color: _storyController.storyLiked.value
                                   ? _colors.likedHearth
                                   : null,
@@ -77,7 +77,7 @@ class BottomBar extends StatelessWidget {
                             showBottomSheet(CommentsBottomSheet(), context);
                           },
                           icon: Icon(
-                            Ionicons.chatbox_ellipses_outline,
+                            Ionicons.chatboxEllipsesOutline,
                             size: _dimens.defaultIconSize * 1.2,
                           ),
                         ),
